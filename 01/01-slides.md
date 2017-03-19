@@ -31,18 +31,6 @@ Link Personali
 ---
 
 
-
-PRIMA DI PARTIRE
-=================
-
-Cos è uno script e come si fa a crearne uno?<br>
-Come i computer interagiscono con il mondo esterno?<br>
-Come si fa a scrivere uno script per una pagina web?
-
-
----
-
-
 COSA È JAVASCRIPT
 =================
 
@@ -109,6 +97,7 @@ Tra i vari link e tool di riferimento, ne segnalo alcuni:
 * [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm): specifiche formali del linguaggio
 * [JS Compatibility Checker](http://jscc.info/): check multiplo di browser
 * [ES 6 compatibility table](https://kangax.github.io/compat-table/es6/): tabella di compatibilità
+* [ES 6 New Feature](http://es6-features.org/) new feature ES6
 
 
 ----
@@ -195,6 +184,65 @@ Nonostante il nome potenzialmente inquietante, il DOM non è una cosa brutta. È
 <br>
 JavaScript è un linguaggio orientato agli oggetti, e tra i suoi oggetti principali troviamo gli elementi dell' HTML.
 Avremo a che fare spesso con il DOM HTML ed i suoi oggetti.
+
+
+---
+
+Before develop
+--------------
+<br>
+<p>Cosa è uno script e come si fa a crearne uno?</p><br>
+<p>Come i computer interagiscono con il mondo esterno?</p><br>
+<p>Come si fa a scrivere uno script per una pagina web?</p>
+
+---
+
+
+Script
+------
+Per scrivere uno *script*, si ha la necessità di definire l'obiettivo e subito dopo di elencare
+i *tasks* necessari per raggiungerlo.<br>
+* DEFINISCI L'OBIETTIVO
+* PROGETTA LO SCRIPT (con l'uso di un Flow Chart)
+* SVILUPPA (con JAVASCRIPT)
+
+---
+
+
+Interaction human-computer
+--------------------------
+I computer creano modelli del mondo circostante usando i dati a disposizione
+* OBJECT TYPE: HOTEL
+* OBJECT TYPE: CAR
+* OBJECT TYPE: USER
+
+---
+
+
+Oggetti e Proprietà
+-------------------
+Nel linguaggio di programmazione, ogni cosa fisica del mondo può essere rappresentato
+con un oggetto.
+Ogni oggetto può avere<br>
+* Proprietà
+* Eventi
+* Metodi
+
+
+---
+
+
+Eventi
+------
+Nel mondo reale, le persone interagiscono con gli oggetti. Queste interazioni possono cambiare i valori delle proprietà di questi oggetti.
+
+
+---
+
+
+Metodi
+------
+I metodi rappresentano cose che le persone hanno bisogno di fare con gli oggetti. Loro possono recuperare o aggiornare i valori delle proprietà di un oggetto.
 
 
 ---
