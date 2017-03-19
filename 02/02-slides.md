@@ -1,6 +1,6 @@
 Ambiente di Sviluppo
 ====================
-- Editor di testo (sublime, notepad++, emacs, vim, etc...)
+- Editor di testo (atom, sublime, notepad++, emacs, vim, etc...)
 - Browser web (Chrome, Firefox)
 - Sandbox online (JsBin, JsFiddle, etc...)
 
