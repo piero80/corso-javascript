@@ -167,7 +167,7 @@ Esercizi extra
 Creare degli elementi *div* di CLASSE "pluto" e uno di ID "ciccio", fate sì che i *div* abbiano dei contenuti testuali, poi lanciare i seguenti comandi da console
 
 ```javascript
-document.getElementsByClassName("pluto")
+document.getElementsByClassName("pluto");
 ```
 
 ```javascript
@@ -175,12 +175,12 @@ document.getElementById('ciccio').style.color = 'blue';
 ```
 
 ```javascript
-document.document.getElementsByTagName('div')
+document.getElementsByTagName('div');
 ```
 
 ```javascript
-var c = document.body.childNodes
-console.log(c)
-c[2].text
-c[4].text
+var c = document.body.childNodes;
+console.log(c);
+c[2].textContent;
+c[4].textContent;
 ```
