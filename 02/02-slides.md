@@ -159,7 +159,10 @@ Es. axyzxp@gmail.com -> axyzxp[at]gmail[dot]com
 mario.rossi@yahoo.it -> mario.rossi[at]yahoo[dot]it
 
 [soluzione](https://jsfiddle.net/piero80/qqq5xncz/)
+
+
 ----
+
 
 Esercizi extra
 ==============
