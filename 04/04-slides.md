@@ -187,7 +187,7 @@ Utile nella programmazione funzionale, in quanto diviene semplice scrivere funzi
 
 ----
 
-CLOSURES
+Closures
 ---------------
 secondo esempio
 ```javascript
