@@ -13,11 +13,16 @@ Definire una Funzione
 Le funzioni sono trattate come tutti gli altri dati e sono dunque assegnabili ad una variabile.
 
 ```javascript
-var cube = function cube(x) { // dichiarazione
-  return x * x * x;  // valore di ritorno
+function sayHello(){  // dichiarazione
+  document.write('Hello');  // statement
+}
+sayHello(); // Chiamata della funzione
+```
+```javascript
+var cube = function cube(x) {
+  return x * x * x;  
 };
-
-console.log(cube(3)); // 27
+console.log(cube(3));
 ```
 
 
@@ -200,6 +205,34 @@ var wrap1 = wrapValue(1);
 var wrap2 = wrapValue(2);
 console.log(wrap1()); // 1
 console.log(wrap2()); // 2
+```
+
+
+----
+
+Pure Function
+-------------
+```javascript
+var values = { a: 1 };
+
+function impureFunction ( items ) {
+  var b = 1;
+  items.a = items.a * b + 2;
+    return items.a;
+}
+var c = impureFunction( values );
+// Now `values.a` is 3, the impure function modifies it.
+```
+```javascript
+var values = { a: 1 };
+
+function pureFunction ( a ) {
+  var b = 1;
+  a = a * b + 2;
+  return a;
+}
+var c = pureFunction( values.a );
+// `values.a` has not been modified, it's still 1
 ```
 
 
