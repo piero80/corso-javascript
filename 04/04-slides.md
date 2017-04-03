@@ -171,6 +171,26 @@ numeroArgomenti(1, "ciao", 4, "b") // 4
 Closures
 ----------
 ```javascript
+
+var me = 'Pietro Colangelo';
+function saluto(){
+  console.log('Ciao, '+ me + '!');
+}
+//me = 'Batman';
+saluto();
+```
+
+In parole povere le variabili definite all'interno di una funzione sono globalmente disponibili all'interno di eventuali funzioni nidificate.
+
+Utile nella programmazione funzionale, in quanto diviene semplice scrivere funzioni che ritornino nuove funzioni che si comportano diversamente a seconda dell'argomento passato (es. il metodo delle stringhe *replace*).
+
+
+----
+
+CLOSURES
+---------------
+secondo esempio
+```javascript
 function wrapValue(n) {
   var localVariable = n;
   return function() { return localVariable; };
@@ -181,10 +201,6 @@ var wrap2 = wrapValue(2);
 console.log(wrap1()); // 1
 console.log(wrap2()); // 2
 ```
-
-In parole povere le variabili definite all'interno di una funzione sono globalmente disponibili all'interno di eventuali funzioni nidificate.
-
-Utile nella programmazione funzionale, in quanto diviene semplice scrivere funzioni che ritornino nuove funzioni che si comportano diversamente a seconda dell'argomento passato (es. il metodo delle stringhe *replace*).
 
 
 ----
