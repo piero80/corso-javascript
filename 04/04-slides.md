@@ -113,13 +113,22 @@ Bisogna sempre prestare attenzione a non saturare lo stack, non solo in casi inf
 Funzioni Ricorsive
 ---------------------
 ```javascript
-function fattoriale(n) {
-  return (n === 0) ? 1 : n * fattoriale(n - 1);
+var add = function(n){
+  if(n<=0){
+    return 0;
+  }
+  else{
+    return n + add(n-1);
+  }
 }
+console.log(add(3));
+add(3) => 3 + add(2);
+          3 + 2 + add(1);
+          3 + 2 + 1 + add(0);
+          3 + 2 + 1 + 0;
 ```
-
+La ricorsione è un'importante tecnica di programmazione nella quale una funzione chiama se stessa.
 JavaScript non dispone (ancora) di un'adeguata ottimizzazione per la chiamata ricorsiva delle funzioni, tuttavia per input che si sa per certo essere relativamente piccoli a volte la ricorsione può essere una soluzione più leggibile ed elegante.
-
 Attenzione però a non usarle mai per input molto grandi o molto probabilmente si avrà uno stack overflow.
 
 
