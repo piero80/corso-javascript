@@ -46,7 +46,7 @@ var f2 = function() {
 f2();
 console.log(x); // "dentro f2"
 ```
-
+Lo scope é il <em>contesto di esecuzione</em> all'interno del quale una particolare funzione javascript viene eseguita.
 Questo vale anche per le funzioni stesse in quanto possono essere assegnate a delle variabili
 
 
@@ -72,26 +72,53 @@ var cube = function cube(x) {
   return x * x * x;
 };
 ```
-
 Assegnazione di una funzione anonima
-
 ```javascript
 var cube = function (x) {
   return x * x * x;
 }
 ```
-
 Notazione breve
-
 ```javascript
 function cube(x) {
   return x * x * x;
 }
 ```
-
 La notazione breve permette di usare la funzione senza prima dichiararla
 
-N.B. mai dichiarare una funzione all'interno di un if
+
+----
+
+Self-Executing Anonymous Functions
+
+```javascript
+(function() {
+	alert('Hello World');
+})();
+```
+E' una funzione anonima che viene eseguita nel momento in cui viene dichiarata;
+
+----
+
+Arrow Function sintax
+
+
+```javascript
+() => { ... } // no parameter
+    x => { ... } // one parameter, an identifier
+(x, y) => { ... } // several parameters
+Specifying a body:
+
+let cube = x => {
+  return x * x * x;
+}
+
+let cube = x => x * x * x;
+//return implicito e quindi non specificato
+//mettere tutto in unica riga
+//rimuovere le parentesi graffe
+Arrow functions sono sempre funzioni anonime
+```
 
 
 ----
