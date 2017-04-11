@@ -103,7 +103,6 @@ pietro.stampa(); // Pietro Colangelo
 ```
 
 Funzioni di questo tipo vengono chiamate costruttori.
-
 Per convenzione vengono dichiarate con la prima lettera maiuscola.
 
 
@@ -118,17 +117,85 @@ function Persona(nome, cognome) {
   this.nome = nome;
   this.cognome = cognome;
 }
-
-Persona.prototype.stampa = function() { // {objectName}.prototype.{methodName}
+Persona.prototype.stampa = function() {//{objectName}.prototype.{methodName}
   console.log(this.nome + " " + this.cognome);
 }
-
 pietro = new Persona("Pietro", "Colangelo");
 mario = new Persona("Mario", "Rossi");
 pietro.stampa(); // Pietro Colangelo
 mario.stampa();// Mario Rossi
 ```
 Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
+
+
+----
+
+
+Metodi - Object.create
+------
+Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
+```javascript
+var persona1 = {
+  name:"Pietro",
+  surname:"Colangelo"
+}
+var persona2 = Object.create(persona1);
+console.log(persona2.name);//Pietro
+
+```
+
+
+----
+
+
+ES6 - Classes
+------
+ES6 introduce la sintassi Class per definire una classe o funzione.
+
+```javascript
+class Person {
+  constructor(name){
+    this.kind = 'Person';
+    this.name = name;
+  }
+  printName(){
+    console.log('this.name');
+  }
+}
+var pietro = new Person('Pietro');
+pietro.printName(); // Pietro
+pietro.hasOwnProperty('kind') // true
+```
+
+
+----
+
+
+ES6 - Classes
+------
+Ereditarietá
+
+```javascript
+class Person {
+  constructor(name){
+    this.kind = 'Person';
+    this.name = name;
+  }
+  printName(){
+    console.log(this.name);
+  }
+}
+class Male extends Person {
+  constructor(name){
+    super(name); //call the parent method with super
+    this.kind = 'male'
+  }
+}
+var pietro = new Person('Pietro');
+pietro.printName(); //Pietro
+var giorgio = new Male('Giorgio');
+giorgio.printName(); //Giorgio
+```
 
 
 ----
