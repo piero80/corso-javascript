@@ -20,12 +20,12 @@ obj.prop2 = valore2;
 
 Es.
 ```javascript
-var jacopo = {
-  nome: "Jacopo",
-  cognome: "Pace",
-  email: "jacopo.pace@gmail.com"
+var pietro = {
+  nome: "Pietro",
+  cognome: "Colangelo",
+  email: "pietro.colangelo@gmail.com"
 };
-console.log(jacopo.email);
+console.log(pietro.email);
 ```
 
 
@@ -78,8 +78,8 @@ function Persona(nome, cognome) {
   this.cognome = cognome;
 }
 
-jacopo = new Persona("Jacopo", "Pace");
-console.log(jacopo.cognome); // Pace
+pietro = new Persona("Pietro", "Colangelo");
+console.log(pietro.cognome); // Colangelo
 ```
 
 
@@ -98,13 +98,37 @@ function Persona(nome, cognome) {
     console.log(this.nome + " " + this.cognome);
   }
 }
-jacopo = new Persona("Jacopo", "Pace");
-jacopo.stampa(); // Jacopo Pace
+pietro = new Persona("Pietro", "Colangelo");
+pietro.stampa(); // Pietro Colangelo
 ```
 
-Funzioni di questo tipo vengono chiamate (non proprio correttamente) costruttori.
+Funzioni di questo tipo vengono chiamate costruttori.
 
 Per convenzione vengono dichiarate con la prima lettera maiuscola.
+
+
+----
+
+
+Metodi
+------
+Un metodo puó essere dichiarato anche esternamente al costruttore
+```javascript
+function Persona(nome, cognome) {
+  this.nome = nome;
+  this.cognome = cognome;
+}
+
+Persona.prototype.stampa = function() { // {objectName}.prototype.{methodName}
+  console.log(this.nome + " " + this.cognome);
+}
+
+pietro = new Persona("Pietro", "Colangelo");
+mario = new Persona("Mario", "Rossi");
+pietro.stampa(); // Pietro Colangelo
+mario.stampa();// Mario Rossi
+```
+Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
 
 
 ----
@@ -125,7 +149,7 @@ discende.
 
 Inoltre bisogna ricordare che eventuali "metodi" verrebbero scansionati.
 
-In sostanza può essere utile quando si usano gli oggetti come smplici mappe di
+In sostanza può essere utile quando si usano gli oggetti come semplici mappe di
 valori.
 
 
