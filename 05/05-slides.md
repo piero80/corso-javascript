@@ -110,7 +110,7 @@ Per convenzione vengono dichiarate con la prima lettera maiuscola.
 ----
 
 
-Metodi
+Metodi - Prototype
 ------
 Un metodo puó essere dichiarato anche esternamente al costruttore
 ```javascript
