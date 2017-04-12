@@ -134,6 +134,7 @@ Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
 Metodi - Object.create
 ------
 Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
+
 ```javascript
 var persona1 = {
   name:"Pietro",
@@ -141,7 +142,6 @@ var persona1 = {
 }
 var persona2 = Object.create(persona1);
 console.log(persona2.name);//Pietro
-
 ```
 
 
