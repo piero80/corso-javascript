@@ -44,7 +44,7 @@ var CasaVacanze = function(name,address,rooms,booked,parking,gym){ //subClass
 CasaVacanze.prototype = Object.create(Hotel.prototype);
 CasaVacanze.prototype.constructor = CasaVacanze;
 
-var myCasaVacanze = new CasaVacanze('Macalitte', 'Via Ferrarelle, 23', 12, 4, true, false);
+var myCasaVacanze = new CasaVacanze('Park', 'Via Ferrarelle, 23', 12, 4, true, false);
 var elCasaVacanze = document.getElementById('casavacanze1');
 
 var details2 = myCasaVacanze.getName() + ' ' + myCasaVacanze.getAvailability()+ ' rooms';
