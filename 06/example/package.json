@@ -8,10 +8,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "piero80"
+    "url": "https://github.com/piero80"
   },
   "devDependencies": {
-    "autoprefixer": "^6.1.1",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",
     "gulp-webserver": "^0.9.1",

@@ -8,6 +8,7 @@ var y = function(callback){
   callback();
 }
 y(x);
+
 /* ESEMPIO SENZA CALLBACK */
 var calc = function(num1,num2,calcType){
   if(calcType==='add'){
@@ -85,7 +86,7 @@ var attitude = function(original, replacement){
 var getHotel = attitude(/park/ig,'Golden');
 var getBed = attitude(/romelikehome/ig, 'Macalitte');
 
-var newHotel = getHotel("Excelsior Hotel è il più costoso di tutta Roma")
+var newHotel = getHotel("Excelsior è l'hotel più costoso di Roma")
 var elHotel = document.getElementById('myHotel');
 elHotel.textContent = newHotel;
 
