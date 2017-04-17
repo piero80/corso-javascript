@@ -39,6 +39,23 @@ Callbacks
 -----------
 Un pattern tipico è quello di passare una funzione come argomento da eseguirsi dopo una certa computazione.
 
+
+```javascript
+var x = function(){
+  console.log("Io sono chiamato all'interno di un altra funzione")
+};
+var y = function(callback){
+  console.log('fai qualcosa');
+  callback();
+}
+y(x);
+```
+
+---
+
+
+2 Esempio
+-------
 ```javascript
 function sum(x, y, cb) {
   if (!isNaN(x) && !isNaN(y)) {
@@ -56,6 +73,25 @@ sum(3, 2, function(err, data) {
   }
 });
 
+```
+
+
+---
+
+
+3 Esempio
+-------
+```javascript
+var friends = ["Mike", "Stacy", "Andy", "Rick"];
+​
+friends.forEach(function (eachName, index){
+console.log(index + 1 + ". " + eachName); // 1. Mike, 2. Stacy, 3. Andy, 4. Rick​
+});
+```
+```javascript
+$("#btn_1").click(function() {
+  alert("Btn 1 Clicked");
+});
 ```
 
 
