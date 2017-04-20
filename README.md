@@ -31,3 +31,17 @@ e lanciare il comando per far partire reveal-md:
 ``` bash
 reveal-md .
 ```
+
+## Lanciare l'esempio della cartella 06
+Scaricare la cartella example dalla cartella 06
+Lanciare il comando
+
+``` bash
+npm install
+```
+
+Poi é necessario lanciare il comando
+
+``` bash
+gulp
+```
