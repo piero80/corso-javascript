@@ -34,13 +34,14 @@ reveal-md .
 
 ## Lanciare l'esempio della cartella 06
 Scaricare la cartella example dalla cartella 06
+
 Lanciare il comando
 
 ``` bash
 npm install
 ```
 
-Poi é necessario lanciare il comando
+Una volta scaricato i sorgenti delle librerie lanciare il comando
 
 ``` bash
 gulp
