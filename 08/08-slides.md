@@ -138,6 +138,8 @@ utilizzando event.preventDefault();
 
 
 Target
+
+
 ------
 Per sapere da quale elemento è stato generato un evento si può utilizzare la
 proprietà target che conterrà il nodo del dom dove esso ha avuto origine.
@@ -171,7 +173,7 @@ Creare due bottoni "red" e "blue" che se cliccati cambiano lo sfondo della pagin
 
 
 ----
-[Soluzione](https://jsfiddle.net/piero80/gh4cfoyy/)
+
 
 Disegno
 -------
