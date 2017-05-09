@@ -95,6 +95,7 @@ poi al genitore del genitore e così via fino all'oggetto window.
 per ogni nodo che ha definito un event listener per quell'evento, esso verrà
 eseguito.
 
+[Event Flow Reference](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/events.html#Events-phases)
 
 ----
 
