@@ -259,4 +259,4 @@ Ogni elemento avrà un meccanismo per poterlo eliminare.
 
 -----
 
-[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/)
+[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/1/)
