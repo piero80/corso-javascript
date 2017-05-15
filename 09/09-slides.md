@@ -242,14 +242,21 @@ Scacchiera jQuery
 Modificare il generatore di scacchiere sostituendo le funzioni native con le
 alternative di jQuery
 
-
-----
 [Soluzione](https://jsfiddle.net/piero80/5fn41n2w/2/)
 
-Scacchiera interattiva
-----------------------
-Modificare il programma precedente in modo che cliccando su una casella si
-scambi il suo colore.
 
 ----
-[Soluzione](https://jsfiddle.net/piero80/5fn41n2w/3/)
+
+
+To-DO List
+----------
+Scrivere un'applicazione che simuli una lista di cose da fare.
+
+Sarà necessario un campo per immettere del testo, ogni volta che viene
+inviato un nuovo testo esso diventerà un nuovo elemento della lista.
+
+Ogni elemento avrà un meccanismo per poterlo eliminare.
+
+-----
+
+[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/)
