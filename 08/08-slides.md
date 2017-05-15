@@ -168,8 +168,11 @@ ESERCIZI
 
 
 red - blue
+
 ----------
 Creare due bottoni "red" e "blue" che se cliccati cambiano lo sfondo della pagina.
+
+[Soluzione] https://jsfiddle.net/piero80/gh4cfoyy/
 
 
 ----
