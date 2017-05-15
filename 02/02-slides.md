@@ -118,7 +118,7 @@ di tutti gli oggetti.
 
 Utilizzo Sandbox
 ================
-Serivizi come [JSBin](http://jsbin.com), [JSFiddle](http://jsfiddle.net),
+Servizi come [JSBin](http://jsbin.com), [JSFiddle](http://jsfiddle.net),
 [CodePen](http://codepen.io), [Plunker](http://plnkr.co)
 permettono di creare e condividere online piccole applicazioni basate
 su html + js + css senza la necessità di dover ogni volta creare i files

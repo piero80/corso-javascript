@@ -199,7 +199,7 @@ senza utilizzare le loro versioni già esistenti.
 
 biggestRightTriangle
 --------------------
-rappresentanto un triangolo come un array [x, y, z] dove x, y e z sono i 3 lati
+rappresentato un triangolo come un array [x, y, z] dove x, y e z sono i 3 lati
 si scriva una funzione biggestRightTriangle che dato un array di triangoli
 restituisca il triangolo **rettangolo** con la superficie più grande.
 

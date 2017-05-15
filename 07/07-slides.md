@@ -217,6 +217,8 @@ color indica il colore sotto forma di stringa esadecimale (es. #3c3c3c).
 ----
 [Soluzione](https://jsfiddle.net/piero80/t3eepx4w/)
 
+
+
 Scacchiera Plus
 ---------------
 Scrivere e testare una funzione makeChecker(w, h, cellW, cellH, cellColor1, cellColor2)
