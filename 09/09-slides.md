@@ -84,6 +84,23 @@ FUNZIONI PRINCIPALI
 ----
 
 
+Aggiungere contenuto dinamicamente
+--------
+```javascript
+$(selector).prepend(content,function(index,html));
+$(selector).append(content,function(index,html));
+```
+
+oppure
+
+```javascript
+$(selector).before(content,function(index));
+$(selector).after(content,function(index));
+```
+
+----
+
+
 css(...)
 --------
 ```javascript
