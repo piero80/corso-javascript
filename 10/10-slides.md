@@ -169,7 +169,7 @@ $.post('url', data)
 
 Serialize
 ---------
-I dati inviati in una chaimata ajax possono essere un oggetto javascript o una
+I dati inviati in una chiamata ajax possono essere un oggetto javascript o una
 stringa. In particolare una stringa in formato url si può usare per inviare
 delle coppie key=value&key2=value2 etc..
 
@@ -199,7 +199,7 @@ Il sito http://data.colorado.gov/ offre alcune API per cercare le attività rela
 ad uno specifico ZIP-CODE
 
 in particolar modo utilizzare le API:
-http://data.colorado.gov/resource/4ykn-tg5h.json?entityStatus=Good%20Standing&principalZipCode=<ZIP>
+https://data.colorado.gov/resource/bhcc-9bdx.json
 
 per realizzare una piccola applicazione che permetta di visualizzare Nome,
 indirizzo, status, latitudine e longitudine per ogni risultato della ricerca.
