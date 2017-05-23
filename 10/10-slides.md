@@ -1,170 +1,99 @@
-RIPASSO HTML
-============
+EVENTI ASINCRONI
+================
 
 
 ----
 
 
-tag
+AJAX
+----
+Asynchronous JavaScript and XML
+
+In parole povere Pagine web la cui dinamicità non dipende dal caricamento di una
+nuova pagina, ma da richieste a risorse esterne tramite JavaScript.
+
+
+----
+
+
+HOW AJAX WORKS
 ---
-Un tag HTML rappresenta un elemento del DOM e viene rappresentato nella seguente
-forma:
-
-```html
-<nomeTag attr1="val1" attr2="val2">childrens...</nomeTag>
-```
-
-Dove childrens può esser eun nodo di testo o qualunque altro tag.
-
-N.B. includere sempre il simbolo per la chiusura del tag: `</nomeTag>`
-
-----
-
-
-Struttura di base HTML
-----------------------
-```html
-<html>
-  <head>
-    ...
-  </head>
-  <body>
-    ...
-  </body>
-</html>
-```
+Il browser richiede informazioni al server<br>
+Il server risponde con i dati (solitamente HTML, XML, JSON)<br>
+Il browser processa il contenuto e lo aggiunge alla pagina<br>
 
 
 ----
 
 
-Tag principali
+XMLHttpRequest
 --------------
-Contenitore generico:
-```html
-<div>...</div>
+Originariamente introdotto da Microsoft per funzionare con risorse XML.
+
+```javascript
+var httpRequest = new XMLHttpRequest();
+httpRequest.onreadystatechange = function () {
+  if (httpRequest.readyState === 4) {
+    if (httpRequest.status === 200) {
+      console.log(httpRequest.responseText);
+    }
+  }
+}
+httpRequest.open('GET', 'url');
+httpRequest.send();
 ```
 
-Contenitore generico inline:
-```html
-<span>...</span>
-```
+----
 
-Titoli di varie dimensioni (h1 -> h6)
-```html
-<h1>TITOLO</h1>
-```
 
-Paragarfo
-```html
-<p>testo...</p>
-```
+DATA FORMAT
+------
 
-Link
-```html
-<a href="indirizzo">testo</a>
-```
 
-Immagine
-```
-<img src="indirizzo" title="titolo" alt="testo alternativo"></img>
+HTML
+```html
+<div class="event">
+  <img src="img/map-ca.png" alt="Map of California" />
+  <p><b>San Francisco, CA</b><br>
+  May 1</p>
+</div>
 ```
 
 
 ----
 
 
-Tabelle
--------
-```html
-<table>
-  <tr> // intestazione
-    <th>header1</th>
-    <th>header2</th>
-  </tr>
-  <tr> //riga 1
-    <td>cella 1</td>
-    <td>cella 2</td>
-  </tr>
-</table>
+XML
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<events>
+  <event>
+    <location>San Francisco, CA</location>
+    <date>May 1</date>
+    <map>img/map-ca.png</map>
+  </event>
+</events>
 ```
 
 
 ----
 
 
-Liste
------
-Unordered List
-```html
-<ul>
-  <li>elemento 1</li>
-  <li>elemento 2</li>
-</ul>
-```
-
-Ordered List
-```
-<ol>
-  <li>elemento 1</li>
-  <li>elemento 2</li>
-</ol>
-```
-
-attributo type = 1 | a | A | I | i
-
-
-----
-
-
-Attributi comuni
-----------------
-id
-```
-<elemento id="nomeId"></elemento>
-```
-
-classi
-```
-<elemento class="classe1 classe2 ..."></elemento>
-```
-
-
-----
-
-
-Inclusione file esterni
------------------------
-Script JavaScript
-```html
-< script type="text/javascript" src="script.js">< /script>
-```
-
-CSS
-```
-< link rel="stylesheet" type="text/css" href="stile.css">
-```
-
-
----
-
-
-
-
-CSS
-===
-Cascading Style Sheets
-
-
-----
-
-
-Struttura istruzioni
---------------------
-```css
-selettore {
-  proprietà1: valore1;
-  proprietà2: valore2;
+JSON
+```json
+{
+  "events": [
+    {
+      "location": "San Francisco, CA",
+      "date": "May 1",
+      "map": "img/map-ca.png"
+    },
+    {
+      "location": "Austin, TX",
+      "date": "May 15",
+      "map": "img/map-tx.png"
+    }
+  ]
 }
 ```
 
@@ -172,137 +101,108 @@ selettore {
 ----
 
 
-Selettori CSS
-----------------
-I principali selettori CSS sono:
 
-- tag = elementi tag (valido per tutti i tag body, a, h1, div, etc...)
-- .name = elementi con classe name
-- `#name` = elemento con id name
-- `*` = tutti gli elementi
+Same origin Policy
+------------------
+Per motivi di sicurezza le XMLHttprequest possono essere eseguite solo verso
+risorse dello stesso dominio.
 
-[Lista completa](http://www.w3schools.com/cssref/css_selectors.asp)
+Per accedere ad API di terze parti si devono usare le http access policy (CORS)
+o, come di solito avviene, il "trucchetto" del jsonp
 
 
 ----
 
 
-Margin & Padding
----------------------
-Gli elementi vengono posizionati in base al rettangolo che li contiene.
-
-i margini rappresentano lo spazio da lasciare libero dai bordi del rettangolo verso l'esterno.
-
-Il padding invece è lo spazio tra bordo del rettangolo e i figli contenuti.
-
-```css
-margin-top: 10px; margin-right: 11px; margin-bottom: 12px; margin-left: 13px;
-```
-
-oppure
-```css
-margin: 10px, 11px, 12px, 13px;
-```
+JQuery ajax
+-----------
+JQuery ci semplifica molto la vita con le richieste asincrone, sia per quanto
+riguarda la compatibilità con tutti i browser, sia per l'astrazione di alcuni
+utili trucchetti come jsonp e la serializzazione dei dati inseriti nei form.
 
 
 ----
 
 
-Testo
--------
-Le principali proprietà che si possono assegnare a elementi testuali sono:
-```css
-color: nome | hex | srgb // colore del testo
-font-size: 16px | 1em
-font-weight: normal | bold | bolder | lighter | 100-900
-font-family: "Times New Roman", serif | Arial, sans-serif
-text-align: left | right | center | justify // allineamento del testo
-text-decoration: none | underline | overline | line-through
+$.ajax
+------
+La funzione $.ajax implementa tutte le operazioni effettuabili tramite
+XMLhttprequest, che in JQuery viene esteso in un oggetto jqXHR
+
+```javascript
+var jqxhr = $.ajax( "example.php" )
+  .done(function() {
+    alert( "success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "complete" );
+  });
 ```
+
+[Lunga documentazione](http://api.jquery.com/jQuery.ajax/)
 
 
 ----
 
 
-Bordi
------
-il bordo del rettangolo contenente un elemento può essere reso visibile
-```css
-border-width: 1px | thin | medium | thick;
-border-style: solid | dotted | dashed | double | groove | ridge | inset | outset;
-border-color: blue | hex | rgba();
-```
-
-
-----
-
-
-Dimensioni
-----------
-Si possono stabilire le dimensioni dei un elemento tramite height e width
-```css
-height: 500px | 20% | 3em | auto;
-width: 200px;
-max-height: 300px;
-max-width: 100px;
-```
-
-
-----
-
-
-Posizione
+Shortcuts
 ---------
-Esistono 3 tipi di posizionamento nei css:
-```css
-position: static | relative | absolute | fixed;
+JQuery ci fornisce alcuni shortcuts per operazioni tipiche.
+
+```javascript
+$.get('url', data)
+  .done(function (data) {...});
+
+$.getJSON('url', data)
+  .done(function (data) {...});
+
+$.post('url', data)
+  .done(function (data) {...});
 ```
-
-In caso di posizionamento non statico (naturale) si possono usare le proprietà
-top, right, bottom, left per definire i relativi scostamenti
-
-con la prorietà z-index si può definire la "posizione" sull'asse Z
 
 
 ----
 
 
-Float
------
-Con la proprietà float si può fare in modo che un elmento si posizioni verso
-sinistra o destra, permettendo che ai suoi lati possano posizionarsi altri
-elementi senza andare a capo (Es. immagini incorniciate da testo)
-```css
-float: left | right;
-```
+Serialize
+---------
+I dati inviati in una chaimata ajax possono essere un oggetto javascript o una
+stringa. In particolare una stringa in formato url si può usare per inviare
+delle coppie key=value&key2=value2 etc..
 
-la prorietà clear fa in modo che un oggetto non possa avere oggetti float alla
-sua sinistra, destra o entrambe le parti (obbligando di fatto il layout ad
-andare a capo)
-```css
-clear: left | right | both;
+la funzione serialize() di jQuery trasforma i dati raccolti in un form in una
+stringa in formato url e si può usare in una funzione post per inviare i dati
+del form ad un server remoto.
+
+```javascript
+$.post( "test.php", $( "#testform" ).serialize() );
 ```
 
 
 ---
 
 
-ESERCIZI
+Esercizi
 ========
 
 
 ----
 
 
-To-DO List
-----------
-Scrivere un'applicazione che simuli una lista di cose da fare.
+Ricerca tramite ZIP-CODE (CAP)
+------------------------------
 
-Sarà necessario un campo per immettere del testo, ogni volta che viene
-inviato un nuovo testo esso diventerà un nuovo elemento della lista.
+Il sito http://data.colorado.gov/ offre alcune API per cercare le attività relative
+ad uno specifico ZIP-CODE
 
-Ogni elemento avrà un meccanismo per poterlo eliminare.
+in particolar modo utilizzare le API:
+http://data.colorado.gov/resource/4ykn-tg5h.json?entityStatus=Good%20Standing&principalZipCode=<ZIP>
 
------
+per realizzare una piccola applicazione che permetta di visualizzare Nome,
+indirizzo, status, latitudine e longitudine per ogni risultato della ricerca.
 
-[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/)
+Inoltre la ricerca attraverso la select dovrà aggiornarsi ogni volta che
+si cambia il valore, senza dover premere invio o bottoni separati.
