@@ -16,6 +16,16 @@ nuova pagina, ma da richieste a risorse esterne tramite JavaScript.
 ----
 
 
+HOW AJAX WORKS
+---
+Il browser richiede informazioni al server<br>
+Il server risponde con i dati (solitamente HTML, XML, JSON)<br>
+Il browser processa il contenuto e lo aggiunge alla pagina<br>
+
+
+----
+
+
 XMLHttpRequest
 --------------
 Originariamente introdotto da Microsoft per funzionare con risorse XML.
@@ -34,6 +44,62 @@ httpRequest.send();
 ```
 
 ----
+
+
+DATA FORMAT
+------
+
+
+HTML
+```html
+<div class="event">
+  <img src="img/map-ca.png" alt="Map of California" />
+  <p><b>San Francisco, CA</b><br>
+  May 1</p>
+</div>
+```
+
+
+----
+
+
+XML
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<events>
+  <event>
+    <location>San Francisco, CA</location>
+    <date>May 1</date>
+    <map>img/map-ca.png</map>
+  </event>
+</events>
+```
+
+
+----
+
+
+JSON
+```json
+{
+  "events": [
+    {
+      "location": "San Francisco, CA",
+      "date": "May 1",
+      "map": "img/map-ca.png"
+    },
+    {
+      "location": "Austin, TX",
+      "date": "May 15",
+      "map": "img/map-tx.png"
+    }
+  ]
+}
+```
+
+
+----
+
 
 
 Same origin Policy
