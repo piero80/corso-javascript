@@ -1,46 +1,44 @@
-EVENTI ASINCRONI
+ANGULAR 2
 ================
 
 
 ----
 
 
-AJAX
-----
-Asynchronous JavaScript and XML
-
-In parole povere Pagine web la cui dinamicità non dipende dal caricamento di una
-nuova pagina, ma da richieste a risorse esterne tramite JavaScript.
-
-
+WHY ANGULAR2
 ----
 
+Performance migliori<br>
+Web Component<br>
+Framework e non libreria<br>
+Typescript o Es6
 
-HOW AJAX WORKS
+
+
+----
+
+
+TYPESCRIPT
 ---
-Il browser richiede informazioni al server<br>
-Il server risponde con i dati (solitamente HTML, XML, JSON)<br>
-Il browser processa il contenuto e lo aggiunge alla pagina<br>
+Classes<br>
+Type checking<br>
+Supporto di Editor<br>
+Superset di javascript
 
 
 ----
 
 
-XMLHttpRequest
+Type checking
 --------------
-Originariamente introdotto da Microsoft per funzionare con risorse XML.
+Passare il tipo di dato al parametro della funzione
 
 ```javascript
-var httpRequest = new XMLHttpRequest();
-httpRequest.onreadystatechange = function () {
-  if (httpRequest.readyState === 4) {
-    if (httpRequest.status === 200) {
-      console.log(httpRequest.responseText);
-    }
-  }
+function saySomething(message:string){
+  console.log(message)
 }
-httpRequest.open('GET', 'url');
-httpRequest.send();
+saySomething(400); //Error
+saySomething('Hello'); // No Error
 ```
 
 ----
@@ -63,17 +61,12 @@ HTML
 ----
 
 
-XML
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<events>
-  <event>
-    <location>San Francisco, CA</location>
-    <date>May 1</date>
-    <map>img/map-ca.png</map>
-  </event>
-</events>
-```
+ANGULAR2 SETUP
+@angular/core<br>
+@angular/common<br>
+@angular/compiler<br>
+@angular/platform-browser<br>
+@angular/platform-browser-dynamic
 
 
 ----
