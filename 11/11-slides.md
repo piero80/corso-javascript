@@ -44,17 +44,72 @@ saySomething('Hello'); // No Error
 ----
 
 
-DATA FORMAT
+CLASSI
 ------
+TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
+
+```javascript
+class Persona {
+    name: string;
+    cognome: string;
+    constructor(nome:string, cognome:string){
+      this.nome = nome;
+      this.cognome = cognome;
+    }
+  getNomeCompleto(){
+    return this.nome + this.cognome;
+  }
+}
+var mypersona = new Persona('Pietro','Colangelo');
+mypersona.getNomeCompleto();
+```
 
 
-HTML
-```html
-<div class="event">
-  <img src="img/map-ca.png" alt="Map of California" />
-  <p><b>San Francisco, CA</b><br>
-  May 1</p>
-</div>
+----
+
+
+EREDITARIETA'
+------
+TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
+
+```javascript
+class Studente extends Persona {
+    materie: Materie[];
+
+	constructor(nome, cognome) {
+		super(nome, cognome);
+    }
+  getNomeCompletoconTitolo(){
+    return "Studente " + super.getNomeCompleto();
+  }
+}
+```
+
+
+----
+
+
+INTERFACCIA
+------
+Un interfaccia è un vincolo al rispetto di un contratto. Definisce i membri che una classe deve avere in modo che gli oggetti che intendono interagire con le loro instanze sappiano gia quali proprietà e metodi chiamare.
+
+```javascript
+interface IPersona {
+	nome: string;
+	cognome: string;
+	visualizzaNomeCognome():string;
+}
+class Persona implements IPersona {
+	nome: string;
+	cognome: string;
+	constructor(nome: string, cognome: string) {
+		this.nome = nome;
+		this.cognome = cognome;
+	}
+	visualizzaNomeCognome() {
+		return this.nome + " " + this.cognome;
+	}
+}
 ```
 
 
