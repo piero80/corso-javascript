@@ -5,8 +5,9 @@ ANGULAR 2
 ----
 
 
+
 WHY ANGULAR2
-----
+-----------
 
 Performance migliori<br>
 Web Component<br>
@@ -18,8 +19,10 @@ Typescript o Es6
 ----
 
 
+
 TYPESCRIPT
----
+----------
+
 Classes<br>
 Type checking<br>
 Supporto di Editor<br>
@@ -29,7 +32,7 @@ Superset di javascript
 ----
 
 
-Type checking
+TYPE CHECKING
 --------------
 Passare il tipo di dato al parametro della funzione
 
@@ -116,34 +119,150 @@ class Persona implements IPersona {
 ----
 
 
-ANGULAR2 SETUP
-@angular/core<br>
-@angular/common<br>
-@angular/compiler<br>
-@angular/platform-browser<br>
-@angular/platform-browser-dynamic
+PROJECT SETUP
+------
+
+
+```javascript
+|- app/
+    |- app.component.ts     // main app component
+    |- app.module.ts        // main app module
+    |- main.ts              // bootstrap our app
+|- index.html
+|- package.json
+|- tsconfig.json
+|- typings.json
+|- systemjs.config.json
+```
+
+----
+
+
+TYPESCRIPT SETUP
+------
+
+
+```javascript
+npm init --yes
+npm install --save-dev lite-server
+"scripts": {
+  "lite": "lite-server"
+}
+npm run lite
+npm install --save-dev typescript typings
+```
 
 
 ----
 
 
-JSON
-```json
+tsconfig.json
+-----
+
+
+```javascript
 {
-  "events": [
-    {
-      "location": "San Francisco, CA",
-      "date": "May 1",
-      "map": "img/map-ca.png"
-    },
-    {
-      "location": "Austin, TX",
-      "date": "May 15",
-      "map": "img/map-tx.png"
-    }
-  ]
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": false,
+    "noImplicitAny": false
+  }
 }
 ```
+
+
+----
+
+
+typings.json
+-----
+
+
+```javascript
+{
+  "globalDependencies": {
+    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
+    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
+    "node": "registry:dt/node#6.0.0+20160818175514"
+  }
+}
+```
+
+
+----
+
+
+
+package.json
+-----
+
+```javascript
+npm install --save-dev concurrently
+"scripts": {
+  "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\"",
+  "lite": "lite-server",
+  "tsc": "tsc",
+  "tsc:w": "tsc -w",
+  "typings": "typings",
+  "postinstall": "typings install"
+},
+```
+
+----
+
+
+ANGULAR DEPENDENCIES
+-----
+CoreJS Shim - <em>Aggiunge Es6 Features al browser</em><br>
+Zone.js - <em>Un contesto di esecuzione. Debug e error</em><br>
+reflect-metadata - <em>Polyfill per metadata decorator(@Component)</em><br>
+rxjs - <em>Libreria per la programmazione funzionale(reactive data stream)</em><br>
+```javascript
+npm install core-js reflect-metadata zone.js rxjs@5.0.0-beta.12 systemjs --save
+```
+
+
+----
+
+
+ANGULAR2 PACKAGES
+-----
+@angular/core<br>
+@angular/common<br>
+@angular/compiler<br>
+@angular/platform-browser<br>
+@angular/platform-browser-dynamic<br>
+@angular/router
+@angular/http
+@angular/forms
+```javascript
+npm install @angular/core @angular/common @angular/compiler @angular/platform-browser @angular/platform-browser-dynamic @angular/forms @angular/http @angular/router --save
+```
+
+
+----
+
+
+SYSTEM.JS
+---------
+systemjs.config.js
+```javascript
+import { Component } from '@angular/core';
+
+<script src="node_modules/systemjs/dist/system.src.js"></script>
+<script src="systemjs.config.js"></script>
+<script>
+   System.import('app').catch(function(err) { console.error(err); });
+</script>
+
+```
+Il browser ancora non supporta il caricamento dei moduli perció noi abbiamo bisogno di un loader.
+Ce ne sono tanti,(Webpack, Gulp, Grunt) ma al momento System.js é il piú semplice per Angular2.
 
 
 ----
