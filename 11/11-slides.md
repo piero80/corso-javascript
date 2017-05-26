@@ -261,21 +261,34 @@ import { Component } from '@angular/core';
 </script>
 
 ```
-Il browser ancora non supporta il caricamento dei moduli perció noi abbiamo bisogno di un loader.
-Ce ne sono tanti,(Webpack, Gulp, Grunt) ma al momento System.js é il piú semplice per Angular2.
+Il browser ancora non supporta il caricamento dei moduli perció noi abbiamo bisogno di un module bundler.
+Ce ne sono tanti,(Webpack, Gulp, Grunt) ma al momento System.js é il piú semplice da usare per Angular2.
 
 
 ----
 
 
 
-Same origin Policy
+ANGULAR2 BASICS
 ------------------
-Per motivi di sicurezza le XMLHttprequest possono essere eseguite solo verso
-risorse dello stesso dominio.
 
-Per accedere ad API di terze parti si devono usare le http access policy (CORS)
-o, come di solito avviene, il "trucchetto" del jsonp
+
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'my-app',
+  template: `
+
+    {{ message }}
+
+  `,
+})
+export class AppComponent {
+    message = 'Hello there!';
+}
+```
 
 
 ----
@@ -359,17 +372,12 @@ Esercizi
 ----
 
 
-Ricerca tramite ZIP-CODE (CAP)
+ToDOList
 ------------------------------
 
-Il sito http://data.colorado.gov/ offre alcune API per cercare le attività relative
-ad uno specifico ZIP-CODE
+Scrivere un'applicazione in Angular2 che simuli una lista di cose da fare.
 
-in particolar modo utilizzare le API:
-http://data.colorado.gov/resource/4ykn-tg5h.json?entityStatus=Good%20Standing&principalZipCode=<ZIP>
+Sarà necessario un campo per immettere del testo, ogni volta che viene
+inviato un nuovo testo esso diventerà un nuovo elemento della lista.
 
-per realizzare una piccola applicazione che permetta di visualizzare Nome,
-indirizzo, status, latitudine e longitudine per ogni risultato della ricerca.
-
-Inoltre la ricerca attraverso la select dovrà aggiornarsi ogni volta che
-si cambia il valore, senza dover premere invio o bottoni separati.
+-----
