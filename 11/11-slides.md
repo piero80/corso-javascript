@@ -252,8 +252,6 @@ SYSTEM.JS
 ---------
 systemjs.config.js
 ```javascript
-import { Component } from '@angular/core';
-
 <script src="node_modules/systemjs/dist/system.src.js"></script>
 <script src="systemjs.config.js"></script>
 <script>
@@ -271,8 +269,7 @@ Ce ne sono tanti,(Webpack, Gulp, Grunt) ma al momento System.js é il piú sempl
 
 ANGULAR2 BASICS
 ------------------
-
-
+Displaying Data - Interpolation
 
 ```javascript
 import { Component } from '@angular/core';
@@ -280,85 +277,87 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'my-app',
   template: `
-
-    {{ message }}
-
+    <h1>{{ title }}</h1>
+    <p>{{message}}</p>
   `,
 })
 export class AppComponent {
-    message = 'Hello there!';
+    title = 'La mia app';
+    message = 'Benvenuto!';
 }
 ```
 
 
 ----
 
+ANGULAR2 BASICS
+------------------
+Using Constructor
 
-JQuery ajax
------------
-JQuery ci semplifica molto la vita con le richieste asincrone, sia per quanto
-riguarda la compatibilità con tutti i browser, sia per l'astrazione di alcuni
-utili trucchetti come jsonp e la serializzazione dei dati inseriti nei form.
+```javascript
+export class AppComponent {
+  title: string;
+  message: string;
 
-
+  constructor() {
+    this.title = 'La mia app';
+    this.message = 'Benvenuto!';
+  }
+}
+```
 ----
 
 
-$.ajax
+Structural - Built-in Directives
 ------
-La funzione $.ajax implementa tutte le operazioni effettuabili tramite
-XMLhttprequest, che in JQuery viene esteso in un oggetto jqXHR
 
 ```javascript
-var jqxhr = $.ajax( "example.php" )
-  .done(function() {
-    alert( "success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "complete" );
-  });
+<section *ngIf="showSection">
+<li *ngFor="let item of list">
+<div [ngSwitch]="conditionExpression">
+  <ng-template [ngSwitchCase]="case1Exp">...</ng-template>
+  <ng-template ngSwitchCase="case2LiteralString">...</ng-template>
+  <ng-template ngSwitchDefault>...</ng-template>
+</div>
+<div [ngClass]="{active: isActive, disabled: isDisabled}">
 ```
 
-[Lunga documentazione](http://api.jquery.com/jQuery.ajax/)
+[Lunga documentazione](https://angular.io/docs/ts/latest/guide/template-syntax.html#)
 
 
 ----
 
 
-Shortcuts
+Binding Sintax
 ---------
-JQuery ci fornisce alcuni shortcuts per operazioni tipiche.
+Il Data binding é un meccanismo per coordinare cio che gli utenti vedono (dati dell'applicazione).
+Angular2 fornisce molti tipi di binding dei dati.
+Il Data binding puó essere raggruppato in tre categorie (direzione dei dati): dall'origine dei dati alla vista, dalla vista all'origine, e in entrambi le direzioni.
 
 ```javascript
-$.get('url', data)
-  .done(function (data) {...});
 
-$.getJSON('url', data)
-  .done(function (data) {...});
+{{expression}}
+[target]="expression"
+bind-target="expression"
 
-$.post('url', data)
-  .done(function (data) {...});
+(target)="statement"
+on-target="statement"
+
+[(target)]="expression"
+bindon-target="expression"
 ```
 
 
 ----
 
 
-Serialize
+Built-in attribute directives
 ---------
-I dati inviati in una chaimata ajax possono essere un oggetto javascript o una
-stringa. In particolare una stringa in formato url si può usare per inviare
-delle coppie key=value&key2=value2 etc..
-
-la funzione serialize() di jQuery trasforma i dati raccolti in un form in una
-stringa in formato url e si può usare in una funzione post per inviare i dati
-del form ad un server remoto.
 
 ```javascript
-$.post( "test.php", $( "#testform" ).serialize() );
+NgClass - add and remove a set of CSS classes
+NgStyle - add and remove a set of HTML styles
+NgModel - two-way data binding to an HTML form element
 ```
 
 
