@@ -1,38 +1,81 @@
-Angular.js
+ANGULAR 2
 ==========
-Framework JavaScript per la realizzazione di web app modulari che
-aumenta l'espressività del codice HTML tramite nuovi tag e attributi.
+Passare dati ad un Componente
 
 
 ----
 
 
-moduli
-------
-I moduli rappresentano elementi semanticamente e funzionalmente autonomi
-e riutilizzabili. Un modulo può dipendere però da altri moduli che
-possono essere inclusi. Solitamente un'intera applicazione viene anche
-essa racchiusa in un modulo.
+Passare dati ad un Componente
+-----------------------------
+Ci sono due modi per passare i dati ad un componente, con proprietà "binding" e con "binding event".
+In Angular, la rilevazione del cambiamento di dati e di eventi si verifica dall'alto al basso da genitore a figlio all'interno dell'alberatura del dom. Tuttavia, per gli eventi di Angular possiamo utilizzare il modello mentale evento DOM dove gli eventi fluiscono dal basso verso l'alto dal bambino al genitore. Quindi, gli eventi di Angular possono essere trattati come regolare eventi HTML basati su DOM quando si tratta della propagazione di un evento cancellabile.<br>
+L'input Decorator definisce un set di parametri che possono essere passati dal componente figlio al componente genitore.
+
+
+----
+
+Esempio
+-------
+
 ```javascript
-var app = angular.module('nomeApp', ['dipendenza1', 'dipendenza2']);
-```
+import { Component, Input } from '@angular/core';
 
+@Component({
+  selector: 'rio-hello',
+  template: '<p>Hello, {{name}}!</p>',
+})
+export class HelloComponent {
+  @Input() name: string;
+}
+```
+```html
+<!-- To bind to a raw string -->
+<rio-hello name="World"></rio-hello>
+<!-- To bind to a variable in the parent scope -->
+<rio-hello [name]="helloName"></rio-hello>
+
+```
 
 ----
 
 
-ng-app
-------
-Dopo aver incluso angular.js nella nostra pagina, è necessario
-indicargli il contenitore della nostra web app, solitamente il tag html
-stesso.
-```html
-<html ng-app="nomeApp">
-  <body>
-  </body>
-</html>
+Event Handler
+----------------------------------------
+
+Un gestore di eventi è specificato all'interno del modello utilizzando parentesi rotonde per indicare l'evento.
+Questo gestore di eventi viene quindi codificato nella classe per elaborare l'evento.
+```javascript
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+@Component({
+  selector: 'rio-counter',
+  templateUrl: 'app/counter.component.html'
+})
+export class CounterComponent {
+  @Input()  count = 0;
+  @Output() result = new EventEmitter<number>();
+
+  increment() {
+    this.count++;
+    this.result.emit(this.count);
+  }
+}
 ```
 
+----
+
+view del Component
+------------------
+```html
+<div>
+  <p>
+    <ng-content></ng-content>
+    Count: {{ count }} -
+    <button (click)="increment()">Increment</button>
+  </p>
+</div>
+```
 
 ----
 
