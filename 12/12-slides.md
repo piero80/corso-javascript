@@ -43,8 +43,9 @@ export class HelloComponent {
 Event Handler
 ----------------------------------------
 
-Un gestore di eventi è specificato all'interno del modello utilizzando parentesi rotonde per indicare l'evento.
-Questo gestore di eventi viene quindi codificato nella classe per elaborare l'evento.
+Angular 2 consente di generare eventi combinando l’utilizzo del decoratore @Output e della classe EventEmitter.
+Analogamente a quanto avviene per il decoratore @Input, il decoratore @Output ci consente di definire una proprietà di output, cioè una proprietà che genera un flusso di informazioni dall’interno del componente verso l’esterno. Un evento può essere considerato a tutti gli effetti un meccanismo che abilita flusso di questo tipo.
+La generazione dell’evento viene effettuata invocando il metodo emit() della proprietà result.
 ```javascript
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
@@ -80,107 +81,96 @@ view del Component
 ----
 
 
-Espressioni
+Cicli di vita dei Componenti
 -----------
-All'interno di una ng-app si possono inserire espressioni javascript
-all'interno di doppie parentesi graffe.
-```
-{{3 + 2}} // 5
-{{funzione()}} // stampa il risultato di funzione()
-{{var}} // stampa il contneuto di var
-```
+I componenti che costituiscono una applicazione Angular 2 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
 
 
 ----
 
 
-Controller
+Prima di ogni fase: l’esecuzione del costruttore
 ----------
-Un controller si occupa di definire il comportamento dell'elemento del
-DOM a cui viene assegnato. In particolare definisce variabili e funzioni
-che saranno disponibili ad angular all'interno di quell'elemento (scope
-dell'elemento)
-
-```javascript
-nomeApp.controller('nomeController', ['$scope', 'dep2', function ($scope,
-dep2) {
-  $scope.foo = "bar";
-  this.test = "prova";
-}]);
-```
-```html
-<html ng-app="nomeApp">
-  <body ng-controller="nomeController as nome">
-    {{foo}} // bar
-    {{nome.test}} // prova
-  </body>
-</html>
-```
+Prima di vedere nel dettaglio quali sono le fasi del ciclo di vita dei componenti, è opportuno evidenziare che la prima attività effettuata dal framework alla creazione di un componente è l’esecuzione del suo costruttore. Anche se tecnicamente non rappresenta un Lifecycle Hook, l’esecuzione del costruttore è quindi la fase iniziale della creazione di un componente Angular2. È da evidenziare tuttavia che in questa fase:
+- non sono ancora state inizializzate le proprietà di input;
+- non è ancora disponibile la view associata al componente stesso.
 
 
 ----
 
 
-Data binding
+Le fasi del ciclo di vita del componente
 ------------
-```html
-<input type="text" ng-model="variabile"></input>
-{{variabile}} <- cambia in tempo reale
-```
-
+<em>OnChanges</em> 	
+Si verifica quando il valore di una proprietà di input viene modificato. Oltre a verificarsi prima dell’inizializzazione del componente, si verifica anche ogni qualvolta cambia il valore delle proprietà di input<br>
+<em>OnInit</em><br>
+Rappresenta la fase di inizializzazione del componente e si verifica dopo il primo evento OnChanges. Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
 
 ----
 
-
-Cicli
 -----
-tramite l'attributo ng-repeat si può iterare un array presente nello
-scope attuale.
-```html
-<ul ng-repeat="item in items">
-  <li>{{item}} presente con indice {{$index}}</li>
-</ul>
-```
+<em>DoCheck</em></br>
+Questa fase viene eseguita durante il check interno di Angular per valutare le modifiche ai componenti ed ai dati</br>
+<em>AfterContentInit</em></br>
+In questa fase il contenuto associato al componente è stato inizializzato; in particolare, è stato costruito l’albero degli eventuali componenti figli.</br>
+<em>AfterContentChecked</em></br>
+Anche questa fase viene eseguita durante un check interno di Angular sui contenuti associati al componente.</br>
+
 
 
 ----
 
-
-Show & hide
 -----------
-Tramite gli attributi ng-show ed ng-hide si può specficare se un
-elemento debba essere visualizzato in base alla condizione specificata.
-```html
-<div ng-show="condizione">ciao</div>
-<div ng-hide="condizione">ciao</div>
-condizione può essere qualunque espressione che ritorni un booleano
-```
-
+<em>AfterViewInit</em></br>
+Questa è la fase di inizializzazione della view associata al componente. In questa fase il componente risulta mappato sul DOM ed è quindi visibile.</br>
+<em>AfterViewChecked</em></br>
+Come per le altre fasi checked, anche in questo caso questa fase riguarda il check interno di Angular sulla view</br>
+<em>OnDestroy</em></br>
+Questa è l’ultima fase del ciclo di vita del componente e si verifica prima che Angular lo distrugga definitivamente.
+Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
 
 ----
 
 
-Assegnazione di classi
+Gestire le fasi del component lifecycle
 ----------------------
-Si possono assegnare delle classi a seconda della veridicità di una
-condizione specificata.
-```html
-<div ng-class="{ classe1:condizione1, classe2:condizione2 }"></div>
+L’approccio generale consiste nell’implementare una specifica interfaccia TypeScript il cui nome corrisponde alla fase da gestire. Ad esempio, se intendiamo gestire la fase OnInit di un componente dobbiamo implementare l’omonima interfaccia come mostrato di seguito:
+```js
+import { Component, OnInit } from '@angular/core';
+@Component({
+    selector: 'articolo',
+    templateUrl: 'articolo.component.html',
+    styleUrls: ['articolo.component.css']
+})
+export class ArticoloComponent implements OnInit {
+    constructor() { }
+    ngOnInit() {
+        console.log("Il componente è in fase di inizializzazione!");
+    }
+}
 ```
 
 
 ----
 
 
-Eventi
-------
-E' possibile eseguire una determinata funzione al verificarsi di un
-evento del DOM.
+Two-way data binding in Angular 2
+----------
+Una dei cavalli di battaglia di Angular 1.x è stato il two-way data binding, il meccanismo automatico che consente di effettuare il binding di un elemento dell’interfaccia con il modello dei dati e viceversa, dal modello dei dati verso l’elemento dell’interfaccia.
+Questo meccanismo di sincronizzazione automatica ha indubbiamente il suo fascino, dal momento che consente di creare interattività tra i vari componenti dell’interfaccia e con il modello dei dati sottostante con poco sforzo, ma ha anche un prezzo in termini di prestazioni. L’uso implicito del two-way data binding di Angular 1.x incide sulle prestazioni dal momento che è attivo anche quando il suo utilizzo non è strettamente necessario.
+
+
+---
+
+
+Angular 2 non ha il two-way data binding predefinito, come accadeva nella versione 1.x. Tuttavia possiamo attivarlo utilizzando la sintassi mostrata nel seguente esempio:
 ```html
-<a href ng-click="funzione()">click</a>
-<form ng-submit="funzione()">...</form>
+Inserisci un numero:
+<input type="number" [(ngModel)]="numero" />
+<div>
+    Il doppio di {{numero}} &egrave; {{numero * 2}}
+</div>
 ```
-[lista completa](https://docs.angularjs.org/api/ng/directive)
 
 
 ---
