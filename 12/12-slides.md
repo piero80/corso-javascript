@@ -164,6 +164,10 @@ Questo meccanismo di sincronizzazione automatica ha indubbiamente il suo fascino
 
 
 Angular 2 non ha il two-way data binding predefinito, come accadeva nella versione 1.x. Tuttavia possiamo attivarlo utilizzando la sintassi mostrata nel seguente esempio:
+```js
+import {FormsModule} from '@angular/forms';
+in app.module.ts
+```
 ```html
 Inserisci un numero:
 <input type="number" [(ngModel)]="numero" />
