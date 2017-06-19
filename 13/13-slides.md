@@ -38,7 +38,7 @@ In Angular a Component:
 ----
 
 
-Transclusion
+Projection
 ------------
 ```html
 <my-panel title="Hello">content here</my-panel>
@@ -49,7 +49,7 @@ Transclusion
 
 ----
 
-La transclusion in Angular2 permette di avere uno stesso componente con contenuto diverso.
+Projection in Angular2 permette di avere uno stesso componente con contenuto diverso.
 
 ```javascript
 import { Component, Input } from '@angular/core';
@@ -135,6 +135,15 @@ export class MyPanelComponent {
   @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
 }
 ```
+
+---
+
+
+Template reference variables
+------
+
+![image](stateless.jpg)
+
 
 ---
 
