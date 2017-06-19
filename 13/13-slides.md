@@ -1,4 +1,4 @@
-ANGULAR.JS PARTE 2
+ANGULAR2
 ==================
 
 
@@ -6,150 +6,137 @@ ANGULAR.JS PARTE 2
 ----
 
 
-Direttive
+Components
 ---------
-Le direttive permettono di creare nuovi tag, attributi o classi con
-comportamenti definibili da noi.
-```
-<side-bar>
-  <search-box></search-box>
-  <main-menu></main-menu>
-  <social></social>
-</side-bar>
-```
+![image](components.jpg)
 
 
 ----
 
 
-Creare direttive
+WHY COMPONENTS?
 ----------------
-```javascript
-app.directive('myTag', function(dep1, dep2) {
-  return {
-    type: 'E',  // A, E, C
-    scope: {
-      attr: '@'
-    },
-    link: function (scope, el, attr) {
-      ...
-    },
-    template: "..." 
-  };
-};
-```
-
-html:
-```
-<my-tag attr="foo"></my-tag>
-```
+* Responsible for a portion of the view
+* Reusable
+* Componible
+* Testable
 
 
 ----
 
 
-Esempio
+In Angular a Component:
 -------
-```javascript
-app.directive('red', function () {
-  return {
-    scope: {
-      text: '@'
-    },
-    template: '<span style="color:red">{{text}}</span>'
-  };
-});
-<red text="ciao"></red>
-```
+* extends the HTML syntax creating new tags (i.e. <tab-bar>)
+* is a class decorated by @Component and some metadata
+* always has an HTML template
+* has a lifecycle
+* receives data by using @Input attributes
+* communicates with the world by using @Output event emitters
 
 
 ----
 
 
-restrictions
+Transclusion
 ------------
-Le direttive possono utilizzare filtri di restrizioni.
+```html
+<my-panel title="Hello">content here</my-panel>
+<my-panel title="Hello">
+  <input type="text">
+</my-panel>
+```
 
-* 'A' - only matches attribute name
-* 'E' - only matches element name
-* 'C' - only matches class name
-* 'M' - only matches comment
+----
+
+La transclusion in Angular2 permette di avere uno stesso componente con contenuto diverso.
 
 ```javascript
-app.directive('helloWorld', function(){
-  return{
-    restrict: 'AE',
-    template: '<p style="background-color:{{color}}">Hello World</p>'
-  }
-});
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'my-panel',
+  template: `<div class="panel panel-info">
+                <div class="panel-heading">
+                  {{title}}
+                </div>
+                <div class="panel-body">
+                  <ng-content></ng-content>    <!-- transclusion here -->
+                </div>
+             </div>`
+})
+export class MyPanelComponent {
+  @Input() title;
+}
 ```
 
 
 ----
 
 
-
-link
-----
-La funzione link viene eseguita quando la direttiva è stata inserità
-nell'applicazione ed è il luogo ideale dove definire comportamenti che
-interagiscano con il DOM.
-
-```javascript
-app.directive('clickLogger', function () {
-  return {
-    restrict: 'A',
-    link: function (scope, el, attr) {
-      el.on('click', function () {
-        console.log('cliccato');
-      });
-    }
-  };
-});
-<div click-logger>test</div>
-```
-
-
-----
-
-
-filtri
+STATEFUL COMPONENT
 ------
 I filtri sono funzioni utilizzabili nelle espressioni che permettono di
 modificare i dati da visualizzare (eg. valute, date, upperCase,
 ordinamento, etc...)
 
+```javascript
+import { Component, Input } from '@angular/core';
+@Component({
+  selector: 'my-panel',
+  template: `<div class="panel panel-info">
+                <div class="panel-heading" (click)="toggle()">
+                  {{title}}
+                </div>
+                <div class="panel-body" *ngIf="opened">
+                  <ng-content></ng-content>  
+                </div>
+             </div>`
+})
+export class MyPanelComponent {
+  @Input() title: string;
+  opened = true;
+  toggle() {
+    this.opened = !this.opened;
+  }
+}
 ```
-{{expression | filter1 | filter2}}
-{{15 | currency:'€'}} // 15.00€
-{{2014-10-19 | date}} // Oct 19, 2014
-{{text | limitTo:n}} // mostra primi n caratteri
-```
-
-[etc](https://docs.angularjs.org/api/ng/filter)
 
 
 ----
 
 
-Creare nuovi filtri
--------------------
-Un filtro non è che una funzione che dato un input restituisce un
-output ed implementarli non è quindi complicato.
+STATELESS
+------
 
-```
-app.filter('filterName', function () {
-  return function (input, arg1, arg2) {
-    ...
-    return output
-  },
-});
-{{input | filterName:arg1:arg2}}
-```
+![image](stateless.jpg)
 
 
 ---
 
+
+STATELESS
+-------------------
+```javascript
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+@Component({
+  selector: 'my-panel',
+  template: `<div class="panel panel-info">
+                <div class="panel-heading" (click)="toggle.emit()">
+                  {{title}}
+                </div>
+                <div class="panel-body" *ngIf="opened">
+                  <ng-content></ng-content>
+                </div>
+              <div>`
+})
+export class MyPanelComponent {
+  @Input() title: string;
+  @Input() opened: boolean;
+  @Output() toggle: EventEmitter<any> = new EventEmitter<any>();
+}
+```
+
+---
 
 ESERCIZI
 ========
@@ -161,7 +148,7 @@ ESERCIZI
 Random color
 ------------
 Creare una direttiva di tipo tag chiamata set-color
-che accetti il nome di un colore da un input. 
+che accetti il nome di un colore da un input.
 Esso dovrà cambiare colore di background in base
 al colore inserito.
 
