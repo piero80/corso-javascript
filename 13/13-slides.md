@@ -75,8 +75,8 @@ export class MyPanelComponent {
 
 STATEFUL COMPONENT
 ------
-Stateful Component è quel componente che ha al suo interno tutta la logica che gli 
-permette di sapere il suo stato e anche di cambiarlo. Registra al suo interno tutti i potenziali 
+Stateful Component è quel componente che ha al suo interno tutta la logica che gli
+permette di sapere il suo stato e anche di cambiarlo. Registra al suo interno tutti i potenziali
 cambi di stato dell'applicazione.
 
 ```javascript
@@ -142,7 +142,7 @@ export class MyPanelComponent {
 
 Template reference variables
 ------
-Un template reference variable è spesso un riferimento dell'elemento del DOM con un template. Può 
+Un template reference variable è spesso un riferimento dell'elemento del DOM con un template. Può
 essere anche un riferimento di un componente Angular o direttiva.
 ```html
 <input #phone placeholder="phone number">
@@ -154,8 +154,9 @@ essere anche un riferimento di un componente Angular o direttiva.
 ----
 
 Reference and @ViewChild
----
-The @ViewChild è un decorator che prende il nome del componente come input e trova its selector in the template of the containing component to bind to. @ViewChild can also be passed a template reference variable.
+-----
+The @ViewChild è un decorator che prende il nome del componente come input e recupera i metodi e le classi del componente figlio allínterno del componente padre.
+ @ViewChild puó essere passato anche come template reference variable.
 ```javascript
 import { Component, ViewChild } from '@angular/core';
 import { AlertComponent } from './alert.component';
@@ -178,15 +179,13 @@ export class AppComponent {
 ----
 
 @ViewChild
-----------
+-----
 
----
 ```javascript
 import { Component } from '@angular/core';
-
 @Component({
 	selector: 'app-alert',
-	template: `
+	template:
 	  <div *ngIf="!hidden">
   	  <div class="backdrop" (click)="hide()"></div>
 	    <div class="modal">
@@ -195,14 +194,12 @@ import { Component } from '@angular/core';
   	      <button (click)="hide()">OK</button>
 	      </div>
       </div>
-	  </div>`
+	  </div>
   export class AlertComponent {
     hidden = true;
-  
     show() {
       this.hidden = false;
     }
-    
     hide() {
       this.hidden = true;
     }
@@ -211,24 +208,80 @@ import { Component } from '@angular/core';
 ----
 
 
-ESERCIZI
+LIFECYCLE
 ========
 
 
 ----
 
 
-Random color
+COMPONENT LIFECYCLE
 ------------
-Creare una direttiva di tipo tag chiamata set-color
-che accetti il nome di un colore da un input.
-Esso dovrà cambiare colore di background in base
-al colore inserito.
+I componenti che costituiscono una applicazione Angular 2 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
+
+[Lunga documentazione](https://angular.io/guide/lifecycle-hooks)
+----
+
+
+Prima di ogni fase: l’esecuzione del costruttore
+----------
+Prima di vedere nel dettaglio quali sono le fasi del ciclo di vita dei componenti, è opportuno evidenziare che la prima attività effettuata dal framework alla creazione di un componente è l’esecuzione del suo costruttore. Anche se tecnicamente non rappresenta un Lifecycle Hook, l’esecuzione del costruttore è quindi la fase iniziale della creazione di un componente Angular2. È da evidenziare tuttavia che in questa fase:
+- non sono ancora state inizializzate le proprietà di input;
+- non è ancora disponibile la view associata al componente stesso.
 
 
 ----
 
 
-Reverse
+Le fasi del ciclo di vita del componente
+------------
+<em>OnChanges</em> 	
+Si verifica quando il valore di una proprietà di input viene modificato. Oltre a verificarsi prima dell’inizializzazione del componente, si verifica anche ogni qualvolta cambia il valore delle proprietà di input<br>
+<em>OnInit</em><br>
+Rappresenta la fase di inizializzazione del componente e si verifica dopo il primo evento OnChanges. Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
+
+----
+
+-----
+<em>DoCheck</em></br>
+Questa fase viene eseguita durante il check interno di Angular per valutare le modifiche ai componenti ed ai dati</br>
+<em>AfterContentInit</em></br>
+In questa fase il contenuto associato al componente è stato inizializzato; in particolare, è stato costruito l’albero degli eventuali componenti figli.</br>
+<em>AfterContentChecked</em></br>
+Anche questa fase viene eseguita durante un check interno di Angular sui contenuti associati al componente.</br>
+
+
+
+----
+
+-----------
+<em>AfterViewInit</em></br>
+Questa è la fase di inizializzazione della view associata al componente. In questa fase il componente risulta mappato sul DOM ed è quindi visibile.</br>
+<em>AfterViewChecked</em></br>
+Come per le altre fasi checked, anche in questo caso questa fase riguarda il check interno di Angular sulla view</br>
+<em>OnDestroy</em></br>
+Questa è l’ultima fase del ciclo di vita del componente e si verifica prima che Angular lo distrugga definitivamente.
+Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
+
+----
+
+
+Gestire le fasi del component lifecycle
+----------------------
+L’approccio generale consiste nell’implementare una specifica interfaccia TypeScript il cui nome corrisponde alla fase da gestire. Ad esempio, se intendiamo gestire la fase OnInit di un componente dobbiamo implementare l’omonima interfaccia come mostrato di seguito:
+```js
+import { Component, OnInit } from '@angular/core';
+@Component({
+    selector: 'articolo',
+    templateUrl: 'articolo.component.html',
+    styleUrls: ['articolo.component.css']
+})
+export class ArticoloComponent implements OnInit {
+    constructor() { }
+    ngOnInit() {
+        console.log("Il componente è in fase di inizializzazione!");
+    }
+}
+```
+
 -------
-Scrivere un filtro reverse che inverte una stringa
