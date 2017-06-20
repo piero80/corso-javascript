@@ -75,9 +75,9 @@ export class MyPanelComponent {
 
 STATEFUL COMPONENT
 ------
-I filtri sono funzioni utilizzabili nelle espressioni che permettono di
-modificare i dati da visualizzare (eg. valute, date, upperCase,
-ordinamento, etc...)
+Stateful Component è quel componente che ha al suo interno tutta la logica che gli 
+permette di sapere il suo stato e anche di cambiarlo. Registra al suo interno tutti i potenziali 
+cambi di stato dell'applicazione.
 
 ```javascript
 import { Component, Input } from '@angular/core';
@@ -114,8 +114,9 @@ STATELESS
 ---
 
 
-STATELESS
--------------------
+STATELESS COMPONENT
+---------
+E' un componente il più semplice possibile che riceve informazioni dall'esterno ed a sua volta trasmette l'informazione ricevuta al componente genitore.
 ```javascript
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 @Component({
@@ -141,11 +142,74 @@ export class MyPanelComponent {
 
 Template reference variables
 ------
+Un template reference variable è spesso un riferimento dell'elemento del DOM con un template. Può 
+essere anche un riferimento di un componente Angular o direttiva.
+```html
+<input #phone placeholder="phone number">
+<!-- lots of other elements -->
+<!-- phone refers to the input element; pass its `value` to an event handler -->
+<button (click)="callPhone(phone.value)">Call</button>
+```
 
-![image](stateless.jpg)
+----
 
+Reference and @ViewChild
+---
+The @ViewChild è un decorator che prende il nome del componente come input e trova its selector in the template of the containing component to bind to. @ViewChild can also be passed a template reference variable.
+```javascript
+import { Component, ViewChild } from '@angular/core';
+import { AlertComponent } from './alert.component';
+
+@Component({
+    selector: 'app-root',
+    template: `
+    <app-alert>My alert</app-alert>
+      <button (click)="showAlert()">Show Alert</button>`
+})
+export class AppComponent {
+  @ViewChild(AlertComponent) alert: AlertComponent;
+
+  showAlert() {
+    this.alert.show();
+  }
+}
+```
+
+----
+
+@ViewChild
+----------
 
 ---
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+	selector: 'app-alert',
+	template: `
+	  <div *ngIf="!hidden">
+  	  <div class="backdrop" (click)="hide()"></div>
+	    <div class="modal">
+	      <ng-content></ng-content>
+	      <div>
+  	      <button (click)="hide()">OK</button>
+	      </div>
+      </div>
+	  </div>`
+  export class AlertComponent {
+    hidden = true;
+  
+    show() {
+      this.hidden = false;
+    }
+    
+    hide() {
+      this.hidden = true;
+    }
+```
+
+----
+
 
 ESERCIZI
 ========
