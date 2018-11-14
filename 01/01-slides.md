@@ -188,65 +188,92 @@ Avremo a che fare spesso con il DOM HTML ed i suoi oggetti.
 
 ---
 
-Before develop
+Hoisting
 --------------
 <br>
-<p>Cosa è uno script e come si fa a crearne uno?</p><br>
-<p>Come i computer interagiscono con il mondo esterno?</p><br>
-<p>Come si fa a scrivere uno script per una pagina web?</p>
+“Prima che il vostro codice venga eseguito, il JS-Engine avrà già riservato dello spazio in memoria per le vostre variabili e le vostre funzioni. Nel frattempo, tutto viene settato al valore undefined.”
+
 
 ---
 
 
-Script
+Undefined
 ------
-Per scrivere uno *script*, si ha la necessità di definire l'obiettivo e subito dopo di elencare
-i *tasks* necessari per raggiungerlo.<br>
-* DEFINISCI L'OBIETTIVO
-* PROGETTA LO SCRIPT (con l'uso di un Flow Chart)
-* SVILUPPA (con JAVASCRIPT)
+Si tratta di un tipo di dato particolare in JS.
+```javascript
+var a;
+if(a === undefined)	//returns true
+```
+MAI settare a mano qualsiasi cosa ad “undefined”, anche se è possibile, perché lo vogliamo riservare al JS-Engine per poterci accorgere di errori nel codice.
+
 
 ---
 
 
-Interaction human-computer
---------------------------
-I computer creano modelli del mondo circostante usando i dati a disposizione
-* OBJECT TYPE: HOTEL
-* OBJECT TYPE: CAR
-* OBJECT TYPE: USER
-
----
-
-
-Oggetti e Proprietà
+Execution Context
 -------------------
-Nel linguaggio di programmazione, ogni cosa fisica del mondo può essere rappresentato
-con un oggetto.
-Ogni oggetto può avere<br>
-* Proprietà
-* Eventi
-* Metodi
+E’ un concetto, che rappresenta l’ambiente nel quale un dato spezzone di codice viene eseguito. Nel caso specifico in cui, ad esempio, una variabile venga inizializzata al di fuori da ogni funzione, si dice che si tratta di una variabile globale e che il suo Execution Context è quello globale (Global Execution Context).
+
 
 
 ---
 
 
-Eventi
+Outer Environment
 ------
-Nel mondo reale, le persone interagiscono con gli oggetti. Queste interazioni possono cambiare i valori delle proprietà di questi oggetti.
-
+Dato un blocco di codice o una funzione, l’OE è l’ambiente immediatamente superiore a quel dato codice. Esempio:
+```javascript
+var a = 2; //la variabile a è nell’ outer environment della funzione test
+	function test() {
+		var b = 3;
+	}
+```
 
 ---
 
 
-Metodi
+Come viene eseguito il codice JS
 ------
-I metodi rappresentano cose che le persone hanno bisogno di fare con gli oggetti. Loro possono recuperare o aggiornare i valori delle proprietà di un oggetto.
+Il funzionamento del JS-Engine è diviso in due grandi fasi (phase):
+CREATION PHASE
+* Viene settato il Global Object (nel browser è window)
+* Viene settato this
+* Viene settato l’Outer Environment
+Hoisting
+EXECUTION PHASE
+* Il vostro codice viene eseguito linea per linea, tradotto in un linguaggio più a basso livello.
+
+---
+
+SINGLE-THREADED EXECUTION
+------
+Vuol dire che il codice viene eseguito un comando alla volta. Questo tipo di esecuzione è chiamata Esecuzione sincrona. JS è sincrono.
 
 
 ---
 
+INVOCAZIONE: 
+------
+“Esecuzione di una funzione.”
+
+Ogni qualvolta una funzione viene invocata, un nuovo “Execution context” viene creato, e messo in uno stack (pila). Quando si arriva alla fine della funzione, il suo Execution context viene rimosso (POP) dallo stack.
+
+
+---
+
+LEXICAL ENVIRONMENT: 
+------
+Dove una funzione o una variabile sono scritte nel codice.
+
+
+---
+
+SCOPE: 
+------
+Dove una variabile è raggiungibile nel codice. Quando si parla di scope, bisogna specificare a cosa si riferisce, altrimenti la frase è priva di significato.
+Es: “Lo scope della variabile A…”
+
+---
 
 framework e librerie
 --------------------
