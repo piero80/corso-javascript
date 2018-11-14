@@ -34,7 +34,7 @@ Link Personali
 COSA È JAVASCRIPT
 =================
 
-Iniziamo...
+Iniziamo....
 
 
 ---
