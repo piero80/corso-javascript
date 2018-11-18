@@ -1,12 +1,19 @@
-TIPI DI DATI
-============
+# TIPI DI DATI
 
+---
 
-----
+## Tipi Primitivi
 
+- Numeri
+- Stringhe
+- Booleani
+- `null`
+- `undefined`
 
-Numeri
-------
+---
+
+## Numeri
+
 - interi: 1, 2, -3
 - reali: 0.2, .3, -1.5...
 - notazione scientifica: 1.333e9
@@ -14,54 +21,121 @@ Numeri
 - numeri in base 8: 0777
 - numeri in base 16: 0xff
 - Infinity: 5/0
-- NaN (Not a Number): 0/0, 3 * "a"
+- NaN (Not a Number): 0/0, 3 \* "a"
 
+---
 
-----
+## Stringhe
 
-
-Stringhe
---------
 - "ciao"
 - 'ciao'
 - "Erano i capei d'oro a l'aura sparsi"
 - 'Erano i capei d\'oro a l\'aura sparsi'
 
+---
 
-----
+## Booleani
 
-
-Booleani
---------
 - true, false
 - false, 0, "", null, undefined e NaN sono valutati come false
 - tutto il resto come true (anche "0", "false", [], {})
 
+---
 
-----
+## Tipi speciali
 
-
-Tipi speciali
--------------
-- *`null`*: valore inesistente o vuoto (quando assegnato volutamente)
+- _`null`_: valore inesistente o vuoto (quando assegnato volutamente)
 
 - `undefined`: variabile dichiarata ma senza valore assegnato
 
+---
+
+## Tipi Oggetti
+
+- Array
+
+- Function
+
+- Object
 
 ---
 
+## Array
 
-OPERATORI E COMPARAZIONI
-========================
+- var arr = []
 
+- var arr = new Array()
 
-----
+---
 
+## Oggetti
 
-Operatori
----------
-- aritmetici (+, -, *, /, %, ++, --)
-- assegnazione ( =, +=, -=, *=, /=, %=)
+```javascript
+const object = {
+  key: "value"
+};
+```
+
+---
+
+## Funzioni
+
+```javascript
+const foo = function() {};
+```
+
+---
+
+## Tipi Primitivi passati per Valore
+
+Se un tipo Primitivo è assegnato ad una variabile, possiamo pensare che quella variabile contiene quel valore
+
+```javascript
+var x = 10;
+var y = "abc";
+var z = null;
+```
+
+![image](img/01.png)
+
+---
+
+Quando assegniamo queste variabili ad altre variabili usando =, noi copiamo il valore nella nuova variabile. Abbiamo copiato per valore.
+
+```javascript
+var x = 10;
+var y = "abc";
+var a = x;
+var b = y;
+console.log(x, y, a, b); // -> 10, 'abc', 10, 'abc'
+```
+
+![image](img/02.png)
+
+---
+
+Cambiando uno non cambia l'altro. Pensa che le variabili non hanno alcuna relazione l'una con l'altra.
+
+```javascript
+var x = 10;
+var y = "abc";
+var a = x;
+var b = y;
+a = 5;
+b = "def";
+console.log(x, y, a, b); // -> 10, 'abc', 5, 'def'
+```
+
+---
+
+# OPERATORI E COMPARAZIONI
+
+---
+
+## Operatori
+
+- aritmetici (+, -, \*, /, %, ++, --)
+- assegnazione ( =, +=, -=, \*=, /=, %=)
 - il '+' con le stringhe effettua concatenazione!
 - comparazione (==, ===, !=, !==, <, > <=, >=)
 - logici (&&, ||, !)
@@ -69,23 +143,21 @@ Operatori
 - operazioni su bit (&, |, ~, ^, <<, >>) // raramente serviranno
 - typeof
 
+---
 
-----
+## Conversioni automatiche (occhio!)
 
-Conversioni automatiche (occhio!)
----------------------------------
-- (8 * null) // 0
+- (8 \* null) // 0
 - ("5" - 1) // 4
 - ("5" + 1) // 51
-- ("five" * 2) // NaN
+- ("five" \* 2) // NaN
 - (false == 0) // true
-- Array(16).join("lol" - 2) + " Batman!"  // :)
+- Array(16).join("lol" - 2) + " Batman!" // :)
 
-----
+---
 
+## Comparare i Booleani
 
-Comparare i Booleani
---------------------
 - (false == 0); // true
 - (false == ""); // true
 - (0 == ""); // true
@@ -94,16 +166,14 @@ Comparare i Booleani
 - (undefined == undefined); // true
 - (undefined == null); // true
 - (NaN == null); // false
-- (NaN == NaN); // false 
+- (NaN == NaN); // false
 - (2 == "2"); // true !
 - (12 == 1 + "2"); // true !!
 
+---
 
-----
+## Un gran macello!
 
-
-Un gran macello!
-----------------
 Per sicurezza nelle comparazioni è meglio utilizzare === e !== che restituiscono
 l'uguaglianza solo se i dati sono effettivamente identici
 
@@ -113,19 +183,14 @@ l'uguaglianza solo se i dati sono effettivamente identici
 - (null === null); // true
 - (null === undefined); // false
 
+---
+
+# STRUTTURE DI CONTROLLO
 
 ---
 
+## if, then, else
 
-STRUTTURE DI CONTROLLO
-======================
-
-
-----
-
-
-if, then, else
---------------
 ```javascript
 if (condizione) { // se la condizione è vera
   fai qualcosa;
@@ -144,12 +209,10 @@ if (3 > 2) {
 }
 ```
 
+---
 
-----
+## while
 
-
-while
------
 ```javascript
 while (condizione) { // finchè la condizione rimane vera
   fai qualcosa;
@@ -166,12 +229,10 @@ while (i <= 10) {
 }
 ```
 
-
-----
-
-
-for
 ---
+
+## for
+
 ```javascript
 for (dichiarazione; condizione; incremento) {
   fai qualcosa;
@@ -186,11 +247,10 @@ for (var i = 0; i <= 10; i++) {
 }
 ```
 
-----
+---
 
+## switch
 
-switch
-------
 ```
 switch (espressione) {
   case "a":
@@ -207,12 +267,10 @@ switch (espressione) {
 In base al valore dell'espressione verrà eseguito il codice **A PARTIRE**
 dal caso corrispondente. Per questo sono necessari i break.
 
+---
 
-----
+## for-in
 
-
-for-in
-------
 ```javascript
 for (key in obj) {
   fai qualcosa con key;
@@ -221,19 +279,14 @@ for (key in obj) {
 
 Permette di iterare tra le chiavi enumerabili di un oggetto JavaScript.
 
+---
+
+# ESERCIZI
 
 ---
 
+## Scacchiera
 
-ESERCIZI
-========
-
-
-----
-
-
-Scacchiera
-----------
 Scrivere un programma che stampi in console una scacchiera 8x8, dove le caselle
 nere sono rappresentate dal simbolo [#] e quelle bianche dal simbolo [ ]
 
@@ -241,12 +294,10 @@ nere sono rappresentate dal simbolo [#] e quelle bianche dal simbolo [ ]
 [soluzione2](http://jsbin.com/guxexo/4/edit?js,console)
 [soluzione3](http://jsbin.com/yucoremizu/edit?js,console)
 
+---
 
-----
+## Trimestri
 
-
-Trimestri
----------
 Scrivere un programma che data una stringa con il nome di un mese stampi in
 console il trimestre a cui corrisponde.
 
@@ -258,12 +309,10 @@ mAgGio -> Secondo Trimestre
 
 [soluzione](http://jsbin.com/fumagi/1/edit?js,output)
 
+---
 
-----
+## FizzBuzz
 
-
-FizzBuzz
---------
 Scrivere un programma che stampi i numeri da 1 a 100, se però il numero è
 divisibile per 3 allora si scriva "Fizz", se è divisibile per 5 "Buzz", se è
 divisibile sia per 3 che per 5 allora si scriva "FizzBuzz".
@@ -274,12 +323,10 @@ Un grande classico della programmazione
 
 [soluzione](http://jsbin.com/kukega/1/edit?js,output)
 
+---
 
-----
+## vOcAlI
 
-
-vOcAlI
-------
 Scrivere un programma che data una stringa minuscola la stampi con le vocali maiuscole
 
 Es. giovannino -> gIOvAnnInO
