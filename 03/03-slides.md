@@ -2,6 +2,10 @@
 
 ---
 
+<em>"Primitive Data Types are passed By Value and Objects are passed By Reference."</em>
+
+---
+
 ## Tipi Primitivi
 
 - Numeri
@@ -124,6 +128,95 @@ var b = y;
 a = 5;
 b = "def";
 console.log(x, y, a, b); // -> 10, 'abc', 5, 'def'
+```
+
+---
+
+## Oggetti passati per Riferimento
+
+Alle variabili a cui è assegnato un valore non primitivo viene assegnato un riferimento a tale valore. Questo riferimento punta alla posizione dell'oggetto nella memoria. Le variabili in realtà non contengono il valore.
+Gli oggetti vengono creati in qualche punto nella memoria del computer. Quando scriviamo arr = [], abbiamo creato una matrice in memoria. Ciò che la variabile arr riceve è l'indirizzo, la posizione, di quella matrice.
+
+---
+
+```javascript
+var myName = {
+  firstName: "Carlos"
+};
+var identity = myName;
+myName.firstName = "Carla";
+console.log(myName.firstName); // "Carla"
+console.log(identity.firstName); // "Carla"
+```
+
+Quando si lavora con oggetti, l'operatore = crea un alias per l'oggetto originale, non crea un nuovo oggetto. Questo è ciò che significa "per riferimento".
+
+---
+
+## Passare Tipi Primitivi e Oggetti ad una Funzione
+
+Se modifichi il valore di un Tipo Primitivo dentro una funzione, questa modifica non avrà effetto sulla variabile al di fuori di quella funzione.
+
+```javascript
+var myName = "Carlos";
+function myNameIs(aName) {
+  aName = "Carla";
+}
+myNameIs(myName);
+console.log(myName); // "Carlos"
+```
+
+---
+
+Anche se stiamo cambiando la variabile myName all'interno della funzione myNameIs, quando la stampiamo dopo aver chiamato la funzione, ha ancora il valore "Carlos". Questo perché quando vengono passati i tipi primitivi, vengono passati per valore.
+
+Stiamo passando una copia di myName: tutto ciò che fai a myName all'interno del corpo della funzione non influenzerà myNamevariable nell'ambito globale perché stai passando una copia di myName e non la variabile myName originale.
+
+---
+
+## Oggetti passati ad una funzione per riferimento
+
+Quando passi qualcosa per riferimento, stai passando qualcosa che indica qualcos'altro, non una copia dell'oggetto. Quindi, dal momento che JavaScript passa gli oggetti per riferimento, quando si modifica una proprietà di tale oggetto all'interno della funzione, la modifica verrà riflessa nell'ambito esterno:
+
+```javascript
+var myName = {};
+function myNameIs(aName) {
+  aName.firstName = "Carla";
+}
+myNameIs(myName);
+console.log(myName); // Object {firstName: "Carla"}
+```
+
+---
+
+```javascript
+var myName = {
+  firstName: "Carla"
+};
+function myNameIs(aName) {
+  aName = {
+    nickName: "Carlita"
+  };
+}
+myNameIs(myName);
+console.log(myName); // Object {firstName: "Carla"}
+```
+
+Qui stampa il valore della variabile myName nello scope esterno e questa volta non ha aggiunto una proprietà nickName all'oggetto. Perché ? Se si guarda attentamente, ciò che stiamo facendo nella funzione sta tentando di riassegnare all'oggetto myName un nuovo valore.
+
+---
+
+Ma non puoi cambiare a cosa punta myName, puoi solo cambiare una proprietà di myName in qualcos'altro, come in questo caso:
+
+```javascript
+var myName = {
+  firstName: "Carla"
+};
+function myNameIs(aName) {
+  aName.nickName = "Carlita";
+}
+myNameIs(myName);
+console.log(myName); // Object {firstName: "Carla", nickName: "Carlita"}
 ```
 
 ---
