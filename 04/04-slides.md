@@ -8,6 +8,15 @@ People think that computer science is the art of geniuses but the actual reality
 ----
 
 
+Funzioni in Javascript
+-------------------------
+Le funzioni in JavaScript hanno un ruolo importantissimo, sono definite a partire da una modalità (o paradigma) di programmazione che prende le mosse dal concetto di funzione in matematica e come vedremo permettono di definire gli oggetti.
+
+<em>una funzione è un insieme di istruzioni racchiuse in un blocco di codice, che può essere contraddistinto da un nome, può accettare argomenti o parametri di ingresso e restituire valori</em>
+
+
+----
+
 Definire una Funzione
 -------------------------
 Le funzioni sono trattate come tutti gli altri dati e sono dunque assegnabili ad una variabile.
@@ -28,6 +37,113 @@ console.log(cube(3));
 
 ----
 
+L’istruzione return
+--------------------
+Nel corpo della funzione può essere presente l’istruzione return che consente di terminare e restituire un valore al codice che l’ha chiamata. Questo ci consente di assegnare ad una variabile il valore restituito da una funzione o utilizzare una funzione all’interno di una espressione.
+```javascript
+function somma() {
+	var z = 11 + 5;
+	return z;
+}
+var risultato = somma();
+```
+In questo esempio abbiamo definito una funzione senza argomenti che somma due interi e restituisce il risultato. L’invocazione della funzione fa sì che venga eseguita la somma ed il risultato venga assegnato alla variabile risultato.
+
+----
+
+
+----
+
+La funzione somma() che abbiamo definito può essere utilizzata in qualsiasi espressione e verrà trattata da JavaScript come un valore numerico:
+
+```javascript
+var risultato = 5 + somma() * 2;
+```
+
+In questo esempio l’invocazione somma() sarà equivalente al valore 16, per cui la variabile risultato avrà valore 37.
+
+----
+
+Argomenti o parametri di una funzione
+-------------------------------------
+La funzione somma() che abbiamo definito prima è in grado di sommare soltanto i due numeri fissati nel blocco di istruzioni. Per renderla più generale è opportuno introdurre due argomenti che rappresenteranno i numeri da sommare:
+```javascript
+function somma(x, y) {
+	var z = x + y;
+	return z;
+}
+```
+In questo caso i valori da sommare verranno passati alla funzione somma() al momento dell’invocazione:
+
+```javascript
+var risultato = somma(11, 5);
+```
+
+----
+
+Parametri opzionali
+--------------------
+Come abbiamo avuto modo di vedere, JavaScript è un linguaggio molto flessibile e questa sua flessibilità ci consente di fare delle cose che talvolta possono apparire abbastanza strane. Ad esempio, a proposito degli argomenti di una funzione, non è obbligatorio passarli tutti in una chiamata di funzione.
+
+In altre parole, data la definizione della funzione somma() con i due argomenti da sommare, possiamo invocare la funzione nei seguenti modi:
+```javascript
+var risultato1 = somma(11);
+var risultato2 = somma();
+var risultato3 = somma(11, 5, 7, 9);
+```
+Queste tre invocazioni della funzione somma() potrebbero apparire errate, ma non generano nessun errore in JavaScript. In particolare, nel primo caso specifichiamo un solo argomento, il che assegna automaticamente al secondo argomento mancante il valore undefined restituendo come somma il valore NaN. Lo stesso ragionamento vale per il secondo caso, dove non passiamo alcun argomento.
+
+Nel terzo caso, invece, passiamo più argomenti di quelli previsti nella definizione della funzione. JavaScript ignorerà gli argomenti in più restituendo lo stesso risultato di somma(11, 5).
+
+----
+
+L’array arguments
+----------------
+Una analoga flessibilità l’abbiamo anche nella dichiarazione degli argomenti quando definiamo una funzione. Ad esempio, possiamo non definire alcun argomento nella definizione di somma() ed accedere ai valori passati in fase di chiamata tramite un array speciale predefinito: arguments.
+
+La definizione della nostra funzione si presenterebbe così:
+```javascript
+function somma() {
+	var z = arguments[0] + arguments[1];
+	return z;
+}
+```
+In questo caso non specifichiamo gli argomenti a fianco al nome della funzione, ma accediamo ad essi sfruttando questo array predefinito.
+
+----
+
+La disponibilità di arguments ci consente di creare funzioni con un numero di parametri non definito. Ad esempio, possiamo sommare un numero indefinito di valori:
+```javascript
+function somma() {
+	var z = 0;
+	var i;
+	for (i in arguments) {
+		z = z + arguments[i];
+	}
+	return z;
+}
+```
+In questo modo potremo chiamare la funzione per sommare un qualsiasi numero di valori:
+```javascript
+somma(2, 78);
+somma(17, 32, 4, 19, 52);
+```
+
+----
+
+Argomenti con valori di default
+-------------------------------
+Con l’avvento di ECMAScript 6 vengono introdotti altri elementi che arricchiscono la flessibilità della gestione degli argomenti di una funzione. In particolare viene introdotta la possibilità di specificare dei valori di default:
+```javascript
+function somma(x = 0, y = 0) {
+	var z = x + y;
+	return z;
+}
+```
+In questo modo se al momento della chiamata non viene passato un argomento, ad esso viene assegnato il valore di default specificato, invece del valore undefined. Quindi, ad esempio, la chiamata somma() senza argomenti restituirà il valore 0 anzichè NaN.
+
+
+----
 
 Scope delle Funzioni
 ------------------------
