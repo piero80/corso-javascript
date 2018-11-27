@@ -168,15 +168,15 @@ console.log(myName); // "Carlos"
 
 ---
 
-Anche se stiamo cambiando la variabile myName all'interno della funzione myNameIs, quando la stampiamo dopo aver chiamato la funzione, ha ancora il valore "Carlos". Questo perché quando vengono passati i tipi primitivi, vengono passati per valore.
+Anche se stiamo cambiando la variabile myName all'interno della funzione myNameIs, quando la stampiamo dopo aver chiamato la funzione, ha ancora il valore "Carlos". Questo perché i tipi primitivi vengono passati per valore.
 
-Stiamo passando una copia di myName: tutto ciò che fai a myName all'interno del corpo della funzione non influenzerà myNamevariable nell'ambito globale perché stai passando una copia di myName e non la variabile myName originale.
+Stiamo passando una copia di myName: tutto ciò che fa myName all'interno del corpo della funzione non influenzerà myNamevariable nell'ambito globale perché si sta passando una copia di myName e non la variabile myName originale.
 
 ---
 
 ## Oggetti passati ad una funzione per riferimento
 
-Quando passi qualcosa per riferimento, stai passando qualcosa che indica qualcos'altro, non una copia dell'oggetto. Quindi, dal momento che JavaScript passa gli oggetti per riferimento, quando si modifica una proprietà di tale oggetto all'interno della funzione, la modifica verrà riflessa nell'ambito esterno:
+Quando si passa qualcosa per riferimento, si sta passando qualcosa che indica qualcos'altro, non una copia dell'oggetto. Quindi, dal momento che JavaScript passa gli oggetti per riferimento, quando si modifica una proprietà di tale oggetto all'interno della funzione, la modifica verrà riflessa nell'ambito esterno:
 
 ```javascript
 var myName = {};
