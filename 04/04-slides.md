@@ -212,6 +212,9 @@ console.log(subtractFour(5));
 
 ---
 
+
+---
+
 ## Scope delle Funzioni
 
 ```javascript
