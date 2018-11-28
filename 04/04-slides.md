@@ -63,8 +63,8 @@ In questo esempio l’invocazione somma() sarà equivalente al valore 16, per cu
 
 ## Argomenti o parametri di una funzione
 
-La funzione somma() che abbiamo definito prima è in grado di sommare soltanto i due numeri fissati nel blocco di istruzioni. Per renderla più generale è opportuno introdurre due argomenti che rappresenteranno i numeri da sommare:
-
+La funzione somma() che abbiamo definito prima è in grado di sommare soltanto i due numeri fissati nel blocco di istruzioni. Per renderla più generale è opportuno introdurre due PARAMETRI che rappresenteranno i numeri da sommare:
+<em>x e y sono parametri nella dichiarazione della funzione</em>
 ```javascript
 function somma(x, y) {
   var z = x + y;
@@ -72,8 +72,8 @@ function somma(x, y) {
 }
 ```
 
-In questo caso i valori da sommare verranno passati alla funzione somma() al momento dell’invocazione:
-
+In questo caso i valori da sommare (ARGOMENTI) verranno passati alla funzione somma() al momento dell’invocazione:
+<em>11 e 5 sono passati nella funzione come argomenti</em>
 ```javascript
 var risultato = somma(11, 5);
 ```
@@ -147,6 +147,32 @@ function somma(x = 0, y = 0) {
 ```
 
 In questo modo se al momento della chiamata non viene passato un argomento, ad esso viene assegnato il valore di default specificato, invece del valore undefined. Quindi, ad esempio, la chiamata somma() senza argomenti restituirà il valore 0 anzichè NaN.
+
+---
+
+Esercizio
+---------
+Dichiara una funzione chiamata ridere() che ritorna "ahahahahahaa!". Stampa il valore ritornato dalla funzione ridere() nella console.
+```javascript
+
+// il tuo codice va qui!
+
+console.log(/* chiama la funzione ridere() */);
+
+```
+---
+
+2 Esercizio
+-----------
+Scrivi una funzione chiamata ridere() che prende un parametro, num che rappresenta il numero di "ha" da ritornare
+Attenzione ad aggiungere il punto esclamativo alla fine della stringa!
+```javascript
+
+// il tuo codice va qui!
+
+console.log(ridere(3));
+
+```
 
 ---
 

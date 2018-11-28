@@ -20,4 +20,18 @@ for (var i = 1; i < 10; i++) {
   msg += i + "x 5 = " + i * 5 + "<br/>";
 }
 
-document.getElementById("answer").innerHTML = msg;
+
+function laugh(num){
+  var string = "ha";
+  var content = "";
+  for(var i = 1; i <= num ; i++){
+    content += string
+    if(i===num){
+      content += "!"
+    }
+  }
+  return content;
+}
+
+document.getElementById("answer").innerHTML = laugh(2);
+
