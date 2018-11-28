@@ -176,6 +176,42 @@ console.log(ridere(3));
 
 ---
 
+Returning vs. Logging
+---------------------
+
+E'importante capire che il return e il print (console.log) non sono la stessa cosa. Se non definisci esplicitamente un valore di ritorno, la funzione ritornerá undefined di default.
+```javascript
+function sleep() {
+  console.log("I'm sleepy!");
+  return "zzz";
+  return "snore";
+}
+sleep();
+```
+Cosa ritorna questa funzione?
+
+---
+
+La funzione ritornerá "zzz" e stamperá "I'm sleepy" in console.
+
+---
+
+Quale numero sará stampato in console?
+
+```javascript
+function square(x) {
+  return x * x;
+}
+
+function subtractFour(x) {
+  return square(x) - 4;
+}
+
+console.log(subtractFour(5));
+```
+
+---
+
 ## Scope delle Funzioni
 
 ```javascript
