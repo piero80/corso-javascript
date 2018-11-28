@@ -65,6 +65,7 @@ In questo esempio l’invocazione somma() sarà equivalente al valore 16, per cu
 
 La funzione somma() che abbiamo definito prima è in grado di sommare soltanto i due numeri fissati nel blocco di istruzioni. Per renderla più generale è opportuno introdurre due PARAMETRI che rappresenteranno i numeri da sommare:
 <em>x e y sono parametri nella dichiarazione della funzione</em>
+
 ```javascript
 function somma(x, y) {
   var z = x + y;
@@ -72,8 +73,11 @@ function somma(x, y) {
 }
 ```
 
+---
+
 In questo caso i valori da sommare (ARGOMENTI) verranno passati alla funzione somma() al momento dell’invocazione:
 <em>11 e 5 sono passati nella funzione come argomenti</em>
+
 ```javascript
 var risultato = somma(11, 5);
 ```
@@ -150,36 +154,34 @@ In questo modo se al momento della chiamata non viene passato un argomento, ad e
 
 ---
 
-Esercizio
----------
-Dichiara una funzione chiamata ridere() che ritorna "ahahahahahaa!". Stampa il valore ritornato dalla funzione ridere() nella console.
-```javascript
+## Esercizio
 
+Dichiara una funzione chiamata ridere() che ritorna "ahahahahahaa!". Stampa il valore ritornato dalla funzione ridere() nella console.
+
+```javascript
 // il tuo codice va qui!
 
 console.log(/* chiama la funzione ridere() */);
-
 ```
+
 ---
 
-2 Esercizio
------------
-Scrivi una funzione chiamata ridere() che prende un parametro, num che rappresenta il numero di "ha" da ritornare
-Attenzione ad aggiungere il punto esclamativo alla fine della stringa!
-```javascript
+## 2 Esercizio
 
+Scrivi una funzione chiamata ridere() che prende un parametro "num" che rappresenta il numero di "ha" da ritornare. Attenzione ad aggiungere il punto esclamativo alla fine della stringa!
+
+```javascript
 // il tuo codice va qui!
 
 console.log(ridere(3));
-
 ```
 
 ---
 
-Returning vs. Logging
----------------------
+## Returning vs. Logging
 
 E'importante capire che il return e il print (console.log) non sono la stessa cosa. Se non definisci esplicitamente un valore di ritorno, la funzione ritornerá undefined di default.
+
 ```javascript
 function sleep() {
   console.log("I'm sleepy!");
@@ -188,6 +190,7 @@ function sleep() {
 }
 sleep();
 ```
+
 Cosa ritorna questa funzione?
 
 ---
@@ -212,10 +215,11 @@ console.log(subtractFour(5));
 
 ---
 
+## 21
 
 ---
 
-## Scope delle Funzioni
+## Global Scope e Function Scope
 
 ```javascript
 var x = "globale";
@@ -224,13 +228,13 @@ var f1 = function() {
   var x = "locale f1";
 };
 f1();
-console.log(x); // "globale"
+console.log(x); // "Global Scope"
 
 var f2 = function() {
   x = "dentro f2";
 };
 f2();
-console.log(x); // "dentro f2"
+console.log(x); // "dentro f2 Function Scope"
 ```
 
 Lo scope é il <em>contesto di esecuzione</em> all'interno del quale una particolare funzione javascript viene eseguita.
@@ -243,6 +247,220 @@ Questo vale anche per le funzioni stesse in quanto possono essere assegnate a de
 Parentesi graffe non significa scope isolato, questo è vero soltanto per le funzioni, ma non per i flussi di controllo (if, for, while, etc...)
 
 Da ECMAScript 6 in poi, si usa la parola chiave _let_ al posto di _var_
+
+---
+
+## Esercizio 1
+
+Quale di queste variabili a, b, c, d, è definita nel global scope?
+
+```javascript
+var a = 1;
+function x() {
+  var b = 2;
+  function y() {
+    var c = 3;
+    function z() {
+      var d = 4;
+    }
+    z();
+  }
+  y();
+}
+
+x();
+```
+
+---
+
+<h1>a</h1>
+
+---
+
+## 2 Esercizio
+
+Dove puoi stampare il valore della variabile c senza incorrere in un errore?
+
+```javascript
+var a = 1;
+function x() {
+  var b = 2;
+  function y() {
+    var c = 3;
+    function z() {
+      var d = 4;
+    }
+    z();
+  }
+  y();
+}
+
+x();
+```
+
+---
+
+<p>In qualsiasi posto dentro la funzione y()</p><br>
+<p>In qualsiasi posto dentro la funzione z()</p>
+
+---
+
+## Shadowing
+
+```javascript
+var bookTitle = "Il piccolo Principe";
+console.log(bookTitle);
+function displayBookEnglish() {
+  bookTitle = "The Little Prince"; // global scope è riassegnato dal valore del function Scope
+  console.log(bookTitle);
+}
+displayBookEnglish();
+console.log(bookTitle); // "The Little Prince"
+// "Il piccolo Principe"
+// "The Little Prince"
+// "The Little Prince"
+```
+
+In questo caso abbiamo una sovrapposizione di scope
+
+---
+
+Per prevenire questo comportamento dovremmo assegnare una nuova variabile dentro la funzione displayBookEnglish()
+
+```javascript
+var bookTitle = "Il piccolo Principe";
+console.log(bookTitle);
+function displayBookEnglish() {
+  var bookTitle = "The Little Prince"; // global scope è riassegnato dal valore del function Scope
+  console.log(bookTitle);
+}
+displayBookEnglish();
+console.log(bookTitle); // "The Little Prince"
+// "Il piccolo Principe"
+// "The Little Prince"
+// "Il piccolo Principe"
+```
+
+---
+
+## Esercizio 1
+
+Cosa stamperà questa funzione?
+
+```javascript
+var x = 1;
+
+function addTwo() {
+  x = x + 2;
+}
+
+addTwo();
+x = x + 1;
+console.log(x);
+```
+
+---
+
+<h1>4</h1>
+
+---
+
+E quest'altra?
+
+```javascript
+var x = 1;
+
+function addTwo() {
+  var x = x + 2;
+}
+
+addTwo();
+x = x + 1;
+console.log(x);
+```
+
+---
+
+<h1>2</h1>
+
+---
+
+## Esercizio
+
+Per questo esercizio creiamo una funzione buildTriangle() che accetterà un input e che ritornerà la stringa rappresentazione di un tringolo.
+
+```javascript
+*
+* *
+* * *
+* * * *
+* * * * *
+* * * * * *
+* * * * * * *
+* * * * * * * *
+* * * * * * * * *
+* * * * * * * * * *
+
+```
+
+---
+
+Partiamo da questa funzione che costruisce la riga.
+
+```javascript
+function makeLine(length) {
+  var line = "";
+  for (var j = 1; j <= length; j++) {
+    line += "* ";
+  }
+  return line + "\n";
+}
+```
+
+e chiamare questa funzione makeLine() dentro buildTriangle()
+
+---
+
+## Function Expressions
+
+In Javascript si può assegnare una funzione ad una variabile
+
+```javascript
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+```
+
+In questo caso la parola chiave function non ha nome, si dice funzione anonima
+
+---
+
+## Funzioni come parametri
+
+Una funzione che è passata come parametro ad un altra funzione è chiamata callback
+
+```javascript
+// function expression catSays
+var catSays = function(max) {
+  var catMessage = "";
+  for (var i = 0; i < max; i++) {
+    catMessage += "meow ";
+  }
+  return catMessage;
+};
+
+// function declaration helloCat accepting a callback
+function helloCat(callbackFunc) {
+  return "Hello " + callbackFunc(3);
+}
+
+// pass in catSays as a callback function
+helloCat(catSays);
+```
 
 ---
 
@@ -345,43 +563,13 @@ add(3) => 3 + add(2);
 
 La ricorsione è un'importante tecnica di programmazione nella quale una funzione chiama se stessa.
 JavaScript non dispone (ancora) di un'adeguata ottimizzazione per la chiamata ricorsiva delle funzioni, tuttavia per input che si sa per certo essere relativamente piccoli a volte la ricorsione può essere una soluzione più leggibile ed elegante.
-Attenzione però a non usarle mai per input molto grandi o molto probabilmente si avrà uno stack overflow.
-
----
-
-## Argomenti Opzionali
-
-in JavaScript tutti gli argomenti sono considerati opzionali
-
-```javascript
-function ciao(name) {
-  name = name === undefined ? "mondo" : name;
-  console.log("ciao " + name);
-}
-```
-
-Verificando l'uguaglianza degli argomenti con undefined si può definire il comportamento della funzione a seconda degli argomenti passati.
-
----
-
-## arguments
-
-All'interno dello scope di una funzione viene automaticamente resa disponibile la variabile arguments che contiene un array di tutti gli elementi passati.
-
-```javascript
-function numeroArgomenti() {
-  console.log(arguments.length);
-}
-
-numeroArgomenti(1, "ciao", 4, "b"); // 4
-```
 
 ---
 
 ## Closures
 
 ```javascript
-var me = "Pietro Colangelo";
+var me = "Piero Colangelo";
 function saluto() {
   console.log("Ciao, " + me + "!");
 }
