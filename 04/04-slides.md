@@ -417,7 +417,7 @@ function makeLine(length) {
 }
 ```
 
-e chiamare questa funzione makeLine() dentro buildTriangle()
+e chiamiamo questa funzione makeLine() dentro buildTriangle()
 
 ---
 

@@ -16,24 +16,23 @@ var msg = "";
   i++;
 }*/
 
+
+/*
 for (var i = 1; i < 10; i++) {
   msg += i + "x 5 = " + i * 5 + "<br/>";
 }
 
-/*
+
 function laugh(num){
   var string = "ha";
   var content = "";
   for(var i = 1; i <= num ; i++){
     content += string
-    if(i===num){
-      content += "!"
-    }
   }
-  return content;
+  return content + "!";
 }
 
-document.getElementById("answer").innerHTML = laugh(2);
+document.getElementById("answer").innerHTML = laugh(5);
 */
 
 /*
@@ -60,6 +59,7 @@ console.log(buildTriangle(10));
 //document.getElementById("answer").innerHTML = buildTriangle(10);
 
 // function expression catSays
+/*
 var catSays = function(max) {
   var catMessage = "";
   for (var i = 0; i < max; i++) {
@@ -77,3 +77,26 @@ function helloCat(callbackFunc) {
 helloCat(catSays);
 
 document.getElementById("answer").innerHTML = helloCat(catSays);
+*/
+
+/*
+
+// don't change this code
+function emotions(myString, myFunc) {
+  console.log("I am " + myString + ", " + myFunc(2));
+}
+
+// your code goes here
+// call the emotions function here and pass in an
+// inline function expression
+
+var pippo = emotions('happy', function(numb) {
+  var smile = '';
+  for(var i = 0; i < numb; i++) {
+      smile += 'ha';
+  }
+  return smile + '!';
+  
+})
+
+*/
