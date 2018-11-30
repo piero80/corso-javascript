@@ -1,99 +1,170 @@
-EVENTI ASINCRONI
-================
+RIPASSO HTML
+============
 
 
 ----
 
 
-AJAX
-----
-Asynchronous JavaScript and XML
-
-In parole povere Pagine web la cui dinamicità non dipende dal caricamento di una
-nuova pagina, ma da richieste a risorse esterne tramite JavaScript.
-
-
-----
-
-
-HOW AJAX WORKS
+tag
 ---
-Il browser richiede informazioni al server<br>
-Il server risponde con i dati (solitamente HTML, XML, JSON)<br>
-Il browser processa il contenuto e lo aggiunge alla pagina<br>
+Un tag HTML rappresenta un elemento del DOM e viene rappresentato nella seguente
+forma:
 
-
-----
-
-
-XMLHttpRequest
---------------
-Originariamente introdotto da Microsoft per funzionare con risorse XML.
-
-```javascript
-var httpRequest = new XMLHttpRequest();
-httpRequest.onreadystatechange = function () {
-  if (httpRequest.readyState === 4) {
-    if (httpRequest.status === 200) {
-      console.log(httpRequest.responseText);
-    }
-  }
-}
-httpRequest.open('GET', 'url');
-httpRequest.send();
-```
-
-----
-
-
-DATA FORMAT
-------
-
-
-HTML
 ```html
-<div class="event">
-  <img src="img/map-ca.png" alt="Map of California" />
-  <p><b>San Francisco, CA</b><br>
-  May 1</p>
-</div>
+<nomeTag attr1="val1" attr2="val2">childrens...</nomeTag>
+```
+
+Dove childrens può esser eun nodo di testo o qualunque altro tag.
+
+N.B. includere sempre il simbolo per la chiusura del tag: `</nomeTag>`
+
+----
+
+
+Struttura di base HTML
+----------------------
+```html
+<html>
+  <head>
+    ...
+  </head>
+  <body>
+    ...
+  </body>
+</html>
 ```
 
 
 ----
 
 
-XML
-```xml
-<?xml version="1.0" encoding="utf-8" ?>
-<events>
-  <event>
-    <location>San Francisco, CA</location>
-    <date>May 1</date>
-    <map>img/map-ca.png</map>
-  </event>
-</events>
+Tag principali
+--------------
+Contenitore generico:
+```html
+<div>...</div>
+```
+
+Contenitore generico inline:
+```html
+<span>...</span>
+```
+
+Titoli di varie dimensioni (h1 -> h6)
+```html
+<h1>TITOLO</h1>
+```
+
+Paragarfo
+```html
+<p>testo...</p>
+```
+
+Link
+```html
+<a href="indirizzo">testo</a>
+```
+
+Immagine
+```
+<img src="indirizzo" title="titolo" alt="testo alternativo"></img>
 ```
 
 
 ----
 
 
-JSON
-```json
-{
-  "events": [
-    {
-      "location": "San Francisco, CA",
-      "date": "May 1",
-      "map": "img/map-ca.png"
-    },
-    {
-      "location": "Austin, TX",
-      "date": "May 15",
-      "map": "img/map-tx.png"
-    }
-  ]
+Tabelle
+-------
+```html
+<table>
+  <tr> // intestazione
+    <th>header1</th>
+    <th>header2</th>
+  </tr>
+  <tr> //riga 1
+    <td>cella 1</td>
+    <td>cella 2</td>
+  </tr>
+</table>
+```
+
+
+----
+
+
+Liste
+-----
+Unordered List
+```html
+<ul>
+  <li>elemento 1</li>
+  <li>elemento 2</li>
+</ul>
+```
+
+Ordered List
+```
+<ol>
+  <li>elemento 1</li>
+  <li>elemento 2</li>
+</ol>
+```
+
+attributo type = 1 | a | A | I | i
+
+
+----
+
+
+Attributi comuni
+----------------
+id
+```
+<elemento id="nomeId"></elemento>
+```
+
+classi
+```
+<elemento class="classe1 classe2 ..."></elemento>
+```
+
+
+----
+
+
+Inclusione file esterni
+-----------------------
+Script JavaScript
+```html
+< script type="text/javascript" src="script.js">< /script>
+```
+
+CSS
+```
+< link rel="stylesheet" type="text/css" href="stile.css">
+```
+
+
+---
+
+
+
+
+CSS
+===
+Cascading Style Sheets
+
+
+----
+
+
+Struttura istruzioni
+--------------------
+```css
+selettore {
+  proprietà1: valore1;
+  proprietà2: valore2;
 }
 ```
 
@@ -101,108 +172,137 @@ JSON
 ----
 
 
+Selettori CSS
+----------------
+I principali selettori CSS sono:
 
-Same origin Policy
-------------------
-Per motivi di sicurezza le XMLHttprequest possono essere eseguite solo verso
-risorse dello stesso dominio.
+- tag = elementi tag (valido per tutti i tag body, a, h1, div, etc...)
+- .name = elementi con classe name
+- `#name` = elemento con id name
+- `*` = tutti gli elementi
 
-Per accedere ad API di terze parti si devono usare le http access policy (CORS)
-o, come di solito avviene, il "trucchetto" del jsonp
-
-
-----
-
-
-JQuery ajax
------------
-JQuery ci semplifica molto la vita con le richieste asincrone, sia per quanto
-riguarda la compatibilità con tutti i browser, sia per l'astrazione di alcuni
-utili trucchetti come jsonp e la serializzazione dei dati inseriti nei form.
+[Lista completa](http://www.w3schools.com/cssref/css_selectors.asp)
 
 
 ----
 
 
-$.ajax
-------
-La funzione $.ajax implementa tutte le operazioni effettuabili tramite
-XMLhttprequest, che in JQuery viene esteso in un oggetto jqXHR
+Margin & Padding
+---------------------
+Gli elementi vengono posizionati in base al rettangolo che li contiene.
 
-```javascript
-var jqxhr = $.ajax( "example.php" )
-  .done(function() {
-    alert( "success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "complete" );
-  });
+i margini rappresentano lo spazio da lasciare libero dai bordi del rettangolo verso l'esterno.
+
+Il padding invece è lo spazio tra bordo del rettangolo e i figli contenuti.
+
+```css
+margin-top: 10px; margin-right: 11px; margin-bottom: 12px; margin-left: 13px;
 ```
 
-[Lunga documentazione](http://api.jquery.com/jQuery.ajax/)
-
-
-----
-
-
-Shortcuts
----------
-JQuery ci fornisce alcuni shortcuts per operazioni tipiche.
-
-```javascript
-$.get('url', data)
-  .done(function (data) {...});
-
-$.getJSON('url', data)
-  .done(function (data) {...});
-
-$.post('url', data)
-  .done(function (data) {...});
+oppure
+```css
+margin: 10px, 11px, 12px, 13px;
 ```
 
 
 ----
 
 
-Serialize
+Testo
+-------
+Le principali proprietà che si possono assegnare a elementi testuali sono:
+```css
+color: nome | hex | srgb // colore del testo
+font-size: 16px | 1em
+font-weight: normal | bold | bolder | lighter | 100-900
+font-family: "Times New Roman", serif | Arial, sans-serif
+text-align: left | right | center | justify // allineamento del testo
+text-decoration: none | underline | overline | line-through
+```
+
+
+----
+
+
+Bordi
+-----
+il bordo del rettangolo contenente un elemento può essere reso visibile
+```css
+border-width: 1px | thin | medium | thick;
+border-style: solid | dotted | dashed | double | groove | ridge | inset | outset;
+border-color: blue | hex | rgba();
+```
+
+
+----
+
+
+Dimensioni
+----------
+Si possono stabilire le dimensioni dei un elemento tramite height e width
+```css
+height: 500px | 20% | 3em | auto;
+width: 200px;
+max-height: 300px;
+max-width: 100px;
+```
+
+
+----
+
+
+Posizione
 ---------
-I dati inviati in una chiamata ajax possono essere un oggetto javascript o una
-stringa. In particolare una stringa in formato url si può usare per inviare
-delle coppie key=value&key2=value2 etc..
+Esistono 3 tipi di posizionamento nei css:
+```css
+position: static | relative | absolute | fixed;
+```
 
-la funzione serialize() di jQuery trasforma i dati raccolti in un form in una
-stringa in formato url e si può usare in una funzione post per inviare i dati
-del form ad un server remoto.
+In caso di posizionamento non statico (naturale) si possono usare le proprietà
+top, right, bottom, left per definire i relativi scostamenti
 
-```javascript
-$.post( "test.php", $( "#testform" ).serialize() );
+con la prorietà z-index si può definire la "posizione" sull'asse Z
+
+
+----
+
+
+Float
+-----
+Con la proprietà float si può fare in modo che un elmento si posizioni verso
+sinistra o destra, permettendo che ai suoi lati possano posizionarsi altri
+elementi senza andare a capo (Es. immagini incorniciate da testo)
+```css
+float: left | right;
+```
+
+la prorietà clear fa in modo che un oggetto non possa avere oggetti float alla
+sua sinistra, destra o entrambe le parti (obbligando di fatto il layout ad
+andare a capo)
+```css
+clear: left | right | both;
 ```
 
 
 ---
 
 
-Esercizi
+ESERCIZI
 ========
 
 
 ----
 
 
-Ricerca tramite ZIP-CODE (CAP)
-------------------------------
+To-DO List
+----------
+Scrivere un'applicazione che simuli una lista di cose da fare.
 
-Il sito http://data.colorado.gov/ offre alcune API per cercare le attività relative
-ad uno specifico ZIP-CODE
+Sarà necessario un campo per immettere del testo, ogni volta che viene
+inviato un nuovo testo esso diventerà un nuovo elemento della lista.
 
-in particolar modo utilizzare le API:
-https://data.colorado.gov/resource/bhcc-9bdx.json
+Ogni elemento avrà un meccanismo per poterlo eliminare.
 
-per realizzare una piccola applicazione che permetta di visualizzare Nome,
-indirizzo, status, latitudine e longitudine per ogni risultato della ricerca.
+-----
 
-Inoltre la ricerca attraverso la select dovrà aggiornarsi ogni volta che
-si cambia il valore, senza dover premere invio o bottoni separati.
+[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/)

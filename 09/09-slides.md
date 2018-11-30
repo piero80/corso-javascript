@@ -1,279 +1,208 @@
-JQUERY
-=======
+EVENTI ASINCRONI
+================
 
 
 ----
 
 
-Cos'è jQuery?
------------------
-jQuery è una libreria JavaScript che fornisce un'interfaccia semplificata e multipiattaforma alle principali funzionalità disponibili nel browser.
+AJAX
+----
+Asynchronous JavaScript and XML
 
-Segni particolari: $
-
-Peso: ~ 32Kb
+In parole povere Pagine web la cui dinamicità non dipende dal caricamento di una
+nuova pagina, ma da richieste a risorse esterne tramite JavaScript.
 
 
 ----
 
 
-La funzione jQuery(...)
------------------------
-jQuery(...) è la funzione principale della libreria e solitamente viene abbreviata in $(...).
-
-Sostanzialmente accetta come argomento un valido selettore CSS e restituisce un oggetto jQuery.
-
-Concettualmente gli oggetti jQuery sono un'astrazione dei nodi del DOM, ma ci mettono a disposizione molte funzioni aggiuntive con cui manipolarli.
-
-Se viene passato del codice HTML la funzione $ restituirà invece un nuovo oggetto jQuery rappresentante quel nodo. Es. `$("<p>ciao</p>")`
-
-----
-
-
-Selettori CSS
-----------------
-I principali selettori CSS sono:
-
-- tag = elementi tag (valido per tutti i tag body, a, h1, div, etc...)
-- .name = elementi con classe name
-- `#name` = elemento con id name
-- `*` = tutti gli elementi
-
-[Lista completa](http://www.w3schools.com/cssref/css_selectors.asp)
-
-
-----
-
-
-$(document).ready(...)
---------------------------
-Prima di poter effettuare operazioni sul DOM è bene aspettare che il documento sia del tutto caricato per non andare incontro a bug imprevedibili.
-
-jQuery ci mette a disposizione il metodo ready
-
-```javascript
-$(document).ready(function () {
-  ...
-}
-```
-
-esiste anche una versione abbreviata
-
-```javascript
-$(function () {
-  ...
-}
-```
-
-se ci sono problemi di compatibilità con il simbolo $ si può usare
-
-```javascript
-jQuery(function ($) {
-  ...
-}
-```
-
-
+HOW AJAX WORKS
 ---
-
-
-FUNZIONI PRINCIPALI
-===================
-
-
-----
-
-
-Aggiungere contenuto dinamicamente
---------
-```javascript
-$(selector).prepend(content,function(index,html));
-$(selector).append(content,function(index,html));
-```
-
-oppure
-
-```javascript
-$(selector).before(content,function(index));
-$(selector).after(content,function(index));
-```
-
-----
-
-
-css(...)
---------
-```javascript
-$(selettore).css('proprietà CSS', 'valore');
-```
-
-oppure
-
-```javascript
-$(selettore).css({'prop1': 'val1', 'prop2', 'val2'});
-```
+Il browser richiede informazioni al server<br>
+Il server risponde con i dati (solitamente HTML, XML, JSON)<br>
+Il browser processa il contenuto e lo aggiunge alla pagina<br>
 
 
 ----
 
 
-visibilità
-----------
-- hide()  nasconde un elemento;
-- show()  mostra un elemento;
-- toggle()  per alternare hide e show in base alla visibilità di un elemento;
+XMLHttpRequest
+--------------
+Originariamente introdotto da Microsoft per funzionare con risorse XML.
 
+```javascript
+var httpRequest = new XMLHttpRequest();
+httpRequest.onreadystatechange = function () {
+  if (httpRequest.readyState === 4) {
+    if (httpRequest.status === 200) {
+      console.log(httpRequest.responseText);
+    }
+  }
+}
+httpRequest.open('GET', 'url');
+httpRequest.send();
+```
 
 ----
 
 
-classi
+DATA FORMAT
 ------
-- hasClass('classe') metodo di controllo, ritorna true se l’elemento ha una specifica classe;
-- addClass('classe') aggiungi una classe agli elementi;
-- removeClass('classe') rimuove una classe agli elementi;
-- toggleClass('classe') aggiunge una classe se già non presente, altrimenti la toglie.
 
 
-----
-
-
-length
-------
-Quando un oggetto jQuery contiene più elementi si può conoscere il loro numero
-tramite la proprietà length.
-
-```javascript
-$('a').length // numero dei link
+HTML
+```html
+<div class="event">
+  <img src="img/map-ca.png" alt="Map of California" />
+  <p><b>San Francisco, CA</b><br>
+  May 1</p>
+</div>
 ```
 
 
 ----
 
 
-each
-----
-Col metodo each si può iterare tra tutti gli elementi di un oggetto jQuery.
+XML
+```xml
+<?xml version="1.0" encoding="utf-8" ?>
+<events>
+  <event>
+    <location>San Francisco, CA</location>
+    <date>May 1</date>
+    <map>img/map-ca.png</map>
+  </event>
+</events>
+```
 
-```javascript
-$('h1').each(function () {
-  $(this).css('color', 'red'); // tutti i titoli diventano rossi
+
+----
+
+
+JSON
+```json
+{
+  "events": [
+    {
+      "location": "San Francisco, CA",
+      "date": "May 1",
+      "map": "img/map-ca.png"
+    },
+    {
+      "location": "Austin, TX",
+      "date": "May 15",
+      "map": "img/map-tx.png"
+    }
+  ]
 }
 ```
 
-N.B. usando $(this) racchiudiamo l'elemento attuale (this) in un oggetto jQuery
-e possiamo quindi utilizzare i metodi della libreria su quell'oggetto.
+
+----
 
 
----
 
+Same origin Policy
+------------------
+Per motivi di sicurezza le XMLHttprequest possono essere eseguite solo verso
+risorse dello stesso dominio.
 
-EVENTI
-======
+Per accedere ad API di terze parti si devono usare le http access policy (CORS)
+o, come di solito avviene, il "trucchetto" del jsonp
 
 
 ----
 
 
-on
---
-con la funzione on si può indicare una funzione da eseguirsi al verificarsi di
-un evento
+JQuery ajax
+-----------
+JQuery ci semplifica molto la vita con le richieste asincrone, sia per quanto
+riguarda la compatibilità con tutti i browser, sia per l'astrazione di alcuni
+utili trucchetti come jsonp e la serializzazione dei dati inseriti nei form.
+
+
+----
+
+
+$.ajax
+------
+La funzione $.ajax implementa tutte le operazioni effettuabili tramite
+XMLhttprequest, che in JQuery viene esteso in un oggetto jqXHR
 
 ```javascript
-$(elemento).on( events [, selector ] [, data ], handler )
-```
-
-```javascript
-$('button').on('click', function () {
-  alert("click");
+var jqxhr = $.ajax( "example.php" )
+  .done(function() {
+    alert( "success" );
+  })
+  .fail(function() {
+    alert( "error" );
+  })
+  .always(function() {
+    alert( "complete" );
   });
 ```
 
-N.B. è buona norma usare dei namespace per gli eventi, Es. click.myPlugin
+[Lunga documentazione](http://api.jquery.com/jQuery.ajax/)
+
 
 ----
 
 
-Eventi delegati
----------------
-Passando una stringa come secondo parametro alla funzione on, si può indicare
-un selettore per i figli del nodo abilitati a far scattare l'evento.
-
-Es.
+Shortcuts
+---------
+JQuery ci fornisce alcuni shortcuts per operazioni tipiche.
 
 ```javascript
-$( "#dataTable tbody tr" ).on( "click", function() {
-  console.log( $( this ).text() );
-});
-```
+$.get('url', data)
+  .done(function (data) {...});
 
-vs
+$.getJSON('url', data)
+  .done(function (data) {...});
 
-```javascript
-$( "#dataTable tbody" ).on( "click", "tr", function() {
-  console.log( $( this ).text() );
-});
+$.post('url', data)
+  .done(function (data) {...});
 ```
 
 
 ----
 
 
-abbreviazioni
--------------
-- click()
-- dblclclick()
-- change()
-- focus()
-- keypress
-- mouseover, mouseenter, mousedown, mousemove, mouseout, mouseup
+Serialize
+---------
+I dati inviati in una chiamata ajax possono essere un oggetto javascript o una
+stringa. In particolare una stringa in formato url si può usare per inviare
+delle coppie key=value&key2=value2 etc..
 
-[etc...](http://api.jquery.com/category/events/)
-
-
-----
-
-
-off
----
-Rimuove un event handler da un oggetto jQuery
+la funzione serialize() di jQuery trasforma i dati raccolti in un form in una
+stringa in formato url e si può usare in una funzione post per inviare i dati
+del form ad un server remoto.
 
 ```javascript
-.off( events [, selector ] [, handler ] )
+$.post( "test.php", $( "#testform" ).serialize() );
 ```
 
 
 ---
 
 
-ESERCIZI
+Esercizi
 ========
 
 
 ----
 
 
-Scacchiera jQuery
------------------
-Modificare il generatore di scacchiere sostituendo le funzioni native con le
-alternative di jQuery
+Ricerca tramite ZIP-CODE (CAP)
+------------------------------
 
-[Soluzione](https://jsfiddle.net/piero80/5fn41n2w/2/)
+Il sito http://data.colorado.gov/ offre alcune API per cercare le attività relative
+ad uno specifico ZIP-CODE
 
+in particolar modo utilizzare le API:
+https://data.colorado.gov/resource/bhcc-9bdx.json
 
-----
+per realizzare una piccola applicazione che permetta di visualizzare Nome,
+indirizzo, status, latitudine e longitudine per ogni risultato della ricerca.
 
-
-To-DO List
-----------
-Scrivere un'applicazione che simuli una lista di cose da fare.
-
-Sarà necessario un campo per immettere del testo, ogni volta che viene
-inviato un nuovo testo esso diventerà un nuovo elemento della lista.
-
-Ogni elemento avrà un meccanismo per poterlo eliminare.
-
------
-
-[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/1/)
+Inoltre la ricerca attraverso la select dovrà aggiornarsi ogni volta che
+si cambia il valore, senza dover premere invio o bottoni separati.

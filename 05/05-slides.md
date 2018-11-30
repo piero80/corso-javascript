@@ -1,223 +1,181 @@
-OBJECTS
-=======
+HIGHER ORDER FUNCTIONS
+=======================
 
 
 ----
 
 
-Dichiarazione
--------------
+Le funzioni sono dati
+------------------------
+Una funzione non è altro che un oggetto come tutti gli altri, la sua unica peculiarità è che può essere invocate tramite il costrutto nomeFunzione(argomenti)
+
+
+----
+
+
+Funzioni anonime
+--------------------
+Se in JavaScript scriviamo "ciao" abbiamo creato una stringa; possiamo assegnarla ad una variabile, passarla come argomento ad una funzione o utilizzarla in espressioni complesse.
+
+Le funzioni si comportano esattamente nello stesso modo:
+
 ```javascript
-var obj = {
-  prop1: valore1,
-  prop2: valore2
+function (x) { return x * 2; }
+```
+
+in questo caso abbiamo creato una funzione anonima e possiamo, esattamente come numeri e stringhe, assegnarla ad una variabile o passarla come argomento.
+
+```javascript
+var double = function (x) { return x * 2; };
+
+[1, 2, 3].map(function (x) { return x * 2; });
+```
+
+
+----
+
+
+Callbacks
+-----------
+Un pattern tipico è quello di passare una funzione come argomento da eseguirsi dopo una certa computazione.
+
+
+```javascript
+var x = function(){
+  console.log("Io sono chiamato all'interno di un altra funzione")
 };
-// oppure
-var obj = new Object();
-obj.prop1 = valore1;
-obj.prop2 = valore2;
-```
-
-Es.
-```javascript
-var pietro = {
-  nome: "Pietro",
-  cognome: "Colangelo",
-  email: "pietro.colangelo@gmail.com"
-};
-console.log(pietro.email);
-```
-
-
-----
-
-
-Accesso alle proprietà
-----------------------
-Le proprietà di un oggetto sono rappresentate da coppie chiave: valore.
-
-Si può accedere ad esse tramite l'operatore punto.
-```javascript
-object.key
-```
-
-oppure con l'operatore []
-```javascript
-object["key"]
-// va passata una stringa o qualcosa che ritorni una stringa
-```
-
-
-----
-
-
-Array
------
-Di fatto gli array non sono che un particolare tipo di oggetto dove le chiavi
-sono numeri invece che stringhe e se non diversamente specificato vengono
-generate automaticamente a partire da 0.
-```javascript
-var arr = [2, 3, "ciao", 9];
-console.log(arr[0]) // 2
-console.log(arr[2]) //ciao
-```
-
-
-----
-
-
-L'istruzione new
-----------------
-Con l'istruzione new prima di una chiamata a funzione viene ritornato un oggetto
-a cui ci si può riferire all'interno di tale funzione tramite la variabile this.
-
-Più semplice a farsi che a dirsi:
-```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
+var y = function(callback){
+  console.log('fai qualcosa');
+  callback();
 }
-
-pietro = new Persona("Pietro", "Colangelo");
-console.log(pietro.cognome); // Colangelo
+y(x);
 ```
 
+---
 
-----
 
-
-Metodi
-------
-In JavaScript non è propriamente corretto parlare di metodi, tuttavia una
-proprietà di un oggetto può essere qualunque cosa, anche una funzione.
+2 Esempio
+-------
 ```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
-  this.stampa = function stampa() {
-    console.log(this.nome + " " + this.cognome);
+function sum(x, y, cb) {
+  if (!isNaN(x) && !isNaN(y)) {
+    cb(null, x + y);
+  } else {
+    cb("error: not a number", null);
   }
 }
-pietro = new Persona("Pietro", "Colangelo");
-pietro.stampa(); // Pietro Colangelo
-```
 
-Funzioni di questo tipo vengono chiamate costruttori.
-Per convenzione vengono dichiarate con la prima lettera maiuscola.
-
-
-----
-
-
-Metodi - Prototype
-------
-Un metodo puó essere dichiarato anche esternamente al costruttore
-```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
-}
-Persona.prototype.stampa = function() {//{objectName}.prototype.{methodName}
-  console.log(this.nome + " " + this.cognome);
-}
-pietro = new Persona("Pietro", "Colangelo");
-mario = new Persona("Mario", "Rossi");
-pietro.stampa(); // Pietro Colangelo
-mario.stampa();// Mario Rossi
-```
-Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
-
-
-----
-
-
-Metodi - Object.create
-------
-Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
-
-```javascript
-var persona1 = {
-  name:"Pietro",
-  surname:"Colangelo"
-}
-var persona2 = Object.create(persona1);
-console.log(persona2.name);//Pietro
-```
-
-
-----
-
-
-ES6 - Classes
-------
-ES6 introduce la sintassi Class per definire una classe o funzione.
-
-```javascript
-class Person {
-  constructor(name){
-    this.kind = 'Person';
-    this.name = name;
+sum(3, 2, function(err, data) {
+  if (!err) {
+    console.log(data);
+  } else {
+    console.log(err);
   }
-  printName(){
-    console.log('this.name');
-  }
-}
-var pietro = new Person('Pietro');
-pietro.printName(); // Pietro
-pietro.hasOwnProperty('kind') // true
+});
+
+```
+
+
+---
+
+
+3 Esempio
+-------
+```javascript
+var friends = ["Mike", "Stacy", "Andy", "Rick"];
+​
+friends.forEach(function (eachName, index){
+console.log(index + 1 + ". " + eachName); // 1. Mike, 2. Stacy, 3. Andy, 4. Rick​
+});
+```
+```javascript
+$("#btn_1").click(function() {
+  alert("Btn 1 Clicked");
+});
+```
+
+
+---
+
+
+PROGRAMMAZIONE FUNZIONALE
+===========================
+
+
+----
+
+
+array map
+------------
+La funzione map degli array accetta come argomento una funzione e restituisce un nuovo array con i risultati della funzione passata applicata a tutti gli elementi dell'array originale.
+
+```javascript
+var double = function (x) { return x * 2; };
+
+[1, 2, 3].map(double); // [2, 4, 6]
+```
+
+----
+
+
+array filter
+------------
+La funzione filter degli array accetta come argomento una funzione e restituisce un nuovo array con i soli elementi dell'array originale che se passati come argomento alla funzione essa restituirà true.
+
+```javascript
+var even = function (x) { return x % 2 == 0; };
+
+[1, 2, 3, 4, 5, 6, 7 , 8].filter(even); // [2, 4, 6, 8]
 ```
 
 
 ----
 
 
-ES6 - Classes
-------
-Ereditarietá
+array reduce
+------------
+La funzione reduce degli array accetta come argomento una funzione che dato un accumulatore del risultato ed il valore attuale computa un risultato che verrà poi passato come primo argomento al passaggio successivo.
+
+Più semplice a farsi che a dirsi...
 
 ```javascript
-class Person {
-  constructor(name){
-    this.kind = 'Person';
-    this.name = name;
-  }
-  printName(){
-    console.log(this.name);
-  }
-}
-class Male extends Person {
-  constructor(name){
-    super(name); //call the parent method with super
-    this.kind = 'male'
-  }
-}
-var pietro = new Person('Pietro');
-pietro.printName(); //Pietro
-var giorgio = new Male('Giorgio');
-giorgio.printName(); //Giorgio
+var sum = function (x, y) { return x + y; };
+
+[1, 2, 3, 4].reduce(sum); // 10
 ```
 
 
 ----
 
 
-Operatore for..in
------------------
-Serve a iterare tra tutte le proprietà enumerabili di un oggetto.
+bind
+----
+La funzione bind può essere applicata ad altre funzioni ed ha un doppio scopo:
+il primo argomento passato sostituirà il this nella funzione, mentre i successivi
+argomenti saranno i primi argomenti della funzione.
+
+Un uso tipico è quello di creare funzioni con i primi argomenti già impostati
+
 ```javascript
-for (key in obj) {
-  console.log(key + ": " + obj[key]);
-}
+var dueAlla = Math.pow.bind(null, 2);
+dueAlla(4); // 16
 ```
 
-Tuttavia il suo uso è abbastanza limitato in quanto non garantisce un ordine di
-visita e scansiona anche gli enumerabili di tutti i prototype da cui un oggetto
-discende.
 
-Inoltre bisogna ricordare che eventuali "metodi" verrebbero scansionati.
+----
 
-In sostanza può essere utile quando si usano gli oggetti come semplici mappe di
-valori.
+
+every & some
+------------
+Le funzioni degli array every(fn) e some(fn) ritornano true rispettivamente se
+tutti gli elementi dell'array se passati ad fn ritornano true, oppure se almeno
+uno ritorna true.
+
+```javascript
+function biggerThanTen(x) { return x > 10; };
+[13, 14, 64, 33].every(biggerThanTen); // true
+[13, 14, 64, 3].some(biggerThanTen); // true
+```
 
 
 ---
@@ -230,48 +188,23 @@ ESERCIZI
 ----
 
 
-Creato
-------
-Programmare un oggetto che alla sua creazione scrivi in console "oggetto creato"
+map & filter
+------------
+Scrivere le funzioni map e filter che prendano in input un array e una funzione
+senza utilizzare le loro versioni già esistenti.
 
 
 ----
 
 
-Person Mail
------------
-Creare un oggetto Person da inizializzarsi con le proprietà name, surname e mail.
-la mail dovrà però essere passata come normale stringa, ma essere salvata
-internamente come mail in formato antispam.
-```javascript
-var jacopo = new Person(
-  "Jacopo",
-  "Pace",
-  "jacopo.pace@gmail.com");
+biggestRightTriangle
+--------------------
+rappresentato un triangolo come un array [x, y, z] dove x, y e z sono i 3 lati
+si scriva una funzione biggestRightTriangle che dato un array di triangoli
+restituisca il triangolo **rettangolo** con la superficie più grande.
 
-console.log(jacopo.mail); // jacopo[dot]pace[at]gmail[dot]com
-```
+Si possono scrivere tutte le funzioni ausiliare che si vogliano, ma si possono
+utilizzare solo i seguenti metodi già esistenti: map, filter, reduce, every,
+some
 
-[soluzione scorsa antispam](http://jsbin.com/yaveze/edit?js,console)  
-<!--  
-[soluzione](http://jsbin.com/jigomijeje/edit?js,console)
--->
-
-----
-
-
-Numero naturale
----------------
-Creare un oggetto che venga inizializzato con un numero naturale e fornisca un
-metodo fact che ne calcoli il fattoriale ed un metodo pow(x) che lo elevi alla x
-```javascript
-var cinque = new N(5);
-console.log(cinque.fact()); // 120
-console.log(cinque.pow(2)); // 25
-```
-
-[potenza](http://jsbin.com/yekicaf/edit?js,console)  
-[fattoriale](http://jsbin.com/zamito/edit?js,console)  
-<!--  
-[soluzione](http://jsbin.com/zecufu/2/edit?html,js,output)
--->
+[Soluzione](http://jsbin.com/toqoco/edit?js,console)

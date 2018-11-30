@@ -1,363 +1,179 @@
 ANGULAR 2
-================
+==========
+Passare dati ad un Componente
 
 
 ----
 
 
-
-WHY ANGULAR2
------------
-
-Performance migliori<br>
-Web Component<br>
-Framework e non libreria<br>
-Typescript o Es6
-
+Passare dati ad un Componente
+-----------------------------
+Ci sono due modi per passare i dati ad un componente, con proprietà "binding" e con "binding event".
+In Angular, la rilevazione del cambiamento di dati e di eventi si verifica dall'alto al basso da genitore a figlio all'interno dell'alberatura del dom. Tuttavia, per gli eventi di Angular possiamo utilizzare il modello mentale evento DOM dove gli eventi fluiscono dal basso verso l'alto dal bambino al genitore. Quindi, gli eventi di Angular possono essere trattati come regolare eventi HTML basati su DOM quando si tratta della propagazione di un evento cancellabile.<br>
+L'input Decorator definisce un set di parametri che possono essere passati dal componente figlio al componente genitore.
 
 
 ----
 
-
-
-TYPESCRIPT
-----------
-
-Classes<br>
-Type checking<br>
-Supporto di Editor<br>
-Superset di javascript
-
-
-----
-
-
-TYPE CHECKING
---------------
-Passare il tipo di dato al parametro della funzione
+Esempio
+-------
 
 ```javascript
-function saySomething(message:string){
-  console.log(message)
-}
-saySomething(400); //Error
-saySomething('Hello'); // No Error
-```
-
-----
-
-
-CLASSI
-------
-TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
-
-```javascript
-class Persona {
-    name: string;
-    cognome: string;
-    constructor(nome:string, cognome:string){
-      this.nome = nome;
-      this.cognome = cognome;
-    }
-  getNomeCompleto(){
-    return this.nome + this.cognome;
-  }
-}
-var mypersona = new Persona('Pietro','Colangelo');
-mypersona.getNomeCompleto();
-```
-
-
-----
-
-
-EREDITARIETA'
-------
-TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
-
-```javascript
-class Studente extends Persona {
-    materie: Materie[];
-
-	constructor(nome, cognome) {
-		super(nome, cognome);
-    }
-  getNomeCompletoconTitolo(){
-    return "Studente " + super.getNomeCompleto();
-  }
-}
-```
-
-
-----
-
-
-INTERFACCIA
-------
-Un interfaccia è un vincolo al rispetto di un contratto. Definisce i membri che una classe deve avere in modo che gli oggetti che intendono interagire con le loro instanze sappiano gia quali proprietà e metodi chiamare.
-
-```javascript
-interface IPersona {
-	nome: string;
-	cognome: string;
-	visualizzaNomeCognome():string;
-}
-class Persona implements IPersona {
-	nome: string;
-	cognome: string;
-	constructor(nome: string, cognome: string) {
-		this.nome = nome;
-		this.cognome = cognome;
-	}
-	visualizzaNomeCognome() {
-		return this.nome + " " + this.cognome;
-	}
-}
-```
-
-
-----
-
-
-PROJECT SETUP
-------
-
-
-```javascript
-|- app/
-    |- app.component.ts     // main app component
-    |- app.module.ts        // main app module
-    |- main.ts              // bootstrap our app
-|- index.html
-|- package.json
-|- tsconfig.json
-|- typings.json
-|- systemjs.config.json
-```
-
-----
-
-
-TYPESCRIPT SETUP
-------
-
-
-```javascript
-npm init --yes
-npm install --save-dev lite-server
-"scripts": {
-  "lite": "lite-server"
-}
-npm run lite
-npm install --save-dev typescript typings
-```
-
-
-----
-
-
-tsconfig.json
------
-
-
-```javascript
-{
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "removeComments": false,
-    "noImplicitAny": false
-  }
-}
-```
-
-
-----
-
-
-typings.json
------
-
-
-```javascript
-{
-  "globalDependencies": {
-    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160818175514"
-  }
-}
-```
-
-
-----
-
-
-
-package.json
------
-
-```javascript
-npm install --save-dev concurrently
-"scripts": {
-  "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\"",
-  "lite": "lite-server",
-  "tsc": "tsc",
-  "tsc:w": "tsc -w",
-  "typings": "typings",
-  "postinstall": "typings install"
-},
-```
-
-----
-
-
-ANGULAR DEPENDENCIES
------
-CoreJS Shim - <em>Aggiunge Es6 Features al browser</em><br>
-Zone.js - <em>Un contesto di esecuzione. Debug e error</em><br>
-reflect-metadata - <em>Polyfill per metadata decorator(@Component)</em><br>
-rxjs - <em>Libreria per la programmazione funzionale(reactive data stream)</em><br>
-```javascript
-npm install core-js reflect-metadata zone.js rxjs@5.0.0-beta.12 systemjs --save
-```
-
-
-----
-
-
-ANGULAR2 PACKAGES
------
-@angular/core<br>
-@angular/common<br>
-@angular/compiler<br>
-@angular/platform-browser<br>
-@angular/platform-browser-dynamic<br>
-@angular/router
-@angular/http
-@angular/forms
-```javascript
-npm install @angular/core @angular/common @angular/compiler @angular/platform-browser @angular/platform-browser-dynamic @angular/forms @angular/http @angular/router --save
-```
-
-
-----
-
-
-SYSTEM.JS
----------
-systemjs.config.js
-```javascript
-<script src="node_modules/systemjs/dist/system.src.js"></script>
-<script src="systemjs.config.js"></script>
-<script>
-   System.import('app').catch(function(err) { console.error(err); });
-</script>
-
-```
-Il browser ancora non supporta il caricamento dei moduli perció noi abbiamo bisogno di un module bundler.
-Ce ne sono tanti,(Webpack, Gulp, Grunt) ma al momento System.js é il piú semplice da usare per Angular2.
-
-
-----
-
-
-
-ANGULAR2 BASICS
-------------------
-Displaying Data - Interpolation
-
-```javascript
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'my-app',
-  template: `
-    <h1>{{ title }}</h1>
-    <p>{{message}}</p>
-  `,
+  selector: 'rio-hello',
+  template: '<p>Hello, {{name}}!</p>',
 })
-export class AppComponent {
-    title = 'La mia app';
-    message = 'Benvenuto!';
+export class HelloComponent {
+  @Input() name: string;
 }
 ```
+```html
+<!-- To bind to a raw string -->
+<rio-hello name="World"></rio-hello>
+<!-- To bind to a variable in the parent scope -->
+<rio-hello [name]="helloName"></rio-hello>
 
+```
 
 ----
 
-ANGULAR2 BASICS
-------------------
-Using Constructor
 
+Event Handler
+----------------------------------------
+
+Angular 2 consente di generare eventi combinando l’utilizzo del decoratore @Output e della classe EventEmitter.
+Analogamente a quanto avviene per il decoratore @Input, il decoratore @Output ci consente di definire una proprietà di output, cioè una proprietà che genera un flusso di informazioni dall’interno del componente verso l’esterno. Un evento può essere considerato a tutti gli effetti un meccanismo che abilita flusso di questo tipo.
+La generazione dell’evento viene effettuata invocando il metodo emit() della proprietà result.
 ```javascript
-export class AppComponent {
-  title: string;
-  message: string;
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-  constructor() {
-    this.title = 'La mia app';
-    this.message = 'Benvenuto!';
+@Component({
+  selector: 'rio-counter',
+  templateUrl: 'app/counter.component.html'
+})
+export class CounterComponent {
+  @Input()  count = 0;
+  @Output() result = new EventEmitter<number>();
+
+  increment() {
+    this.count++;
+    this.result.emit(this.count);
   }
 }
 ```
+
 ----
 
-
-Structural - Built-in Directives
-------
-
-```javascript
-<section *ngIf="showSection">
-<li *ngFor="let item of list">
-<div [ngSwitch]="conditionExpression">
-  <ng-template [ngSwitchCase]="case1Exp">...</ng-template>
-  <ng-template ngSwitchCase="case2LiteralString">...</ng-template>
-  <ng-template ngSwitchDefault>...</ng-template>
+view del Component
+------------------
+```html
+<div>
+  <p>
+    <ng-content></ng-content>
+    Count: {{ count }} -
+    <button (click)="increment()">Increment</button>
+  </p>
 </div>
-<div [ngClass]="{active: isActive, disabled: isDisabled}">
 ```
 
-[Lunga documentazione](https://angular.io/docs/ts/latest/guide/template-syntax.html#)
+----
+
+
+Cicli di vita dei Componenti
+-----------
+I componenti che costituiscono una applicazione Angular 2 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
 
 
 ----
 
 
-Binding Sintax
----------
-Il Data binding é un meccanismo per coordinare cio che gli utenti vedono (dati dell'applicazione).
-Angular2 fornisce molti tipi di binding dei dati.
-Il Data binding puó essere raggruppato in tre categorie (direzione dei dati): dall'origine dei dati alla vista, dalla vista all'origine, e in entrambi le direzioni.
+Prima di ogni fase: l’esecuzione del costruttore
+----------
+Prima di vedere nel dettaglio quali sono le fasi del ciclo di vita dei componenti, è opportuno evidenziare che la prima attività effettuata dal framework alla creazione di un componente è l’esecuzione del suo costruttore. Anche se tecnicamente non rappresenta un Lifecycle Hook, l’esecuzione del costruttore è quindi la fase iniziale della creazione di un componente Angular2. È da evidenziare tuttavia che in questa fase:
+- non sono ancora state inizializzate le proprietà di input;
+- non è ancora disponibile la view associata al componente stesso.
 
-```javascript
 
-{{expression}}
-[target]="expression"
-bind-target="expression"
+----
 
-(target)="statement"
-on-target="statement"
 
-[(target)]="expression"
-bindon-target="expression"
+Le fasi del ciclo di vita del componente
+------------
+<em>OnChanges</em> 	
+Si verifica quando il valore di una proprietà di input viene modificato. Oltre a verificarsi prima dell’inizializzazione del componente, si verifica anche ogni qualvolta cambia il valore delle proprietà di input<br>
+<em>OnInit</em><br>
+Rappresenta la fase di inizializzazione del componente e si verifica dopo il primo evento OnChanges. Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
+
+----
+
+-----
+<em>DoCheck</em></br>
+Questa fase viene eseguita durante il check interno di Angular per valutare le modifiche ai componenti ed ai dati</br>
+<em>AfterContentInit</em></br>
+In questa fase il contenuto associato al componente è stato inizializzato; in particolare, è stato costruito l’albero degli eventuali componenti figli.</br>
+<em>AfterContentChecked</em></br>
+Anche questa fase viene eseguita durante un check interno di Angular sui contenuti associati al componente.</br>
+
+
+
+----
+
+-----------
+<em>AfterViewInit</em></br>
+Questa è la fase di inizializzazione della view associata al componente. In questa fase il componente risulta mappato sul DOM ed è quindi visibile.</br>
+<em>AfterViewChecked</em></br>
+Come per le altre fasi checked, anche in questo caso questa fase riguarda il check interno di Angular sulla view</br>
+<em>OnDestroy</em></br>
+Questa è l’ultima fase del ciclo di vita del componente e si verifica prima che Angular lo distrugga definitivamente.
+Questa fase viene eseguita una sola volta durante il ciclo di vita del componente.
+
+----
+
+
+Gestire le fasi del component lifecycle
+----------------------
+L’approccio generale consiste nell’implementare una specifica interfaccia TypeScript il cui nome corrisponde alla fase da gestire. Ad esempio, se intendiamo gestire la fase OnInit di un componente dobbiamo implementare l’omonima interfaccia come mostrato di seguito:
+```js
+import { Component, OnInit } from '@angular/core';
+@Component({
+    selector: 'articolo',
+    templateUrl: 'articolo.component.html',
+    styleUrls: ['articolo.component.css']
+})
+export class ArticoloComponent implements OnInit {
+    constructor() { }
+    ngOnInit() {
+        console.log("Il componente è in fase di inizializzazione!");
+    }
+}
 ```
 
 
 ----
 
 
-Built-in attribute directives
----------
+Two-way data binding in Angular 2
+----------
+Una dei cavalli di battaglia di Angular 1.x è stato il two-way data binding, il meccanismo automatico che consente di effettuare il binding di un elemento dell’interfaccia con il modello dei dati e viceversa, dal modello dei dati verso l’elemento dell’interfaccia.
+Questo meccanismo di sincronizzazione automatica ha indubbiamente il suo fascino, dal momento che consente di creare interattività tra i vari componenti dell’interfaccia e con il modello dei dati sottostante con poco sforzo, ma ha anche un prezzo in termini di prestazioni. L’uso implicito del two-way data binding di Angular 1.x incide sulle prestazioni dal momento che è attivo anche quando il suo utilizzo non è strettamente necessario.
 
-```javascript
-NgClass - add and remove a set of CSS classes
-NgStyle - add and remove a set of HTML styles
-NgModel - two-way data binding to an HTML form element
+
+---
+
+
+Angular 2 non ha il two-way data binding predefinito, come accadeva nella versione 1.x. Tuttavia possiamo attivarlo utilizzando la sintassi mostrata nel seguente esempio:
+```js
+import {FormsModule} from '@angular/forms';
+in app.module.ts
+```
+```html
+Inserisci un numero:
+<input type="number" [(ngModel)]="numero" />
+<div>
+    Il doppio di {{numero}} &egrave; {{numero * 2}}
+</div>
 ```
 
 
@@ -371,12 +187,27 @@ Esercizi
 ----
 
 
-ToDOList
-------------------------------
+Caratteri maiuscoli
+-------------------
+Scrivere un'applicazione angular che dato un testo in input visualizzi
+in tempo reale la lista dei suoi caratteri trasformati in maiuscolo.
 
-Scrivere un'applicazione in Angular2 che simuli una lista di cose da fare.
 
-Sarà necessario un campo per immettere del testo, ogni volta che viene
-inviato un nuovo testo esso diventerà un nuovo elemento della lista.
+----
 
------
+
+Angular TO-DO
+-------------
+Realizzare un'applicazion con angular per la gestione di cose da fare.
+
+I task siano inseribili scrivendo in una casella di testo e premendo
+invio.
+
+Ogni task potrà essere "checkato" e in tal caso il testo verrà sbarrato.
+
+Ogni task avrà un proprio link per la sua cancellazione.
+
+I task devono apparire con l'ultimo inserimento per primo.
+
+alla fine deve essere presente una stringa di testo che indichi quanti
+task sono stati svolti (checkati) sul totale (es. 2/4 task eseguiti)

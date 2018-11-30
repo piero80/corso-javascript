@@ -1,181 +1,199 @@
-HIGHER ORDER FUNCTIONS
-=======================
+DOM
+===
 
 
 ----
 
 
-Le funzioni sono dati
-------------------------
-Una funzione non è altro che un oggetto come tutti gli altri, la sua unica peculiarità è che può essere invocate tramite il costrutto nomeFunzione(argomenti)
+Cos'è il DOM
+------------
+Il Document Object Model è una struttura dati ad albero che rappresenta il
+contenuto di un documento strutturato.
+
+In particolare tale modello è utilizzato nei browser per rappresentare il
+contenuto delle pagine web.
+
+Nel browser viene fornito l'oggetto document, utilizzabile in JavaScript che
+corrisponde alla radice del DOM, ovvero il nodo in cima all'albero o, vedendola
+in un altro modo, l'elemento che contiene tutto e non è contenuto da nulla.
+- Platone
 
 
 ----
 
 
-Funzioni anonime
---------------------
-Se in JavaScript scriviamo "ciao" abbiamo creato una stringa; possiamo assegnarla ad una variabile, passarla come argomento ad una funzione o utilizzarla in espressioni complesse.
+Esplorare il DOM
+----------------
+I nodi del DOM hanno alcuni metodi per muoversi all'interno della struttura ad
+albero che li contiene.
 
-Le funzioni si comportano esattamente nello stesso modo:
+- childNodes() restituisce un array con tutti i nodi figli.
+- firstChild() restituisce il primo figlio.
+- nextSibling() restituisce il fratello successivo.
+- previousSibling() restituisce il fratello precedente.
+- lastChild() restituisce l'ultimo figlio.
+- parentNode() restituisce il nodo genitore.
 
-```javascript
-function (x) { return x * 2; }
-```
+----
 
-in questo caso abbiamo creato una funzione anonima e possiamo, esattamente come numeri e stringhe, assegnarla ad una variabile o passarla come argomento.
 
-```javascript
-var double = function (x) { return x * 2; };
+Trovare elementi specifici
+--------------------------
+In molti casi muoversi manualmente nel DOM risulta poco pratico: cambiando la
+struttura spesso si deve cambiare l'ordine dei movimenti, inoltre anche un
+semplice spazio tra i tag verrà considerato come un nodo di testo.
 
-[1, 2, 3].map(function (x) { return x * 2; });
-```
+In JavaScript possiamo però servirci di alcune funzioni, definite nell'oggetto
+document, per riferirci ad elementi specifici.
+
+- getElementsByTagName(name) restituisce un array con tutti gli elementi di tipo
+  name
+- getElementById(id) restituisce l'elemento con l'id specificato.
+- getElementsByClassName(class) restituisce un array con tutti gli elementi
+  aventi la classe specificata.
+- querySelector(selector) restituisce il primo elemento identificato dal
+  selettore css specificato.
+- querySelectorAll(selector) restituisce un array con tutti gli elementi
+  identificati dal selettore css specificato.
 
 
 ----
 
 
-Callbacks
------------
-Un pattern tipico è quello di passare una funzione come argomento da eseguirsi dopo una certa computazione.
+Modificare il DOM
+-----------------
+I singoli nodi hanno anche dei metodi per apportare delle modifiche al DOM.
+tra i più utili troviamo:
+
+- removeChild(node) rimuove il nodo specificato dal DOM.
+- appendChild(node) aggiunge il nodo specificato come ultimo figlio.
+- insertBefore(node1, node2) inserisce node1 prima di node2.
+- replaceChild(node1, node2) sostituisce node2 con node1.
 
 
-```javascript
-var x = function(){
-  console.log("Io sono chiamato all'interno di un altra funzione")
-};
-var y = function(callback){
-  console.log('fai qualcosa');
-  callback();
-}
-y(x);
-```
+----
+
+
+Creare elementi
+---------------
+É possibile creare elementi con i metodi dell'oggetto document
+
+- createElement(type) crea un nodo del tipo specificato.
+- createTextNode(text) crea un elemento di testo con il contenuto specificato.
+
+
+----
+
+
+Modificare elementi
+-------------------
+Le modifiche principali che si possno applicare ad un nodo possono riguardare
+il suo contenuto o il suo stile.
+
+- innerHTML è un attributo modificabile che contiene l'html all'interno del nodo.
+- innerText è un attributo modificabile che contiene il testo (privato dei tag
+  HTML) all'interno del nodo.
+- la proprietà style di un nodo è un oggetto contenente tutte le proprietà
+  impostabili tramite css (es. width, color, fontFamily, position, left, etc...)
+
+
+----
+
+
+Layout
+------
+Esistono delle funzioni che ci aiutano a determinare le attuali dimensioni e
+posizione di un elemento.
+
+- getBoundingClientRect() restituisce un oggetto clientRect contenente le
+  proprietà height, width, left, right, top, bottom (relativi all'angolo in alto
+  a sinistra dello schermo.
+- pageXOffset e pageYOffset sono variabili globali contenenti gli attuali valori
+  dello scroll della pagina.
+
+
+----
+
+
+Attributi
+---------
+É possibile leggere o scrivere gli attributi di un elemento del DOM
+
+- getAttribute(attr) restituisce il contenuto dell'attributo specificato
+- setAttribute(attr, value) assegna il valore specificato all'attributo.
+
 
 ---
 
 
-2 Esempio
--------
-```javascript
-function sum(x, y, cb) {
-  if (!isNaN(x) && !isNaN(y)) {
-    cb(null, x + y);
-  } else {
-    cb("error: not a number", null);
-  }
-}
-
-sum(3, 2, function(err, data) {
-  if (!err) {
-    console.log(data);
-  } else {
-    console.log(err);
-  }
-});
-
-```
-
-
----
-
-
-3 Esempio
--------
-```javascript
-var friends = ["Mike", "Stacy", "Andy", "Rick"];
-​
-friends.forEach(function (eachName, index){
-console.log(index + 1 + ". " + eachName); // 1. Mike, 2. Stacy, 3. Andy, 4. Rick​
-});
-```
-```javascript
-$("#btn_1").click(function() {
-  alert("Btn 1 Clicked");
-});
-```
-
-
----
-
-
-PROGRAMMAZIONE FUNZIONALE
-===========================
+ESEMPI PRATICI
+==============
 
 
 ----
 
 
-array map
-------------
-La funzione map degli array accetta come argomento una funzione e restituisce un nuovo array con i risultati della funzione passata applicata a tutti gli elementi dell'array originale.
-
+Quadrato rosso
+--------------
 ```javascript
-var double = function (x) { return x * 2; };
+var box = document.createElement("div");
+box.style.width = "100px";
+box.style.height = "100px";
+box.style.backgroundColor = "red";
 
-[1, 2, 3].map(double); // [2, 4, 6]
+document.body.appendChild(box);
 ```
 
-----
-
-
-array filter
-------------
-La funzione filter degli array accetta come argomento una funzione e restituisce un nuovo array con i soli elementi dell'array originale che se passati come argomento alla funzione essa restituirà true.
-
-```javascript
-var even = function (x) { return x % 2 == 0; };
-
-[1, 2, 3, 4, 5, 6, 7 , 8].filter(even); // [2, 4, 6, 8]
-```
+<pre>
+<div style="width:100px;height:100px;background-color:red;"></div>
+</pre>
 
 
 ----
 
 
-array reduce
-------------
-La funzione reduce degli array accetta come argomento una funzione che dato un accumulatore del risultato ed il valore attuale computa un risultato che verrà poi passato come primo argomento al passaggio successivo.
-
-Più semplice a farsi che a dirsi...
-
+Poesia
+------
 ```javascript
-var sum = function (x, y) { return x + y; };
+var title = document.createElement("h2");
+title.innerText = "Soldati";
+var text = document.createElement("p");
+text.innerText = "Si sta come\nd'autunno\nsugli alberi\nle foglie";
 
-[1, 2, 3, 4].reduce(sum); // 10
+document.body.appendChild(title);
+document.body.appendChild(text);
 ```
+
+<pre>
+<h2>Soldati</h2>
+<p>Si sta come
+d'autunno
+sugli alberi
+le foglie</p>
+</pre>
 
 
 ----
 
 
-bind
-----
-La funzione bind può essere applicata ad altre funzioni ed ha un doppio scopo:
-il primo argomento passato sostituirà il this nella funzione, mentre i successivi
-argomenti saranno i primi argomenti della funzione.
-
-Un uso tipico è quello di creare funzioni con i primi argomenti già impostati
-
+Dimensioni
+----------
 ```javascript
-var dueAlla = Math.pow.bind(null, 2);
-dueAlla(4); // 16
+var box = document.createElement("div");
+box.style.width = "100px";
+box.style.height = "50px";
+box.style.backgroundColor = "blue";
+document.body.appendChild(box);
+var rect = box.getBoundingClientRect();
+var size = document.createElement("span");
+size.innerText = "width: " + rect.width + " - height: " + rect.height;
+document.body.appendChild(size);
 ```
 
-
-----
-
-
-every & some
-------------
-Le funzioni degli array every(fn) e some(fn) ritornano true rispettivamente se
-tutti gli elementi dell'array se passati ad fn ritornano true, oppure se almeno
-uno ritorna true.
-
-```javascript
-function biggerThanTen(x) { return x > 10; };
-[13, 14, 64, 33].every(biggerThanTen); // true
-[13, 14, 64, 3].some(biggerThanTen); // true
-```
+<pre>
+<div style="width:100px;height:50px;background-color:blue"></div>
+<span>width: 100 - height: 50</span>
+</pre>
 
 
 ---
@@ -188,23 +206,30 @@ ESERCIZI
 ----
 
 
-map & filter
-------------
-Scrivere le funzioni map e filter che prendano in input un array e una funzione
-senza utilizzare le loro versioni già esistenti.
-
+Scala
+-----
+scrivere e testare una funzione makeStairs(n, stepW, stepH, color) che
+restituisca un elemento del DOM contentente una scala di n scalini, dove ogni
+scalino ha altezza stepH e la larghezza del primo scalino sia stepW, mentre il
+successivo sarà largo il doppio, il seguente il triplo e così via.
+color indica il colore sotto forma di stringa esadecimale (es. #3c3c3c).
 
 ----
+[Soluzione](https://jsfiddle.net/piero80/t3eepx4w/)
 
 
-biggestRightTriangle
---------------------
-rappresentato un triangolo come un array [x, y, z] dove x, y e z sono i 3 lati
-si scriva una funzione biggestRightTriangle che dato un array di triangoli
-restituisca il triangolo **rettangolo** con la superficie più grande.
 
-Si possono scrivere tutte le funzioni ausiliare che si vogliano, ma si possono
-utilizzare solo i seguenti metodi già esistenti: map, filter, reduce, every,
-some
+Scacchiera Plus
+---------------
+Scrivere e testare una funzione makeChecker(w, h, cellW, cellH, cellColor1, cellColor2)
+che crei una scacchiera w x h dove ogni cella sarà un elemento div con lo sfondo
+colorato. cellW e cellH saranno la larghezza e l'altezza delle singole celle,
+mentre cellColor1 e cellColor2 sono i colori delle celle da alternare.
 
-[Soluzione](http://jsbin.com/toqoco/edit?js,console)
+Aiuto: per affiancare dei div su una stessa linea utilizzare l'attributo css
+float: left.
+
+per mandare a capo un'insieme di div floated si può inserire un div vuoto
+avente la proprietà css clear: both.
+
+[Soluzione](https://jsfiddle.net/piero80/3jm4scp5/)

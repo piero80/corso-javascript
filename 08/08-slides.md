@@ -1,3 +1,173 @@
+JQUERY
+=======
+
+
+----
+
+
+Cos'è jQuery?
+-----------------
+jQuery è una libreria JavaScript che fornisce un'interfaccia semplificata e multipiattaforma alle principali funzionalità disponibili nel browser.
+
+Segni particolari: $
+
+Peso: ~ 32Kb
+
+
+----
+
+
+La funzione jQuery(...)
+-----------------------
+jQuery(...) è la funzione principale della libreria e solitamente viene abbreviata in $(...).
+
+Sostanzialmente accetta come argomento un valido selettore CSS e restituisce un oggetto jQuery.
+
+Concettualmente gli oggetti jQuery sono un'astrazione dei nodi del DOM, ma ci mettono a disposizione molte funzioni aggiuntive con cui manipolarli.
+
+Se viene passato del codice HTML la funzione $ restituirà invece un nuovo oggetto jQuery rappresentante quel nodo. Es. `$("<p>ciao</p>")`
+
+----
+
+
+Selettori CSS
+----------------
+I principali selettori CSS sono:
+
+- tag = elementi tag (valido per tutti i tag body, a, h1, div, etc...)
+- .name = elementi con classe name
+- `#name` = elemento con id name
+- `*` = tutti gli elementi
+
+[Lista completa](http://www.w3schools.com/cssref/css_selectors.asp)
+
+
+----
+
+
+$(document).ready(...)
+--------------------------
+Prima di poter effettuare operazioni sul DOM è bene aspettare che il documento sia del tutto caricato per non andare incontro a bug imprevedibili.
+
+jQuery ci mette a disposizione il metodo ready
+
+```javascript
+$(document).ready(function () {
+  ...
+}
+```
+
+esiste anche una versione abbreviata
+
+```javascript
+$(function () {
+  ...
+}
+```
+
+se ci sono problemi di compatibilità con il simbolo $ si può usare
+
+```javascript
+jQuery(function ($) {
+  ...
+}
+```
+
+
+---
+
+
+FUNZIONI PRINCIPALI
+===================
+
+
+----
+
+
+Aggiungere contenuto dinamicamente
+--------
+```javascript
+$(selector).prepend(content,function(index,html));
+$(selector).append(content,function(index,html));
+```
+
+oppure
+
+```javascript
+$(selector).before(content,function(index));
+$(selector).after(content,function(index));
+```
+
+----
+
+
+css(...)
+--------
+```javascript
+$(selettore).css('proprietà CSS', 'valore');
+```
+
+oppure
+
+```javascript
+$(selettore).css({'prop1': 'val1', 'prop2', 'val2'});
+```
+
+
+----
+
+
+visibilità
+----------
+- hide()  nasconde un elemento;
+- show()  mostra un elemento;
+- toggle()  per alternare hide e show in base alla visibilità di un elemento;
+
+
+----
+
+
+classi
+------
+- hasClass('classe') metodo di controllo, ritorna true se l’elemento ha una specifica classe;
+- addClass('classe') aggiungi una classe agli elementi;
+- removeClass('classe') rimuove una classe agli elementi;
+- toggleClass('classe') aggiunge una classe se già non presente, altrimenti la toglie.
+
+
+----
+
+
+length
+------
+Quando un oggetto jQuery contiene più elementi si può conoscere il loro numero
+tramite la proprietà length.
+
+```javascript
+$('a').length // numero dei link
+```
+
+
+----
+
+
+each
+----
+Col metodo each si può iterare tra tutti gli elementi di un oggetto jQuery.
+
+```javascript
+$('h1').each(function () {
+  $(this).css('color', 'red'); // tutti i titoli diventano rossi
+}
+```
+
+N.B. usando $(this) racchiudiamo l'elemento attuale (this) in un oggetto jQuery
+e possiamo quindi utilizzare i metodi della libreria su quell'oggetto.
+
+
+---
+
+
 EVENTI
 ======
 
@@ -5,116 +175,44 @@ EVENTI
 ----
 
 
-La necessità degli eventi
--------------------------
-Per alcuni tipi di interazione con il programma, non possiamo determinare a
-priori l'ordine di avvenimento. Si pensi all'utilizzo del mouse e della
-tastiera o anche il sopraggiungere di dati da un server esterno.
+on
+--
+con la funzione on si può indicare una funzione da eseguirsi al verificarsi di
+un evento
 
-Nasce dunque la necessità di un sistema di eventi per poter dire al programma
-che cosa fare in caso essi si verifichino.
+```javascript
+$(elemento).on( events [, selector ] [, data ], handler )
+```
 
-- controllo continuo
-- controllo periodico di una coda
-- event handlers
+```javascript
+$('button').on('click', function () {
+  alert("click");
+  });
+```
+
+N.B. è buona norma usare dei namespace per gli eventi, Es. click.myPlugin
 
 ----
 
 
-Event Handlers
---------------
-In JavaScript è possibile definire degli event handlers ovvero funzioni che
-vengono eseguite al verificarsi di un evento.
-Abbiamo due modi di definire gli eventhandlers:
+Eventi delegati
+---------------
+Passando una stringa come secondo parametro alla funzione on, si può indicare
+un selettore per i figli del nodo abilitati a far scattare l'evento.
+
+Es.
 
 ```javascript
-element.onclick = functionName;
-
-```
-
-```javascript
-element.addEventListener("click", function() {
-  console.log("click");
+$( "#dataTable tbody tr" ).on( "click", function() {
+  console.log( $( this ).text() );
 });
 ```
 
-Il primo argomento indica il tipo di evento da gestire, in questo caso  il click
-del mouse.
-
-Se non viene specificato alcun elemento a cui "attaccare" l'event listener esso
-verrà automaticamente associato all'oggetto window,
-
-
-----
-
-
-Rimuovere un event listener
----------------------------
-È possibile rimuovere un event listener già registrato:
+vs
 
 ```javascript
-function eventHandler() {
-  // fai qualcosa
-};
-element.addEventlistener("evento", eventHandler);
-element.removeEventListener("evento", eventHandler);
-```
-
-Da notare che tale metodo richiede il  nome dell'evento e la funzione stessa
-che gestiva l'evento.
-
-
-----
-
-
-L'oggetto evento
-----------------
-Quando viene invocata la funzione che gestisce un determinato evento gli viene
-passato come argomento un oggetto contentente informazioni sull'evento stesso.
-
-Per esempio clientX e clientY conterranno le coordinate del mouse al verificarsi
-di un evento
-
-```javascript
-addEventlistener("mousemove", function (e) {
-  console.log(e.clientX);
-});
-```
-
-[Event Reference](https://developer.mozilla.org/en-US/docs/Web/Events)
-
-
-----
-
-
-Propagazione degli eventi
--------------------------
-Quando un evento è originato da un elemento, esso si propaga al nodo genitore,
-poi al genitore del genitore e così via fino all'oggetto window.
-
-per ogni nodo che ha definito un event listener per quell'evento, esso verrà
-eseguito.
-
-[Event Flow Reference](https://www.w3.org/TR/2003/NOTE-DOM-Level-3-Events-20031107/events.html#Events-phases)
-
-----
-
-
-Fermare la propagazione
------------------------
-dato un evento si può fermare la sua propagazione ed impedire che altri
-eventuali event handler definiti nei genitori possano essere eseguiti.
-
-Per farlo ci si serve del metodo stopPropagation().
-
-Se ad esempio abbiamo 2 elementi cliccabili uno dentro l'altro e vogliamo che un
-click sul più interno non causi un evento click anche sul genitore, possiamo
-procedere così:
-
-```javascript
-figlio.addEventListener("click", function (e) {
-  // fai qualcosa
-  e.stoppropagation();
+$( "#dataTable tbody" ).on( "click", "tr", function() {
+  console.log( $( this ).text() );
 });
 ```
 
@@ -122,38 +220,27 @@ figlio.addEventListener("click", function (e) {
 ----
 
 
-Comportamento di default
-------------------------
-Per alcuni elementi e dati alcuni eventi nel browser sono definiti dei
-comportamenti di default.
+abbreviazioni
+-------------
+- click()
+- dblclclick()
+- change()
+- focus()
+- keypress
+- mouseover, mouseenter, mousedown, mousemove, mouseout, mouseup
 
-Per esempio il click di un link caricherà un nuovo indirizzo, muovere il mouse
-quando il pulsante sinistro è premuto causerà un trascinamento, etc...
-
-Talvolta questi comportamenti possono ostacolarci ed è possibile sopprimerli
-utilizzando event.preventDefault();
+[etc...](http://api.jquery.com/category/events/)
 
 
 ----
 
 
-Target
-
-
-------
-Per sapere da quale elemento è stato generato un evento si può utilizzare la
-proprietà target che conterrà il nodo del dom dove esso ha avuto origine.
+off
+---
+Rimuove un event handler da un oggetto jQuery
 
 ```javascript
-// HTML
-<button>A</button>
-<button>B</button>
-<button>C</button>
-// JS
-document.body.addEventListener("click", function(event) {
-  if (event.target.nodeName == "BUTTON")
-    console.log("Clicked", event.target.textContent);
-});
+.off( events [, selector ] [, handler ] )
 ```
 
 
@@ -167,24 +254,26 @@ ESERCIZI
 ----
 
 
-red - blue
+Scacchiera jQuery
+-----------------
+Modificare il generatore di scacchiere sostituendo le funzioni native con le
+alternative di jQuery
 
-----------
-Creare due bottoni "red" e "blue" che se cliccati cambiano lo sfondo della pagina.
-
-[Soluzione](https://jsfiddle.net/piero80/gh4cfoyy/)
+[Soluzione](https://jsfiddle.net/piero80/5fn41n2w/2/)
 
 
 ----
 
 
-Disegno
--------
-Creare una pagina dove si possa disegnare con il mouse.
+To-DO List
+----------
+Scrivere un'applicazione che simuli una lista di cose da fare.
 
-- quando si tiene cliccato deve disgnare
-- se non si clicca no!
-- non importa che la linea sia continua, va bene una semplice successione di
-  punti.
+Sarà necessario un campo per immettere del testo, ogni volta che viene
+inviato un nuovo testo esso diventerà un nuovo elemento della lista.
 
-[Soluzione](https://jsfiddle.net/piero80/padwhps9/)
+Ogni elemento avrà un meccanismo per poterlo eliminare.
+
+-----
+
+[Soluzione](https://jsfiddle.net/piero80/e0ssye5c/1/)
