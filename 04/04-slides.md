@@ -47,20 +47,72 @@ object["key"]
 // va passata una stringa o qualcosa che ritorni una stringa
 ```
 
+----
+
+Array
+----
+
+Un array é una struttura dati che si puo usare per inserire valori di ogni tipo.
+Noi possiamo definire un array come una lista di valori separati da virgola tra parentesi quadre.
+```javascript
+//creates a `donuts` array with three strings
+var gelati = ["cocco", "panna", "cioccolato"];
+// creates a `mixedData` array with mixed data types
+var mixedData = ["abcd", 1, true, undefined, null, "all the things"];
+// creates a `arraysInArrays` array with three arrays
+var arraysInArrays = [[1, 2, 3], ["Julia", "James"], [true, false, true, false]];
+```
 
 ----
 
+Accedere agli elementi di un array
+---------
 
-Array
------
-Di fatto gli array non sono che un particolare tipo di oggetto dove le chiavi
-sono numeri invece che stringhe e se non diversamente specificato vengono
-generate automaticamente a partire da 0.
+Ricorda che gli elementi di un array sono indicizzati a partire dalla posizione 0. Per accedere a un elemento in un array, usa il nome dell'array seguito immediatamente da parentesi quadre che contengono l'indice del valore a cui vuoi accedere.
+
 ```javascript
-var arr = [2, 3, "ciao", 9];
-console.log(arr[0]) // 2
-console.log(arr[2]) //ciao
+var gelati = ["cocco", "panna", "ciocolato"];
+console.log(gelati[0]); // "cocco" é il primo elemento nel `gelati` array
+// Prints: "cocco"
+console.log(gelati[3]);
+//Prints: undefined
 ```
+
+----
+
+Domanda?
+-------
+
+Quale linea di codice useresti per selezionare la ciambella "cocco" dall'array ciambelle?
+
+```javascript
+var gelati = ["cioccolato", "crema", "panna", "cocco", "nocciola", "amarena", "melone", "nutella"];
+```
+
+----
+
+<h1>gelati[6]</h1>
+
+----
+
+Infine, se si desidera modificare il valore di un elemento nell'array, è possibile farlo impostandolo uguale a un nuovo valore.
+```javascript
+gelati[1] = "limone";
+console.log(gelati[1]); 
+//limone
+```
+
+----
+
+Esercizio
+---------
+
+Creiamo un array chiamato fusolab e aggiungiamo "corso javascript", "corso python", "corso taglio e cucito" all' array.
+Poi stampiamo tramite console.log l'array.
+
+
+----
+
 
 
 ----
