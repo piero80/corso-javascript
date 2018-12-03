@@ -1,53 +1,5 @@
-# OBJECTS
 
----
-
-## Dichiarazione
-
-```javascript
-var obj = {
-  prop1: valore1,
-  prop2: valore2
-};
-// oppure
-var obj = new Object();
-obj.prop1 = valore1;
-obj.prop2 = valore2;
-```
-
-Es.
-
-```javascript
-var pietro = {
-  nome: "Pietro",
-  cognome: "Colangelo",
-  email: "pietro.colangelo@gmail.com"
-};
-console.log(pietro.email);
-```
-
----
-
-## Accesso alle proprietà
-
-Le proprietà di un oggetto sono rappresentate da coppie chiave: valore.
-
-Si può accedere ad esse tramite l'operatore punto.
-
-```javascript
-object.key;
-```
-
-oppure con l'operatore []
-
-```javascript
-object["key"];
-// va passata una stringa o qualcosa che ritorni una stringa
-```
-
----
-
-## Array
+# Array
 
 Un array é una struttura dati che si puo usare per inserire valori di ogni tipo.
 Noi possiamo definire un array come una lista di valori separati da virgola tra parentesi quadre.
@@ -218,6 +170,132 @@ for (var i = 0; i < fusolab.length; i++) {
 ---
 
 ## The forEach() loop
+
+```javascript
+var fusolab = ["javascript", "python", "elettronica"];
+fusolab.forEach(function(corso, num, all) {
+  console.log("Corso " + num + " in " + all.toString() + " is " + corso);
+});
+```
+
+---
+
+Esercizio
+--------
+
+Utilizzare il metodo forEach () per eseguire il ciclo sul seguente array e aggiungere 100 a ciascuno dei valori se il valore è divisibile per 3.
+
+```javascript
+var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 148, 169, 299, 6, 109, 20, 58, 139, 59, 3, 1, 139];
+```
+
+---
+
+```javascript
+test.forEach(function(num, index, array){
+    if(num % 3 === 0){
+     array[index] = num += 100; 
+  }
+
+})
+console.log(test)
+```
+
+---
+
+Map func
+-------
+
+L'uso di forEach () non sarà utile se si desidera modificare in modo permanente l'array originale. forEach () restituisce sempre undefined. Tuttavia, la creazione di un nuovo array da un array esistente è semplice con il potente metodo map ().
+
+Con il metodo map (), è possibile acquisire un array, eseguire alcune operazioni su ciascun elemento dell'array e restituire un nuovo array.
+
+
+---
+
+```javascript
+var fusolab = ["javascript", "python", "elettronica"];
+var corsi = fusolab.map(function(corso) {
+  corso += ' corso';
+  corso = corso.toUpperCase();
+  return corso;
+});
+console.log(corsi);//JAVASCRIPT CORSO, PYTHON CORSO, ELETTRONICA CORSO
+```
+
+---
+
+Esercizio
+--------
+
+Usa il metodo map () per prendere l'array degli importi delle fatture mostrati di seguito, e crea una seconda serie di numeri chiamati totali che mostrano gli importi delle fatture con una aggiunta del 15%.
+Stampa il nuovo array di totali utilizzando console.log
+SUGGERIMENTO: controlla il metodo toFixed () per i numeri per aiutare a arrotondare i valori a un massimo di 2 posizioni decimali. Si noti che il metodo restituisce una stringa per mantenere il formato "fisso" del numero. Quindi, se vuoi riconvertire la stringa in un numero, puoi lanciarla o convertirla in un numero:
+
+---
+
+
+```javascript
+var bills = [50.23, 19.12, 34.01,
+    100.11, 12.15, 9.90, 29.11, 12.99,
+    10.00, 99.22, 102.20, 100.10, 6.77, 2.22
+];
+var total = bills.map(function(bill){
+    var tip = bill.toFixed('1')*15/100;
+    return Number(bill + tip);
+})
+console.log(total);
+
+```
+
+---
+
+# OBJECTS
+
+---
+
+## Dichiarazione
+
+```javascript
+var obj = {
+  prop1: valore1,
+  prop2: valore2
+};
+// oppure
+var obj = new Object();
+obj.prop1 = valore1;
+obj.prop2 = valore2;
+```
+
+Es.
+
+```javascript
+var pietro = {
+  nome: "Pietro",
+  cognome: "Colangelo",
+  email: "pietro.colangelo@gmail.com"
+};
+console.log(pietro.email);
+```
+
+---
+
+## Accesso alle proprietà
+
+Le proprietà di un oggetto sono rappresentate da coppie chiave: valore.
+
+Si può accedere ad esse tramite l'operatore punto.
+
+```javascript
+object.key;
+```
+
+oppure con l'operatore []
+
+```javascript
+object["key"];
+// va passata una stringa o qualcosa che ritorni una stringa
+```
 
 ---
 
