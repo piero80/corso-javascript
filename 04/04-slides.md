@@ -35,7 +35,7 @@ console.log(gelati[3]);
 
 ## Domanda?
 
-Quale linea di codice useresti per selezionare il gelato "cocco" dall'array gelati?
+Quale linea di codice useresti per selezionare il gelato "nocciola" dall'array gelati?
 
 ```javascript
 var gelati = [
@@ -52,7 +52,7 @@ var gelati = [
 
 ---
 
-<h1>gelati[6]</h1>
+<h1>gelati[4]</h1>
 
 ---
 
@@ -73,7 +73,7 @@ Poi stampiamo tramite console.log l'array.
 
 ---
 
-## Proprietà e metodi dell' Array
+## Proprietà e metodi dell'Array
 
 ---
 
@@ -138,7 +138,7 @@ Abbiamo un array di corsi del Fusolab e vogliamo rimuovere e aggiungere altri.
 var fusolab = ["javascript", "python", "elettronica", "cucina", "spagnolo"];
 var myfusolab = ["javascript", "python", "inglese"];
 //Rimuovere "inglese"
-//Aggiungere "elettronica" and "taglio e cucito"
+//Aggiungere "elettronica" e "taglio e cucito"
 //Aggiungere "spagnolo"
 ```
 
