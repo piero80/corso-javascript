@@ -299,6 +299,60 @@ object["key"];
 
 ---
 
+```javascript
+var ombrello = { 
+  color: "pink",
+  isOpen: false,
+  open: function() { 
+    if (umbrella.isOpen === true) {
+      return "L'ombrello é giá aperto";
+    } else {
+      umbrella.isOpen = true;
+      return "Giulia apre l'ombrello";
+    }
+   }
+};
+```
+
+---
+
+
+Usando l'esempio dell'ombrello, cosí come abbiamo creato il metodo open () creiamo il metodo close ()!
+
+
+---
+
+```javascript
+
+var ombrello = {
+    color: "pink",
+    isOpen: true,
+    open: function() {
+        if (ombrello.isOpen === true) {
+            return "L'ombrello é giá aperto";
+        } else {
+            ombrello.isOpen = true;
+            return "Giulia apre l'ombrello";
+        }
+    },
+    close:function(){
+        if(ombrello.isOpen===false){
+            return "L'ombrello é chiuso!"
+        }
+        else{
+            ombrello.isOpen = false;
+            return "Giulia chiude l'ombrello!";
+        }
+    }
+    // your code goes here
+};
+
+console.log(ombrello.close())
+console.log(ombrello)
+```
+
+---
+
 ## L'istruzione new
 
 Con l'istruzione new prima di una chiamata a funzione viene ritornato un oggetto
