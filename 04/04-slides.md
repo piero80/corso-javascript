@@ -187,6 +187,7 @@ Utilizzare il metodo forEach () per eseguire il ciclo sul seguente array e aggiu
 
 ```javascript
 var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 148, 169, 299, 6, 109, 20, 58, 139, 59, 3, 1, 139];
+//Utilizzare l'operatore modulo (if(num%3===0))
 ```
 
 ---
@@ -236,15 +237,15 @@ SUGGERIMENTO: controlla il metodo toFixed () per i numeri per aiutare a arrotond
 
 
 ```javascript
-var bills = [50.23, 19.12, 34.01,
+var fattura = [50.23, 19.12, 34.01,
     100.11, 12.15, 9.90, 29.11, 12.99,
     10.00, 99.22, 102.20, 100.10, 6.77, 2.22
 ];
-var total = bills.map(function(bill){
-    var tip = bill.toFixed('1')*15/100;
-    return Number(bill + tip);
+var totale = fattura.map(function(importi){
+    var iva = importi.toFixed('1')*15/100;
+    return Number(importi + iva);
 })
-console.log(total);
+console.log(totale);
 
 ```
 
@@ -287,13 +288,13 @@ Le proprietà di un oggetto sono rappresentate da coppie chiave: valore.
 Si può accedere ad esse tramite l'operatore punto.
 
 ```javascript
-object.key;
+object.key; // dot notation
 ```
 
-oppure con l'operatore []
+oppure con l'operatore [] 
 
 ```javascript
-object["key"];
+object["key"]; //bracket notation
 // va passata una stringa o qualcosa che ritorni una stringa
 ```
 
@@ -349,6 +350,49 @@ var ombrello = {
 
 console.log(ombrello.close())
 console.log(ombrello)
+```
+
+---
+
+Esercizio
+---------
+
+Creiamo un oggetto ProfiloFacebook che ha tre proprietá:
+
+- Nome
+- Numero di amici
+- Array di messaggi che hai postato (stringhe)
+
+L'oggetto deve avere 4 metodi:
+- aggiungiMessaggio(messaggio) - aggiunge un nuovo messaggio all'array Messaggi;
+- rimuoviMessaggio(index) - rimuove il messaggio corrispondente all'index passato
+- aggiungiAmico() - Aumenta il numero di Amici di 1
+- rimuoviAmico() - Diminuisce il numero di Amici di 1
+
+
+---
+
+```javascript
+
+var profiloFacebook = {
+    nome:"Piero",
+    amici:140,
+    messaggi:["il cielo é bello", "la notte é buia"],
+    aggiungiMessaggio:function(messaggio){
+        profiloFacebook.messaggi.push(messaggio);
+    },
+    rimuoviMessaggio:function(index){
+      profiloFacebook.messaggi.splice(index,1);
+    },
+    aggiungiAmico:function(){
+        profiloFacebook.amici += 1;
+    },
+    rimuoviAmico(){
+        profiloFacebook.amici -= 1;
+    }
+}
+
+console.log(profiloFacebook)
 ```
 
 ---
