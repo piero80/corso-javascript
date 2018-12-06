@@ -174,7 +174,7 @@ for (var i = 0; i < fusolab.length; i++) {
 ```javascript
 var fusolab = ["javascript", "python", "elettronica"];
 fusolab.forEach(function(corso, num, all) {
-  console.log("Corso " + num + " in " + all.toString() + " is " + corso);
+  console.log("Corso " + num + " in " + all.toString() + " é " + corso);
 });
 ```
 
@@ -195,9 +195,8 @@ var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 
 ```javascript
 test.forEach(function(num, index, array){
     if(num % 3 === 0){
-     array[index] = num += 100; 
+     array[index] = num + 100; 
   }
-
 })
 console.log(test)
 ```
@@ -231,7 +230,7 @@ Esercizio
 
 Usa il metodo map () per prendere l'array degli importi delle fatture mostrati di seguito, e crea una seconda serie di numeri chiamati totali che mostrano gli importi delle fatture con una aggiunta del 15%.
 Stampa il nuovo array di totali utilizzando console.log
-SUGGERIMENTO: controlla il metodo toFixed () per i numeri per aiutare a arrotondare i valori a un massimo di 2 posizioni decimali. Si noti che il metodo restituisce una stringa per mantenere il formato "fisso" del numero. Quindi, se vuoi riconvertire la stringa in un numero, puoi lanciarla o convertirla in un numero:
+SUGGERIMENTO: usa il metodo toFixed() per i numeri per aiutare ad arrotondare i valori a un massimo di 2 posizioni decimali. Si noti che il metodo restituisce una stringa per mantenere il formato "fisso" del numero. Quindi, se vuoi riconvertire la stringa in un numero, ti serve il metodo Number()
 
 ---
 
@@ -272,9 +271,9 @@ Es.
 
 ```javascript
 var pietro = {
-  nome: "Pietro",
+  nome: "Piero",
   cognome: "Colangelo",
-  email: "pietro.colangelo@gmail.com"
+  email: "piero.colangelo@gmail.com"
 };
 console.log(pietro.email);
 ```
@@ -302,7 +301,7 @@ object["key"]; //bracket notation
 
 ```javascript
 var ombrello = { 
-  color: "pink",
+  color: "blu",
   isOpen: false,
   open: function() { 
     if (umbrella.isOpen === true) {
@@ -326,7 +325,7 @@ Usando l'esempio dell'ombrello, cosí come abbiamo creato il metodo open () crei
 ```javascript
 
 var ombrello = {
-    color: "pink",
+    color: "blu",
     isOpen: true,
     open: function() {
         if (ombrello.isOpen === true) {
