@@ -357,7 +357,7 @@ console.log(ombrello)
 Esercizio
 ---------
 
-Creiamo un oggetto ProfiloFacebook che ha tre proprietá:
+Creiamo un oggetto profiloFacebook che ha tre proprietá:
 
 - Nome
 - Numero di amici
