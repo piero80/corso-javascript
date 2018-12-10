@@ -1,20 +1,15 @@
-HIGHER ORDER FUNCTIONS
-=======================
+# HIGHER ORDER FUNCTIONS
 
+---
 
-----
+## Le funzioni sono dati
 
-
-Le funzioni sono dati
-------------------------
 Una funzione non è altro che un oggetto come tutti gli altri, la sua unica peculiarità è che può essere invocate tramite il costrutto nomeFunzione(argomenti)
 
+---
 
-----
+## Funzioni anonime
 
-
-Funzioni anonime
---------------------
 Se in JavaScript scriviamo "ciao" abbiamo creato una stringa; possiamo assegnarla ad una variabile, passarla come argomento ad una funzione o utilizzarla in espressioni complesse.
 
 Le funzioni si comportano esattamente nello stesso modo:
@@ -26,36 +21,36 @@ function (x) { return x * 2; }
 in questo caso abbiamo creato una funzione anonima e possiamo, esattamente come numeri e stringhe, assegnarla ad una variabile o passarla come argomento.
 
 ```javascript
-var double = function (x) { return x * 2; };
+var double = function(x) {
+  return x * 2;
+};
 
-[1, 2, 3].map(function (x) { return x * 2; });
+[1, 2, 3].map(function(x) {
+  return x * 2;
+});
 ```
 
+---
 
-----
+## Callbacks
 
-
-Callbacks
------------
 Un pattern tipico è quello di passare una funzione come argomento da eseguirsi dopo una certa computazione.
 
-
 ```javascript
-var x = function(){
-  console.log("Io sono chiamato all'interno di un altra funzione")
+var x = function() {
+  console.log("Io sono chiamato all'interno di un altra funzione");
 };
-var y = function(callback){
-  console.log('fai qualcosa');
+var y = function(callback) {
+  console.log("fai qualcosa");
   callback();
-}
+};
 y(x);
 ```
 
 ---
 
+## 2 Esempio
 
-2 Esempio
--------
 ```javascript
 function sum(x, y, cb) {
   if (!isNaN(x) && !isNaN(y)) {
@@ -72,15 +67,12 @@ sum(3, 2, function(err, data) {
     console.log(err);
   }
 });
-
 ```
-
 
 ---
 
+## 3 Esempio
 
-3 Esempio
--------
 ```javascript
 var friends = ["Mike", "Stacy", "Andy", "Rick"];
 ​
@@ -88,68 +80,65 @@ friends.forEach(function (eachName, index){
 console.log(index + 1 + ". " + eachName); // 1. Mike, 2. Stacy, 3. Andy, 4. Rick​
 });
 ```
+
 ```javascript
 $("#btn_1").click(function() {
   alert("Btn 1 Clicked");
 });
 ```
 
+---
+
+# PROGRAMMAZIONE FUNZIONALE
 
 ---
 
+## array map
 
-PROGRAMMAZIONE FUNZIONALE
-===========================
-
-
-----
-
-
-array map
-------------
 La funzione map degli array accetta come argomento una funzione e restituisce un nuovo array con i risultati della funzione passata applicata a tutti gli elementi dell'array originale.
 
 ```javascript
-var double = function (x) { return x * 2; };
+var double = function(x) {
+  return x * 2;
+};
 
 [1, 2, 3].map(double); // [2, 4, 6]
 ```
 
-----
+---
 
+## array filter
 
-array filter
-------------
 La funzione filter degli array accetta come argomento una funzione e restituisce un nuovo array con i soli elementi dell'array originale che se passati come argomento alla funzione essa restituirà true.
 
 ```javascript
-var even = function (x) { return x % 2 == 0; };
+var even = function(x) {
+  return x % 2 == 0;
+};
 
-[1, 2, 3, 4, 5, 6, 7 , 8].filter(even); // [2, 4, 6, 8]
+[1, 2, 3, 4, 5, 6, 7, 8].filter(even); // [2, 4, 6, 8]
 ```
 
+---
 
-----
+## array reduce
 
-
-array reduce
-------------
 La funzione reduce degli array accetta come argomento una funzione che dato un accumulatore del risultato ed il valore attuale computa un risultato che verrà poi passato come primo argomento al passaggio successivo.
 
 Più semplice a farsi che a dirsi...
 
 ```javascript
-var sum = function (x, y) { return x + y; };
+var sum = function(x, y) {
+  return x + y;
+};
 
 [1, 2, 3, 4].reduce(sum); // 10
 ```
 
+---
 
-----
+## bind
 
-
-bind
-----
 La funzione bind può essere applicata ad altre funzioni ed ha un doppio scopo:
 il primo argomento passato sostituirà il this nella funzione, mentre i successivi
 argomenti saranno i primi argomenti della funzione.
@@ -161,44 +150,37 @@ var dueAlla = Math.pow.bind(null, 2);
 dueAlla(4); // 16
 ```
 
+---
 
-----
+## every & some
 
-
-every & some
-------------
 Le funzioni degli array every(fn) e some(fn) ritornano true rispettivamente se
 tutti gli elementi dell'array se passati ad fn ritornano true, oppure se almeno
 uno ritorna true.
 
 ```javascript
-function biggerThanTen(x) { return x > 10; };
+function biggerThanTen(x) {
+  return x > 10;
+}
 [13, 14, 64, 33].every(biggerThanTen); // true
 [13, 14, 64, 3].some(biggerThanTen); // true
 ```
 
+---
+
+# ESERCIZI
 
 ---
 
+## map & filter
 
-ESERCIZI
-========
-
-
-----
-
-
-map & filter
-------------
 Scrivere le funzioni map e filter che prendano in input un array e una funzione
 senza utilizzare le loro versioni già esistenti.
 
+---
 
-----
+## biggestRightTriangle
 
-
-biggestRightTriangle
---------------------
 rappresentato un triangolo come un array [x, y, z] dove x, y e z sono i 3 lati
 si scriva una funzione biggestRightTriangle che dato un array di triangoli
 restituisca il triangolo **rettangolo** con la superficie più grande.

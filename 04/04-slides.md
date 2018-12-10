@@ -1,4 +1,3 @@
-
 # Array
 
 Un array é una struttura dati che si puo usare per inserire valori di ogni tipo.
@@ -180,53 +179,79 @@ fusolab.forEach(function(corso, num, all) {
 
 ---
 
-Esercizio
---------
+## Esercizio
 
 Utilizzare il metodo forEach () per eseguire il ciclo sul seguente array e aggiungere 100 a ciascuno dei valori se il valore è divisibile per 3.
 
 ```javascript
-var test = [12, 929, 11, 3, 199, 1000, 7, 1, 24, 37, 4, 19, 300, 3775, 299, 36, 209, 148, 169, 299, 6, 109, 20, 58, 139, 59, 3, 1, 139];
+var test = [
+  12,
+  929,
+  11,
+  3,
+  199,
+  1000,
+  7,
+  1,
+  24,
+  37,
+  4,
+  19,
+  300,
+  3775,
+  299,
+  36,
+  209,
+  148,
+  169,
+  299,
+  6,
+  109,
+  20,
+  58,
+  139,
+  59,
+  3,
+  1,
+  139
+];
 //Utilizzare l'operatore modulo (if(num%3===0))
 ```
 
 ---
 
 ```javascript
-test.forEach(function(num, index, array){
-    if(num % 3 === 0){
-     array[index] = num + 100; 
+test.forEach(function(num, index, array) {
+  if (num % 3 === 0) {
+    array[index] = num + 100;
   }
-})
-console.log(test)
+});
+console.log(test);
 ```
 
 ---
 
-Map func
--------
+## Map func
 
 L'uso di forEach () non sarà utile se si desidera modificare in modo permanente l'array originale. forEach () restituisce sempre undefined. Tuttavia, la creazione di un nuovo array da un array esistente è semplice con il potente metodo map ().
 
 Con il metodo map (), è possibile acquisire un array, eseguire alcune operazioni su ciascun elemento dell'array e restituire un nuovo array.
-
 
 ---
 
 ```javascript
 var fusolab = ["javascript", "python", "elettronica"];
 var corsi = fusolab.map(function(corso) {
-  corso += ' corso';
+  corso += " corso";
   corso = corso.toUpperCase();
   return corso;
 });
-console.log(corsi);//JAVASCRIPT CORSO, PYTHON CORSO, ELETTRONICA CORSO
+console.log(corsi); //JAVASCRIPT CORSO, PYTHON CORSO, ELETTRONICA CORSO
 ```
 
 ---
 
-Esercizio
---------
+## Esercizio
 
 Usa il metodo map () per prendere l'array degli importi delle fatture mostrati di seguito, e crea una seconda serie di numeri chiamati totali che mostrano gli importi delle fatture con una aggiunta del 15%.
 Stampa il nuovo array di totali utilizzando console.log
@@ -234,18 +259,28 @@ SUGGERIMENTO: usa il metodo toFixed() per i numeri per aiutare ad arrotondare i 
 
 ---
 
-
 ```javascript
-var fattura = [50.23, 19.12, 34.01,
-    100.11, 12.15, 9.90, 29.11, 12.99,
-    10.00, 99.22, 102.20, 100.10, 6.77, 2.22
+var fattura = [
+  50.23,
+  19.12,
+  34.01,
+  100.11,
+  12.15,
+  9.9,
+  29.11,
+  12.99,
+  10.0,
+  99.22,
+  102.2,
+  100.1,
+  6.77,
+  2.22
 ];
-var totale = fattura.map(function(importi){
-    var iva = importi.toFixed('1')*15/100;
-    return Number(importi + iva);
-})
+var totale = fattura.map(function(importi) {
+  var iva = (importi.toFixed("1") * 15) / 100;
+  return Number(importi + iva);
+});
 console.log(totale);
-
 ```
 
 ---
@@ -290,7 +325,7 @@ Si può accedere ad esse tramite l'operatore punto.
 object.key; // dot notation
 ```
 
-oppure con l'operatore [] 
+oppure con l'operatore []
 
 ```javascript
 object["key"]; //bracket notation
@@ -300,61 +335,56 @@ object["key"]; //bracket notation
 ---
 
 ```javascript
-var ombrello = { 
+var ombrello = {
   color: "blu",
   isOpen: false,
-  open: function() { 
+  open: function() {
     if (umbrella.isOpen === true) {
       return "L'ombrello é giá aperto";
     } else {
       umbrella.isOpen = true;
       return "Giulia apre l'ombrello";
     }
-   }
+  }
 };
 ```
 
 ---
 
-
 Usando l'esempio dell'ombrello, cosí come abbiamo creato il metodo open () creiamo il metodo close ()!
-
 
 ---
 
 ```javascript
-
 var ombrello = {
-    color: "blu",
-    isOpen: true,
-    open: function() {
-        if (ombrello.isOpen === true) {
-            return "L'ombrello é giá aperto";
-        } else {
-            ombrello.isOpen = true;
-            return "Giulia apre l'ombrello";
-        }
-    },
-    close:function(){
-        if(ombrello.isOpen===false){
-            return "L'ombrello é chiuso!"
-        }
-        else{
-            ombrello.isOpen = false;
-            return "Giulia chiude l'ombrello!";
-        }
+  color: "blu",
+  isOpen: true,
+  open: function() {
+    if (ombrello.isOpen === true) {
+      return "L'ombrello é giá aperto";
+    } else {
+      ombrello.isOpen = true;
+      return "Giulia apre l'ombrello";
     }
-    // your code goes here
+  },
+  close: function() {
+    if (ombrello.isOpen === false) {
+      return "L'ombrello é chiuso!";
+    } else {
+      ombrello.isOpen = false;
+      return "Giulia chiude l'ombrello!";
+    }
+  }
+  // your code goes here
 };
 
-console.log(ombrello.close())
-console.log(ombrello)
+console.log(ombrello.close());
+console.log(ombrello);
 ```
 
 ---
 
-Esercizio
----------
+## Esercizio
 
 Creiamo un oggetto profiloFacebook che ha tre proprietá:
 
@@ -363,185 +393,35 @@ Creiamo un oggetto profiloFacebook che ha tre proprietá:
 - Array di messaggi che hai postato (stringhe)
 
 L'oggetto deve avere 4 metodi:
+
 - aggiungiMessaggio(messaggio) - aggiunge un nuovo messaggio all'array Messaggi;
 - rimuoviMessaggio(index) - rimuove il messaggio corrispondente all'index passato
 - aggiungiAmico() - Aumenta il numero di Amici di 1
 - rimuoviAmico() - Diminuisce il numero di Amici di 1
 
-
 ---
 
 ```javascript
-
 var profiloFacebook = {
-    nome:"Piero",
-    amici:140,
-    messaggi:["il cielo é bello", "la notte é buia"],
-    aggiungiMessaggio:function(messaggio){
-        profiloFacebook.messaggi.push(messaggio);
-    },
-    rimuoviMessaggio:function(index){
-      profiloFacebook.messaggi.splice(index,1);
-    },
-    aggiungiAmico:function(){
-        profiloFacebook.amici += 1;
-    },
-    rimuoviAmico(){
-        profiloFacebook.amici -= 1;
-    }
-}
-
-console.log(profiloFacebook)
-```
-
----
-
-## L'istruzione new
-
-Con l'istruzione new prima di una chiamata a funzione viene ritornato un oggetto
-a cui ci si può riferire all'interno di tale funzione tramite la variabile this.
-
-Più semplice a farsi che a dirsi:
-
-```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
-}
-
-pietro = new Persona("Pietro", "Colangelo");
-console.log(pietro.cognome); // Colangelo
-```
-
----
-
-## Metodi
-
-In JavaScript non è propriamente corretto parlare di metodi, tuttavia una
-proprietà di un oggetto può essere qualunque cosa, anche una funzione.
-
-```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
-  this.stampa = function stampa() {
-    console.log(this.nome + " " + this.cognome);
-  };
-}
-pietro = new Persona("Pietro", "Colangelo");
-pietro.stampa(); // Pietro Colangelo
-```
-
-Funzioni di questo tipo vengono chiamate costruttori.
-Per convenzione vengono dichiarate con la prima lettera maiuscola.
-
----
-
-## Metodi - Prototype
-
-Un metodo puó essere dichiarato anche esternamente al costruttore
-
-```javascript
-function Persona(nome, cognome) {
-  this.nome = nome;
-  this.cognome = cognome;
-}
-Persona.prototype.stampa = function() {
-  //{objectName}.prototype.{methodName}
-  console.log(this.nome + " " + this.cognome);
+  nome: "Piero",
+  amici: 140,
+  messaggi: ["il cielo é bello", "la notte é buia"],
+  aggiungiMessaggio: function(messaggio) {
+    profiloFacebook.messaggi.push(messaggio);
+  },
+  rimuoviMessaggio: function(index) {
+    profiloFacebook.messaggi.splice(index, 1);
+  },
+  aggiungiAmico: function() {
+    profiloFacebook.amici += 1;
+  },
+  rimuoviAmico() {
+    profiloFacebook.amici -= 1;
+  }
 };
-pietro = new Persona("Pietro", "Colangelo");
-mario = new Persona("Mario", "Rossi");
-pietro.stampa(); // Pietro Colangelo
-mario.stampa(); // Mario Rossi
+
+console.log(profiloFacebook);
 ```
-
-Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
-
----
-
-## Metodi - Object.create
-
-Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
-
-```javascript
-var persona1 = {
-  name: "Pietro",
-  surname: "Colangelo"
-};
-var persona2 = Object.create(persona1);
-console.log(persona2.name); //Pietro
-```
-
----
-
-## ES6 - Classes
-
-ES6 introduce la sintassi Class per definire una classe o funzione.
-
-```javascript
-class Person {
-  constructor(name) {
-    this.kind = "Person";
-    this.name = name;
-  }
-  printName() {
-    console.log("this.name");
-  }
-}
-var pietro = new Person("Pietro");
-pietro.printName(); // Pietro
-pietro.hasOwnProperty("kind"); // true
-```
-
----
-
-## ES6 - Classes
-
-Ereditarietá
-
-```javascript
-class Person {
-  constructor(name) {
-    this.kind = "Person";
-    this.name = name;
-  }
-  printName() {
-    console.log(this.name);
-  }
-}
-class Male extends Person {
-  constructor(name) {
-    super(name); //call the parent method with super
-    this.kind = "male";
-  }
-}
-var pietro = new Person("Pietro");
-pietro.printName(); //Pietro
-var giorgio = new Male("Giorgio");
-giorgio.printName(); //Giorgio
-```
-
----
-
-## Operatore for..in
-
-Serve a iterare tra tutte le proprietà enumerabili di un oggetto.
-
-```javascript
-for (key in obj) {
-  console.log(key + ": " + obj[key]);
-}
-```
-
-Tuttavia il suo uso è abbastanza limitato in quanto non garantisce un ordine di
-visita e scansiona anche gli enumerabili di tutti i prototype da cui un oggetto
-discende.
-
-Inoltre bisogna ricordare che eventuali "metodi" verrebbero scansionati.
-
-In sostanza può essere utile quando si usano gli oggetti come semplici mappe di
-valori.
 
 ---
 
