@@ -1,3 +1,136 @@
+## PROGRAMMAZIONE AD OGGETTI
+
+---
+
+- Incapsulamento
+- Astrazione
+- Ereditá
+- Polimorfismo
+
+---
+
+Programmazione Procedurale
+
+```javascript
+
+let salario_base = 30_000;
+let straordinario = 10;
+let rate = 20;
+function calcolaSalario (salario_base,straordinario,rate){
+  return salario_base + (straordinario*rate);
+}
+
+```
+
+---
+
+Programmazione ad Oggetti
+
+```javascript
+
+let impiegato = {
+  salario_base:30_000,
+  straordinario:10,
+  rate: 20,
+  calcolaSalario: function(){
+    return this.salario_base + (this.straordinario * this.rate);
+  }
+}
+impiegato.calcolaSalario();
+
+```
+
+---
+
+<em>The best functions are those with no parameters!</em>
+
+---
+
+```javascript
+
+const circle = {
+  radius:1,
+  location:{
+    x:1,
+    y:1
+  },
+  draw:function(){
+    console.log('draw')
+  }
+}
+circle.draw();
+```
+
+---
+
+```javascript
+
+const circle = {
+  radius:2,
+  location:{
+    x:2,
+    y:2
+  },
+  draw:function(){
+    console.log('draw')
+  }
+}
+circle.draw();
+```
+
+---
+
+Constructor Function and Factory Function
+-----------------------------------------
+
+---
+
+FACTORY FUNCTION
+-----
+
+```javascript
+//FACTORY FUNCTION
+function createCircle(radius){
+  return {
+    radius:radius,
+    location:{
+      x:1,
+      y:1
+    },
+    draw:function(){
+      console.log('draw')
+    }
+  }
+}
+const circle = createCircle(1)
+console.log(circle)
+```
+
+---
+
+CONSTRUCTOR FUNCTION
+--------
+
+```javascript
+//CONSTRUCTOR FUNCTION
+//Name Convention Different with first capital letter 
+function Circle(radius){
+    console.log('this', this);// this é relativo al Circle Object
+    this.radius = radius,
+    this.location = {
+      x:1,
+      y:1
+    },
+    this.draw = function(){
+      console.log('draw')
+    }
+  }
+const circle = new Circle(1);
+
+```
+
+---
+
 ## L'istruzione new
 
 Con l'istruzione new prima di una chiamata a funzione viene ritornato un oggetto
