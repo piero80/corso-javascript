@@ -12,14 +12,12 @@
 Programmazione Procedurale
 
 ```javascript
-
 let salario_base = 30_000;
 let straordinario = 10;
 let rate = 20;
-function calcolaSalario (salario_base,straordinario,rate){
-  return salario_base + (straordinario*rate);
+function calcolaSalario(salario_base, straordinario, rate) {
+  return salario_base + straordinario * rate;
 }
-
 ```
 
 ---
@@ -27,17 +25,15 @@ function calcolaSalario (salario_base,straordinario,rate){
 Programmazione ad Oggetti
 
 ```javascript
-
 let impiegato = {
-  salario_base:30_000,
-  straordinario:10,
+  salario_base: 30_000,
+  straordinario: 10,
   rate: 20,
-  calcolaSalario: function(){
-    return this.salario_base + (this.straordinario * this.rate);
+  calcolaSalario: function() {
+    return this.salario_base + this.straordinario * this.rate;
   }
-}
+};
 impiegato.calcolaSalario();
-
 ```
 
 ---
@@ -47,86 +43,80 @@ impiegato.calcolaSalario();
 ---
 
 ```javascript
-
 const circle = {
-  radius:1,
-  location:{
-    x:1,
-    y:1
+  radius: 1,
+  location: {
+    x: 1,
+    y: 1
   },
-  draw:function(){
-    console.log('draw')
+  draw: function() {
+    console.log("draw");
   }
-}
+};
 circle.draw();
 ```
 
 ---
 
 ```javascript
-
 const circle = {
-  radius:2,
-  location:{
-    x:2,
-    y:2
+  radius: 2,
+  location: {
+    x: 2,
+    y: 2
   },
-  draw:function(){
-    console.log('draw')
+  draw: function() {
+    console.log("draw");
   }
-}
+};
 circle.draw();
 ```
 
 ---
 
-Constructor Function and Factory Function
------------------------------------------
+## Constructor Function and Factory Function
 
 ---
 
-FACTORY FUNCTION
------
+## FACTORY FUNCTION
 
 ```javascript
 //FACTORY FUNCTION
-function createCircle(radius){
+function createCircle(radius) {
   return {
-    radius:radius,
-    location:{
-      x:1,
-      y:1
+    radius: radius,
+    location: {
+      x: 1,
+      y: 1
     },
-    draw:function(){
-      console.log('draw')
+    draw: function() {
+      console.log("draw");
     }
-  }
+  };
 }
-const circle = createCircle(1)
-console.log(circle)
+const circle = createCircle(1);
+console.log(circle);
 ```
 
 ---
 
-CONSTRUCTOR FUNCTION
---------
+## CONSTRUCTOR FUNCTION
 
 ```javascript
 //CONSTRUCTOR FUNCTION
-//Name Convention Different with first capital letter 
-function Circle(radius){
-    console.log('this', this);// this é relativo al Circle Object
-    this.radius = radius,
-    this.location = {
-      x:1,
-      y:1
-    },
-    this.draw = function(){
-      console.log('draw')
-    }
-  }
+//Name Convention Different with first capital letter
+function Circle(radius) {
+  console.log("this", this); // this é relativo al Circle Object
+  (this.radius = radius),
+    (this.location = {
+      x: 1,
+      y: 1
+    }),
+    (this.draw = function() {
+      console.log("draw");
+    });
+}
 const circle = new Circle(1);
-
 ```
 
 ---
@@ -195,6 +185,53 @@ Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
 
 ---
 
+## Prototypical Inheritance
+
+```javascript
+function Circle(radius) {
+  this.radius = radius;
+}
+Circle.prototype.draw = function() {
+  console.log("draw");
+};
+Circle.prototype.duplicate = function() {
+  console.log("duplicate");
+};
+
+function Square() {}
+Square.prototype.duplicate = function() {
+  console.log("duplicate");
+};
+```
+
+---
+
+Prototypical Inheritance
+
+```javascript
+function Shape() {}
+
+Shape.prototype.duplicate = function() {
+  console.log("duplicate");
+};
+
+function Circle(radius) {
+  this.radius = radius;
+}
+
+//Circle riceverà tutte i metodi e le proprietà di Shape
+Circle.prototype = Object.create(Shape.prototype);
+
+Circle.prototype.draw = function() {
+  console.log("draw");
+};
+
+const s = new Shape();
+const c = new Circle();
+```
+
+---
+
 ## Metodi - Object.create
 
 Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
@@ -216,6 +253,7 @@ ES6 introduce la sintassi Class per definire una classe o funzione.
 
 ```javascript
 class Person {
+  //special object
   constructor(name) {
     this.kind = "Person";
     this.name = name;
@@ -227,6 +265,11 @@ class Person {
 var pietro = new Person("Pietro");
 pietro.printName(); // Pietro
 pietro.hasOwnProperty("kind"); // true
+```
+
+---
+
+```javascript
 ```
 
 ---
