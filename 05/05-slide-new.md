@@ -185,53 +185,6 @@ Generalmente avremo oggetti con proprietá e metodi in comune agli oggetti.
 
 ---
 
-## Prototypical Inheritance
-
-```javascript
-function Circle(radius) {
-  this.radius = radius;
-}
-Circle.prototype.draw = function() {
-  console.log("draw");
-};
-Circle.prototype.duplicate = function() {
-  console.log("duplicate");
-};
-
-function Square() {}
-Square.prototype.duplicate = function() {
-  console.log("duplicate");
-};
-```
-
----
-
-Prototypical Inheritance
-
-```javascript
-function Shape() {}
-
-Shape.prototype.duplicate = function() {
-  console.log("duplicate");
-};
-
-function Circle(radius) {
-  this.radius = radius;
-}
-
-//Circle riceverà tutte i metodi e le proprietà di Shape
-Circle.prototype = Object.create(Shape.prototype);
-
-Circle.prototype.draw = function() {
-  console.log("draw");
-};
-
-const s = new Shape();
-const c = new Circle();
-```
-
----
-
 ## Metodi - Object.create
 
 Un oggetto puó essere creato da un oggetto esistente e erediterá le sue proprietá
@@ -269,8 +222,84 @@ pietro.hasOwnProperty("kind"); // true
 
 ---
 
+Class é una funzione
+
+
 ```javascript
+class Plane {
+  constructor(numEngines) {
+    this.numEngines = numEngines;
+    this.enginesActive = false;
+  }
+
+  startEngines() {
+    console.log('starting engines…');
+    this.enginesActive = true;
+  }
+}
+
+typeof Plane; // function
+
 ```
+
+---
+
+
+Esempio Es5 Vs Es6
+--------
+
+```javascript
+
+function Plane(numEngines) {
+  this.numEngines = numEngines;
+  this.enginesActive = false;
+}
+
+// metodi "ereditati" da tutte le istanze
+Plane.prototype.startEngines = function () {
+  console.log('starting engines...');
+  this.enginesActive = true;
+};
+
+var richardsPlane = new Plane(1);
+richardsPlane.startEngines();
+
+var jamesPlane = new Plane(4);
+jamesPlane.startEngines();
+
+```
+
+---
+
+
+```javascript
+class Plane {
+  constructor(numEngines) {
+    this.numEngines = numEngines;
+    this.enginesActive = false;
+  }
+
+  startEngines() {
+    console.log('starting engines…');
+    this.enginesActive = true;
+  }
+}
+const richardsPlane = new Plane(1);
+richardsPlane.startEngines();
+
+const jamesPlane = new Plane(4);
+jamesPlane.startEngines();
+
+```
+
+---
+
+Benefici dell'uso di Class
+-----
+
+- C'è molto meno codice che devi scrivere per creare una funzione
+- Constructor Function chiaramente definita
+- Tutto è contenuto (Tutto il codice necessario per la classe è contenuto nella dichiarazione della classe. Invece di avere la funzione di costruzione in   un posto, quindi aggiungere metodi al prototipo uno per uno, puoi fare tutto in una volta!)
 
 ---
 
@@ -302,24 +331,44 @@ giorgio.printName(); //Giorgio
 
 ---
 
-## Operatore for..in
+Esercizio
+---------
 
-Serve a iterare tra tutte le proprietà enumerabili di un oggetto.
+Creare una Bicicletta subclass che estende Veicolo class. La Bicicletta SubClass dovrá modificare i valori predefiniti per ruote da 4 a 2 e clacson da
+'beep beep' a 'honk honk'
 
 ```javascript
-for (key in obj) {
-  console.log(key + ": " + obj[key]);
+
+class Veicolo {
+	constructor(colore = 'blue', ruote = 4, clacson = 'beep beep') {
+		this.colore = colore;
+		this.ruote = ruote;
+		this.clacson = clacson;
+	}
+
+	suonaClacson() {
+		console.log(this.clacson);
+	}
 }
+
 ```
 
-Tuttavia il suo uso è abbastanza limitato in quanto non garantisce un ordine di
-visita e scansiona anche gli enumerabili di tutti i prototype da cui un oggetto
-discende.
+---
 
-Inoltre bisogna ricordare che eventuali "metodi" verrebbero scansionati.
-
-In sostanza può essere utile quando si usano gli oggetti come semplici mappe di
-valori.
+```javascript
+class Bicicletta extends Veicolo {
+  constructor(colore, route=2, clacson='honk honk'){
+    super(colore, ruote, clacson)
+    //this.colore = colore;
+    //this.ruote = 2;
+    //this.clacson ='honk honk'; 
+  }
+}
+const mioVeicolo = new Veicolo();
+mioVeicolo.honkHorn(); // beep beep
+const myBike = new Bicicletta();
+myBike.honkHorn(); // honk honk
+```
 
 ---
 
@@ -448,4 +497,115 @@ let message = `${student.name} please see ${teacher.name} in ${
 
 ---
 
-## Object
+Arrow Function
+-----------
+
+```javascript
+
+const upperizedNames = ['Farrin', 'Kagure', 'Asser'].map(function(name) { 
+  return name.toUpperCase();
+});
+
+const upperizedNames = ['Farrin', 'Kagure', 'Asser'].map(
+  name => name.toUpperCase()
+);
+
+```
+
+---
+
+Esercizio
+
+```javascript
+
+const names = ['Afghanistan', 'Aruba', 'Bahamas', 'Chile', 'Fiji', 'Gabon', 'Luxembourg', 'Nepal', 'Singapore', 'Uganda', 'Zimbabwe'];
+
+const longNames = names.filter(function(name) {
+  return name.length > 6;
+});
+
+```
+
+---
+
+
+Soluzione
+
+```javascript
+const names = ['Afghanistan', 'Aruba', 'Bahamas', 'Chile', 'Fiji', 'Gabon', 'Luxembourg', 'Nepal', 'Singapore', 'Uganda', 'Zimbabwe'];
+
+const longNames = names.filter(name=>name.length>6);
+
+```
+
+---
+
+In questo caso arrow function é memorizzata nella variabile greet e la si chiama in questo modo
+
+```javascript
+
+const greet = name => `Hello ${name}!`;
+
+greet('Piero'); 
+
+//Hello Piero!
+
+```
+
+---
+
+```javascript
+
+// empty parameter list requires parentheses
+const sayHi = () => console.log('Hello Udacity Student!');
+sayHi();
+
+```
+
+---
+
+Default function parameters
+---------
+
+```javascript
+function greet(name = 'Student', greeting = 'Welcome') {
+  return `${greeting} ${name}!`;
+}
+
+greet(); // Welcome Student!
+greet('James'); // Welcome James!
+greet('Richard', 'Howdy'); // Howdy Richard!
+
+```
+
+---
+
+Destructuring
+------------
+
+Destructuring valori da un array
+
+```javascript
+const point = [10, 25, -34];
+const [x, y, z] = point;
+console.log(x, y, z);
+
+```
+
+---
+
+Destructuring valori da un oggetto
+
+```javascript
+const gemstone = {
+  type: 'quartz',
+  color: 'rose',
+  carat: 21.29
+};
+
+const {type, color, carat} = gemstone;
+
+console.log(type, color, carat);
+```
+
+---
