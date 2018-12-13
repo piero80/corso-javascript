@@ -200,6 +200,32 @@ console.log(persona2.name); //Pietro
 
 ---
 
+Prototypical (Ereditarietá)
+
+```javascript
+function Shape() {}
+
+Shape.prototype.duplicate = function() {
+  console.log("duplicate");
+};
+
+function Circle(radius) {
+  this.radius = radius;
+}
+
+//Circle erediterá tutte i metodi e le proprietà di Shape
+Circle.prototype = Object.create(Shape.prototype);
+
+Circle.prototype.draw = function() {
+  console.log("draw");
+};
+
+const s = new Shape();
+const c = new Circle();
+```
+
+---
+
 ## ES6 - Classes
 
 ES6 introduce la sintassi Class per definire una classe o funzione.
