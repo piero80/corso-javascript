@@ -59,7 +59,7 @@ circle.draw();
 ---
 
 ```javascript
-const circle = {
+const circle2 = {
   radius: 2,
   location: {
     x: 2,
@@ -69,7 +69,7 @@ const circle = {
     console.log("draw");
   }
 };
-circle.draw();
+circle2.draw();
 ```
 
 ---
