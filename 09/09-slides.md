@@ -4,6 +4,95 @@ EVENTI ASINCRONI
 
 ----
 
+CALLBACKS - PROMISE - ASYNC AWAIT
+---------------------------------
+
+
+----
+
+CALLBACKS
+---------
+
+```javascript
+const posts = [
+  { title: 'Post One', body: 'This is post one' },
+  { title: 'Post Two', body: 'This is post two' }
+];
+
+function getPosts() {
+  setTimeout(() => {
+    let output = '';
+    posts.forEach((post, index) => {
+      output += `<li>${post.title}</li>`;
+    });
+    document.body.innerHTML = output;
+  }, 1000);
+}
+
+function createPost(post, callback) {
+  setTimeout(() => {
+    posts.push(post);
+    callback();
+  }, 2000);
+}
+
+createPost({ title: 'Post Three', body: 'This is post three' }, getPosts);
+```
+
+----
+
+PROMISE
+-------
+
+```javascript
+const posts = [
+  { title: 'Post One', body: 'This is post one' },
+  { title: 'Post Two', body: 'This is post two' }
+];
+
+function getPosts() {
+  setTimeout(() => {
+    let output = '';
+    posts.forEach((post, index) => {
+      output += `<li>${post.title}</li>`;
+    });
+    document.body.innerHTML = output;
+  }, 1000);
+}
+
+function createPost(post) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      posts.push(post);
+
+      const error = false;
+
+      if (!error) {
+        resolve();
+      } else {
+        reject('Error: Something went wrong');
+      }
+    }, 2000);
+  });
+}
+
+ createPost({ title: 'Post Three', body: 'This is post three' })
+   .then(getPosts)
+   .catch(err => console.log(err));
+```
+
+----
+
+```javascript
+ //Async / Await
+async function init() {
+    await createPost({ title: 'Post Three', body: 'This is post three' });
+    getPosts();
+}
+
+```
+
+----
 
 AJAX
 ----
@@ -41,6 +130,27 @@ httpRequest.onreadystatechange = function () {
 }
 httpRequest.open('GET', 'url');
 httpRequest.send();
+```
+
+----
+
+FETCH (NATIVO)
+-----
+
+Per effettuare una richiesta e ottenere una risorsa, si usa il metodo GlobalFetch.fetch. Esso é implementato in piú interfacce.
+Il metodo fetch() richiede un parametro obbligatorio (path url) e ritorna una Promise che risolve la Response a quella richiesta.
+
+```javascript
+fetch('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => response.json())
+  .then(json => console.log(json))
+
+{
+  "userId": 1,
+  "id": 1,
+  "title": "delectus aut autem",
+  "completed": false
+}
 ```
 
 ----
