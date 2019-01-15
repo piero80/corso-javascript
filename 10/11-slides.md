@@ -74,7 +74,7 @@ npm install core-js reflect-metadata zone.js rxjs@5.0.0-beta.12 systemjs --save
 ----
 
 
-ANGULAR2 PACKAGES
+ANGULAR 6 PACKAGES
 -----
 @angular/core<br>
 @angular/common<br>
@@ -258,7 +258,7 @@ let drawPoint = (point:Point) => {
 ----
 
 
-CLASSI
+CLASSES
 ------
 TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
 
@@ -282,7 +282,8 @@ mypersona.getNomeCompleto();
 ----
 
 
-EREDITARIETA'
+
+INHERITANCE (EREDITARIETA')
 ------
 TypeScript prevede il supporto delle classi estendendo la nuova sintassi ES6 e rendendola ancora più vicina alla programmazione ad oggetti classica.
 
