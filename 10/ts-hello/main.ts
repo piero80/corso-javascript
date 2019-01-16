@@ -1,17 +1,6 @@
-// BLOCK SCOPING
-/*function doSomething(){
-    for(let i = 0; i < 5; i++){
-      console.log(i);
-    }
-    console.log("Finally: " + i);
-  }
-  doSomething();
+import {Point} from './point'; 
 
 
-  let count = 5;
-  count = 'a'; // is an error
-*/
-// TYPES
 let a: number;
 let b: boolean;
 let c: string;
@@ -27,3 +16,7 @@ enum Color {
   Red = 0, Green = 1, Blue = 2
 };
 let backgroundColor = Color.Red
+
+
+let point = new Point(1,2);
+point.draw();
