@@ -1,4 +1,4 @@
-ANGULAR 2
+ANGULAR 6
 ==========
 Passare dati ad un Componente
 

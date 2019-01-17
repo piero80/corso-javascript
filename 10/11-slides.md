@@ -370,7 +370,7 @@ point.draw();
 
 ----
 
-ANGULAR2 BASICS
+ANGULAR6 BASICS
 ------------------
 Displaying Data - Interpolation
 
@@ -393,7 +393,7 @@ export class AppComponent {
 
 ----
 
-ANGULAR2 BASICS
+ANGULAR6 BASICS
 ------------------
 Using Constructor
 
@@ -410,28 +410,20 @@ export class AppComponent {
 ```
 ----
 
-
-Structural - Built-in Directives
+Creating a Component Using Angular CLI
 ------
 
 ```javascript
-<section *ngIf="showSection">
-<li *ngFor="let item of list">
-<div [ngSwitch]="conditionExpression">
-  <ng-template [ngSwitchCase]="case1Exp">...</ng-template>
-  <ng-template ngSwitchCase="case2LiteralString">...</ng-template>
-  <ng-template ngSwitchDefault>...</ng-template>
-</div>
-<div [ngClass]="{active: isActive, disabled: isDisabled}">
+ng generate c course
 ```
 
-[Lunga documentazione](https://angular.io/docs/ts/latest/guide/template-syntax.html#)
+[documentazione](https://cli.angular.io/)
 
 
 ----
 
 
-Binding Sintax
+Interpolation
 ---------
 Il Data binding é un meccanismo per coordinare cio che gli utenti vedono (dati dell'applicazione).
 Angular2 fornisce molti tipi di binding dei dati.
@@ -439,32 +431,82 @@ Il Data binding puó essere raggruppato in tre categorie (direzione dei dati): d
 
 ```javascript
 
-{{expression}}
-[target]="expression"
-bind-target="expression"
+@Component({
+  selector:'courses',
+  template:'<h2>{{"Title:" + title}}</h2>'
+})
 
-(target)="statement"
-on-target="statement"
+export class AppComponent {
+  title: string;
+  message: string;
 
-[(target)]="expression"
-bindon-target="expression"
+  constructor() {
+    this.title = 'La mia app';
+    this.message = 'Benvenuto!';
+  }
+
+  getTitle(){
+    return this.title;
+  }
+}
 ```
 
 
 ----
 
 
-Built-in attribute directives
+Directives
 ---------
 
 ```javascript
-NgClass - add and remove a set of CSS classes
-NgStyle - add and remove a set of HTML styles
-NgModel - two-way data binding to an HTML form element
+@Component({
+  selector:'courses',
+  template:`<h2>{{title}}</h2>
+             <ul>
+              <li *ngFor="let course of courses">{{course}}</li>
+             </ul>
+            `
+})
+
+export class AppComponent {
+ 
+  this.title = 'List of courses';
+  courses = ["course1", "course2", "course3", "course4"];
+
+  getTitle(){
+    return this.title;
+  }
+
 ```
 
 
----
+----
+
+Services
+---------
+
+```javascript
+@Component({
+  selector:'courses',
+  template:`<h2>{{title}}</h2>
+             <ul>
+              <li *ngFor="let course of courses">{{course}}</li>
+             </ul>
+            `
+})
+
+export class AppComponent {
+ 
+  this.title = 'List of courses';
+  courses = ["course1", "course2", "course3", "course4"];
+
+  getTitle(){
+    return this.title;
+  }
+
+```
+
+----
 
 
 Esercizi
