@@ -383,10 +383,12 @@ export class AppComponent {
   }
 }
 ```
+
 ----
 
+
 Creating a Component Using Angular CLI
-------
+----------
 
 ```javascript
 ng generate c course
