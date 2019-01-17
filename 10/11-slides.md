@@ -472,11 +472,7 @@ export class AppComponent {
  
   this.title = 'List of courses';
   courses = ["course1", "course2", "course3", "course4"];
-
-  getTitle(){
-    return this.title;
-  }
-
+  
 ```
 
 
@@ -496,32 +492,38 @@ Services
 })
 
 export class AppComponent {
- 
   this.title = 'List of courses';
-  courses = ["course1", "course2", "course3", "course4"];
+  courses;
 
-  getTitle(){
-    return this.title;
+  constructor(service:CoursesService){
+    this.courses = service.getCourses();
+    //let service = new CoursesService();
+    //this.courses = service.getCourses();
   }
+
+}
+
+export class CoursesService {
+  getCourses(){
+    return  ["course1", "course2", "course3", "course4"];
+  }
+}
 
 ```
 
 ----
 
 
-Esercizi
+Esercizio
 ========
 
 
 ----
 
 
-ToDOList
+Authors App
 ------------------------------
 
-Scrivere un'applicazione in Angular2 che simuli una lista di cose da fare.
-
-Sarà necessario un campo per immettere del testo, ogni volta che viene
-inviato un nuovo testo esso diventerà un nuovo elemento della lista.
+Creare un nuovo componente Autore che recupera le informazioni da un servizio.
 
 -----
