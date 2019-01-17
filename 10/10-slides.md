@@ -403,8 +403,7 @@ ng generate c course
 Interpolation
 ---------
 Il Data binding é un meccanismo per coordinare cio che gli utenti vedono (dati dell'applicazione).
-Angular2 fornisce molti tipi di binding dei dati.
-Il Data binding puó essere raggruppato in tre categorie (direzione dei dati): dall'origine dei dati alla vista, dalla vista all'origine, e in entrambi le direzioni.
+Puó essere raggruppato in tre categorie (direzione dei dati): dall'origine dei dati alla vista, dalla vista all'origine, e in entrambi le direzioni.
 
 ```javascript
 
