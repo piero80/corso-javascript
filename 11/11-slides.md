@@ -329,6 +329,51 @@ export class CounterComponent {
 
 ---
 
+ngContent
+---------
+
+```javascript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'bootstrap-panel',
+  templateUrl: './panel.component.html',
+  styleUrls:['./panel.component.css']
+})
+export class PanelComponent {
+ constructor(){}
+}
+```
+
+---
+
+```html
+<div class="card">
+    <div class="card-heading">
+      <ng-content></ng-content>
+    </div>
+    <div class="card-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+```
+
+---
+
+
+```html
+<bootstrap-panel>
+    <div class="heading">Heading</div>
+    <div class="body">
+        <h2>Body</h2>
+        <p>Some content here..</p>
+    </div>
+</bootstrap-panel>
+```
+
+
+---
+
 ## Cicli di vita dei Componenti
 
 I componenti che costituiscono una applicazione Angular 2 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
