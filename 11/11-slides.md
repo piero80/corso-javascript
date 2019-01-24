@@ -227,6 +227,14 @@ export class SummuryPipe implements PipeTransform {
 
 ---
 
+Component API
+-------------
+
+Un Component Angular riceve proprietá dall'esterno tramite Input e lancia Eventi tramite Output. Questo per rendere un Componente
+riutilizzabile.
+
+---
+
 ## Passare dati ad un Componente
 
 Ci sono due modi per passare i dati ad un componente, con proprietà "binding" e con "binding event".
@@ -241,7 +249,7 @@ L'input Decorator definisce un set di parametri che possono essere passati dal c
 import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: "hello",
+  selector: "rio-hello",
   template: "<p>Hello, {{name}}!</p>"
 })
 export class HelloComponent {
@@ -255,6 +263,30 @@ export class HelloComponent {
 <!-- To bind to a variable in the parent scope -->
 <rio-hello [name]="helloName"></rio-hello>
 ```
+
+---
+
+## Aliasing Input Properties
+
+```javascript
+import { Component, Input } from "@angular/core";
+
+@Component({
+  selector: "rio-hello",
+  template: "<p>Hello, {{name}}!</p>"
+})
+export class HelloComponent {
+  @Input('my-name') name: string;
+}
+```
+
+```html
+<!-- To bind to a raw string -->
+<rio-hello my-name="World"></rio-hello>
+<!-- To bind to a variable in the parent scope -->
+<rio-hello [name]="helloName"></rio-hello>
+```
+
 
 ---
 
