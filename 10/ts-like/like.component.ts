@@ -13,3 +13,5 @@ export class LikeComponent{
         this.isSelected = !this.isSelected;
     }
 }
+
+

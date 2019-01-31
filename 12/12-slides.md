@@ -1,4 +1,4 @@
-ANGULAR2
+ANGULAR6
 ==================
 
 
@@ -49,7 +49,7 @@ Projection
 
 ----
 
-Projection in Angular2 permette di avere uno stesso componente con contenuto diverso.
+Projection in Angular6n permette di avere uno stesso componente con contenuto diverso.
 
 ```javascript
 import { Component, Input } from '@angular/core';
@@ -207,6 +207,59 @@ import { Component } from '@angular/core';
 
 ----
 
+Esercizio
+---------
+
+```html
+
+<panel title="Shipping Details">
+  Shipping Details Content
+</panel>
+
+```
+
+
+----
+
+
+```javascript
+
+import {Component, OnInit, Input} from '@angular/core';
+@Component({
+  selector:'panel',
+  templateUrl:'./panel.component.html',
+  styleUrls:['./panel.component.css']
+})
+export class PanelComponent implements OnInit {
+  @Input('title') title: string;
+  isExpanded:boolean = true;
+  toggle(){
+    this.isExpanded = !this.isExpanded;
+  }
+}
+
+```
+
+
+----
+
+```html
+<div class="panel">
+  <div
+    class="panel-heading" 
+    [class.expanded]="isExpanded"
+    (click)="toggle()"
+  >
+  {{title}}
+</div>
+  <div *ngIf="isExpanded" class="panel-body">
+    <ng-content></ng-content>
+  </div>
+</div>
+```
+
+----
+
 
 LIFECYCLE
 ========
@@ -217,7 +270,7 @@ LIFECYCLE
 
 COMPONENT LIFECYCLE
 ------------
-I componenti che costituiscono una applicazione Angular 2 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
+I componenti che costituiscono una applicazione Angular 6 vengono creati dinamicamente in base all’evoluzione dell’applicazione stessa.L’esistenza dei componenti durante l’esecuzione dell’applicazione attraversa diverse fasi che ne rappresentano il ciclo di vita. Angular 2 ci consente di intercettare e gestire in maniera personalizzata le varie fasi del ciclo di vita di un componente sfruttando i cosiddetti Lifecycle Hooks: un insieme di eventi in corrispondenza dei quali è possibile definire dei metodi per la loro gestione.
 
 [Lunga documentazione](https://angular.io/guide/lifecycle-hooks)
 ----
