@@ -22,11 +22,19 @@ Front-end Developer
 
 # COSA È JAVASCRIPT
 
+Iniziamo....
+
+---
+
 JavaScript è un linguaggio di programmazione (detto anche di scripting). Tutti gli sviluppatori
 conoscono JavaScript in qualche misura. Da semplici animazioni sulle pagine web ad interazioni
 complesse, tutti ci siamo trovati almeno una volta ad utilizzarlo. JavaScript è un linguaggio di
 programmazione nato in origine per il web. Brendan Eich, il creatore di JavaScript, si ritrovò nel 1995
-a lavorare per Netscape. Il project manager assegnò a Brendan un compito in apparenza impossibile
+a lavorare per Netscape.
+
+---
+
+Il project manager assegnò a Brendan un compito in apparenza impossibile
 da portare a termine: creare un linguaggio di programmazione che funzionasse nel browser Netscape
 Navigator. Brendan Eich concepì JavaScript (originariamente denominato Mocha), sviluppato in soli
 10 giorni. Il risultato di quei 10 giorni di sviluppo? Un linguaggio strano, costellato di cose a loro
@@ -320,58 +328,46 @@ Tra questi citiamo alcuni dei più conosciuti:
 
 ---
 
-## 9 - Gli Array
+## 9 - Gli Array e l'oggetto String
 
 - Dichiarazione e gestione dei dati
 - Proprietà e metodi
 - Ciclare un Array
 - Stringhe e Array
-
----
-
-## 10 - Analisi degli oggetti principali
-
-- Document
-- Window
-- Location
-- Math
-
----
-
-## 11 - Gestione delle stringhe: l'oggetto String
-
 - Proprietà e metodi
 - Sequenze e funzioni di escape
 - Le espressioni regolari (cenni)
 
 ---
 
-## 12 - Putting all together
+## 10 - Angular 8
 
-- Javascript ed i CSS
-- Javascript e XML: Document Object Model
-- Gestione degli errori col costrutto try ... catch ... finally
-- Il formato dati JSON
-- Oggetti in Javascript: introduzione alle classi
+- Analisi del Framework
+- Angular Cli
 
 ---
 
-## 13 - jQuery
+## 11 - React (la libreria di Facebook)
 
-- Introduzione a jQuery
-- I selettori di jQuery
-- Gli eventi in jQuery
+- Introduzione a React
+- Le classi
 
 ---
 
-## 14 - Analisi di framework e librerie
+## Perchè studiare Javascript
 
-- Angular.js
-- Node.js
-- Parallax.js
-- Ember.js
-- Ext JS
-- Altri
+JavaScript ha una reputazione di linguaggio “giocattolo” ma negli ultimi anni ha fatto passi da
+gigante. Continuare ad ignorare JavaScript o trattarlo come un linguaggio di serie B è una mossa
+controproducente. Sembra una frase fatta ma JavaScript sta diventando sempre di più un linguaggio
+universale. Non possiamo ancora dire se questo sia un bene o un male. Ma JavaScript è diventato
+un requisito di base per qualsiasi posizione di Web Developer (o Front End Developer).
+
+---
+
+Studiare JavaScript non significa soltanto conoscere variabili e funzioni. Lo sviluppatore che vuole
+ambire a padroneggiare il linguaggio deve sapere non solo come usarlo ma anche come funziona
+internamente. E’ fondamentale per lo sviluppatore JavaScript approfondire le parti più complicate
+del linguaggio, ed è quello che faremo in questo corso.
 
 ---
 
