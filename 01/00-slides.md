@@ -20,7 +20,7 @@ Front-end Developer
 
 ---
 
-# COSA È JAVASCRIPT
+# COSÈ JAVASCRIPT
 
 Iniziamo....
 
@@ -34,12 +34,57 @@ a lavorare per Netscape.
 
 ---
 
-Il project manager assegnò a Brendan un compito in apparenza impossibile
-da portare a termine: creare un linguaggio di programmazione che funzionasse nel browser Netscape
-Navigator. Brendan Eich concepì JavaScript (originariamente denominato Mocha), sviluppato in soli
-10 giorni. Il risultato di quei 10 giorni di sviluppo? Un linguaggio strano, costellato di cose a loro
-volta strane. Da quel momento JavaScript è diventato il linguaggio universale del web, anche se non
-ha mai goduto di una reputazione stellare.
+## A cosa serve JavaScript?
+
+In poche parole: immagina di avere un bottone su una pagina
+web. Dopo aver premuto il bottone vuoi che l’utente veda un altro elemento nella pagina, che prima
+era nascosto. Come pensi si possa ottenere un effetto del genere? Con JavaScript! In altre parole, ogni
+pagina web costruita con puro HTML è inanimata (escludendo le animazioni CSS). Per aggiungere
+effetti ed interazioni è necessario lanciare JavaScript nella mischia.
+Se dovessi rispondere alla domanda
+“ma a cosa serve davvero JavaScript?” direi che il motivo principale è uno: la possibilità di creare o
+rimuovere elementi HTML dinamicamente.
+
+---
+
+## Cosa posso costruire con JavaScript?
+
+JavaScript è nato per aggiungere interazioni abbastanza innocenti sulle pagine web (clicco qui e
+succede una cosa 40px più avanti). Ma dai quei tempi è cambiato molto. JavaScript viene usato ora
+per costruire interfacce web interattive di altissimo livello: le Single Page Application. Le Single
+Page Application sono applicazioni web costruite con JavaScript ed offrono dei benefici per l’utente
+(se costruite in modo adeguato). Ma come è strutturata una Single Page Application? Le Single Page
+Application non sono altro che un singolo file HTML. Considera questo banale esempio:
+
+---
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>titolo SPA</title>
+<link href="main.css" rel="stylesheet"></head>
+<body>
+<div id="app">
+</div>
+<script type="text/javascript"
+src="main.4a4c.js"
+async="">
+</script>
+<script type="text/javascript"
+src="vendors~main.613f.js"
+async="">
+</script>
+</html>
+```
+
+---
+
+Il file HTML d’ingresso è un index.html che carica uno o più file (detti anche bundle) JavaScript. Da
+quel momento in poi è JavaScript a prendere le redini. Una Single Page Application quindi è in parole
+povere un’applicazione dinamica il cui contenuto viene generato con JavaScript, un linguaggio ormai
+maturo ed in rapidissima crescita.
 
 ---
 

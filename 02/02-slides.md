@@ -13,6 +13,8 @@
 - Booleani
 - `null`
 - `undefined`
+- Object
+- Symbol
 
 ---
 
@@ -66,18 +68,91 @@
 
 ## Array
 
+E’ possibile creare collezioni di elementi fondamentali raggruppandoli in una lista, ovvero un array:
+
 - var arr = []
 
 - var arr = new Array()
+
+- var firstArray = ['Hello', 89, false, true];
 
 ---
 
 ## Oggetti
 
+Uno dei tipi più importanti in JavaScript è Object. L’oggetto è il pilastro su cui si regge il linguaggio.
+Gli oggetti sono “contenitori” di valori ed ogni valore può essere associato ad una chiave. Le chiavi
+prendono il nome di proprietà dell’oggetto. Gli oggetti in JavaScript sono definiti come nel seguente
+esempio dove le parentesi graffe { } rappresentano il contenitore mentre name ed age sono le
+proprietà (dette anche chiavi):
+
 ```javascript
-const object = {
-  key: "value"
+{
+  name: "Alex",
+  age: 33
+}
+```
+
+---
+
+Per mantenere un oggetto in memoria possiamo assegnarlo ad una variabile:
+
+```javascript
+var firstObj = {
+  name: "Alex",
+  age: 33
 };
+```
+
+---
+
+Questo modo di creare oggetti JavaScript è definito “letterale”. Esiste anche un altro metodo, ma è
+molto meno diffuso e lo incontrerai raramente:
+
+```javascript
+var firstObj = new Object({
+  name: "Alex",
+  age: 33
+});
+```
+
+---
+
+Il motivo per cui creiamo oggetti JavaScript è quello di poter accedere (e modificare) i valori contenuti
+all’interno. Continuando con il nostro esempio possiamo estrarre il nome da firstObj con:
+
+```javascript
+firstObj.name;
+firstObj.age;
+```
+
+---
+
+oppure aggiungere una nuova proprietà sull’oggetto:
+
+```javascript
+firstObj.address = "Some fancy address";
+```
+
+---
+
+Le chiavi di un oggetto possono anche essere composte da stringhe più complesse o da
+numeri:
+
+```javascript
+var anotherObj = {
+  "alex muraro": "333335685454",
+  88: "554234242"
+};
+```
+
+---
+
+In questo caso però si accede ad ogni valore con una sintassi diversa, detta “bracket notation”:
+
+```javascript
+anotherObj["alex muraro"];
+anotherObj[88];
 ```
 
 ---
@@ -378,6 +453,30 @@ Permette di iterare tra le chiavi enumerabili di un oggetto JavaScript.
 
 ---
 
+Scrivere un programma che data una stringa in input stampi in console la stringa con le lettere maiuscole
+(utilizzare il metodo toUpperCase())
+
+[soluzione](https://jsfiddle.net/piero80/tgvuny06/2/)
+
+---
+
+Scrivere un programma che data una stringa in input stampi in console la stringa al contrario
+
+[soluzione](https://jsfiddle.net/piero80/8khy7Lft/)
+
+---
+
+Scrivere un programma che data una stringa minuscola la stampi con le vocali maiuscole
+
+Es. giovannino -> gIOvAnnInO
+
+Per quanto vi siano soluzioni semplici ma tediose, si consiglia di sbirciare
+tra le funzioni di stringhe ed array per trovare una soluzione elegante.
+
+[soluzione](http://jsbin.com/vosume/edit?js,console)
+
+---
+
 ## Scacchiera
 
 Scrivere un programma che stampi in console una scacchiera 8x8, dove le caselle
@@ -415,16 +514,3 @@ Es. 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz, 16,
 Un grande classico della programmazione
 
 [soluzione](http://jsbin.com/kukega/1/edit?js,output)
-
----
-
-## vOcAlI
-
-Scrivere un programma che data una stringa minuscola la stampi con le vocali maiuscole
-
-Es. giovannino -> gIOvAnnInO
-
-Per quanto vi siano soluzioni semplici ma tediose, si consiglia di sbirciare
-tra le funzioni di stringhe ed array per trovare una soluzione elegante.
-
-[soluzione](http://jsbin.com/vosume/edit?js,console)
