@@ -1,8 +1,9 @@
 /* CSS for adding content example */
 
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:800italic);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400);
 
-body{
-  background-color: #333;
+body {
+  background-color: #2067ab;
   color: #fff;
+  font-family: "Open Sans";
 }
