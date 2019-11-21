@@ -1,4 +1,4 @@
-/*var i = 1;
+var i = 1;
 var msg = "";
 
 while (i < 10) {
@@ -6,8 +6,8 @@ while (i < 10) {
   i++;
 }
 
-document.getElementById("answer").innerHTML = msg;*/
-
+document.getElementById("answer").innerHTML = msg;
+/*
 //var i = 1;
 var msg = "";
 
@@ -15,7 +15,6 @@ var msg = "";
   msg += i + " x 5 = " + i * 5 + "<br/>";
   i++;
 }*/
-
 
 /*
 for (var i = 1; i < 10; i++) {
