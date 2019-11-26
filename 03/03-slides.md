@@ -568,6 +568,178 @@ JavaScript non dispone (ancora) di un'adeguata ottimizzazione per la chiamata ri
 
 ## Closures
 
+In JavaScript non dobbiamo preoccuparci di gestire la memoria, a differenza dei linguaggi di
+programmazione low-level come C. Una delle caratteristiche di JavaScript è infatti quella di essere
+un linguaggio garbage collected. In altre parole il motore svuota la memoria allocata per le variabili
+(globali e locali) non appena le funzioni terminano il loro lavoro. Per chiarire meglio considera questo
+esempio. Supponiamo di avere la necessità di un banale contatore, che viene incrementato ad ogni
+call di una funzione.
+
+---
+
+Il primo approccio potrebbe essere questo:
+
+```javascript
+var counter = 0;
+function increment() {
+  counter++;
+  console.log(counter);
+}
+
+increment();
+increment();
+```
+
+---
+
+Ma abbiamo un problema evidente: counter è una variabile globale e le variabili globali sono
+qualcosa che vogliamo evitare ad ogni costo nel nostro codice. Che cosa succede se un’altra
+funzione che non è increment inizia a modificare counter? Potremmo ritrovarci con un programma
+inaffidabile ed altamente inefficiente. Ci sono soluzioni? Un possibile espediente potrebbe essere
+quello di spostare counter all’interno di increment in modo da creare privacy per la nostra variabile:
+
+---
+
+```javascript
+function increment() {
+  var counter = 0;
+  counter++;
+  console.log(counter);
+}
+increment();
+increment();
+```
+
+---
+
+Che cosa succede facendo girare questo codice? Ricorda: il motore JavaScript pulisce la memoria
+locale della funzione increment al termine di ogni esecuzione. Questo significa che il codice sopra
+produrrà:
+
+```javascript
+1;
+1;
+```
+
+---
+
+Quando dichiaro e assegno counter come variabile locale il motore la “resetta” ad ogni esecuzione
+di increment. Allo stesso tempo abbiamo visto sopra che usare variabili globali non è ottimale (mai
+contaminare il global scope!). Quindi? Che fare? E se potessimo “mantenere” la variabile counter tra
+un’esecuzione e l’altra?<strong> L’idea è quella di avere uno stato che persiste e rimane agganciato alla
+nostra funzione</strong>. Si può fare una cosa del genere in JavaScript? La via d’uscita è lì che ci aspetta: è
+già nel linguaggio JavaScript, e non dobbiamo fare altro che sfruttarla.
+
+---
+
+La soluzione che stiamo cercando sta in uno dei tratti più oscuri di JavaScript, uno degli argomenti
+che confonde anche gli sviluppatori più esperti. Hai utilizzato mille volte questa caratteristica di
+JavaScript, magari senza saperlo. Per “mantenere” infatti la variabile counter tra un’esecuzione
+e l’altra, come uno stato persistente, non dobbiamo fare altro che ritornare una funzione dalla
+nostra funzione.
+
+---
+
+Sto parlando delle closures! La traduzione esatta di closures sarebbe “chiusure”
+per il modo in cui le funzioni “chiudono” sopra le variabili che stanno attorno. Ma la definizione
+che preferisco è: conservare in modo persistente le variabili che circondano una funzione, tra
+un’esecuzione e l’altra.
+
+---
+
+Caratteristica fondamentale affinchè si verifichi la closure è inglobare una funzione all’interno di una
+funzione contenitore, e ritornare poi la funzione interna. Per sfruttare le closures infatti dobbiamo
+riscrivere il nostro codice in modo leggermente diverso:
+
+---
+
+```javascript
+function increment() {
+  var counter = 0;
+  return function addToCounter() {
+    counter++;
+    console.log(counter);
+  };
+}
+```
+
+---
+
+La novità rispetto alla prima versione è la funzione interna addToCounter. Tutto l’ambiente di
+variabili contiguo a questa funzione, che viene ritornata dalla funzione “contenitore” increment
+viene preservato, anche tra un’esecuzione e l’altra. Il motore infatti “aggancia” la variabile counter
+alla funzione addToCounter, anche quando quest’ultima viene chiamata in un punto diverso del
+codice. Vantaggi immediati delle closures: il global scope rimane pulito ed abbiamo finalmente
+privacy per le nostre variabili. Resta un’ultima cosa da fare per testare il nostro codice.
+
+---
+
+Primo,
+“catturiamo” addToCounter all’interno di una variabile:
+
+```javascript
+var result = increment();
+```
+
+---
+
+Ti stai chiedendo perché eseguo increment e lo assegno a result quando ho parlato un secondo
+fa di catturare addToCounter? increment è solo un contenitore che ritorna qualcosa. Ci serve per
+dare privacy alla funzione addToCounter e per contenere la variabile counter. A questo punto non
+resta altro che eseguire result. Questa variabile infatti è diventata una referenza per la nostra cara
+addToCounter, che ora si porta dietro l’ambiente delle variabili al momento dell’esecuzione. Il test
+finale:
+
+---
+
+```javascript
+result();
+result();
+1;
+2;
+```
+
+---
+
+Il nostro codice funziona. Le closures potrebbero sembra qualcosa di arcano ma in parole povere
+è sufficiente ritornare una funzione interna da una funzione contenitore. In questo modo tutto
+l’ambiente di variabili attiguo alla funzione interna persiste attraverso l’esecuzione. Se non facessimo
+affidamento sulle closure il motore JavaScript pulirebbe ogni volta le nostre variabili, cancellandole
+dalla memoria. Ma a parte questa banale applicazione quali sono gli utilizzi pratici delle closures?
+
+---
+
+Le
+closures sono alla base del module pattern. Il module pattern è un tentativo di organizzare il codice
+JavaScript in unità indipendenti, mimando le classi presenti in altri linguaggi di programmazione
+(ma non in JavaScript come vedremo a breve). Se volessimo fare refactoring del nostro contatore per
+modularizzare il codice avremmo qualcosa del genere:
+
+---
+
+```javascript
+var incrementModule = (function increment() {
+  var counter = 0;
+  function addToCounter() {
+    counter++;
+    console.log(counter);
+  }
+
+  return { addToCounter };
+})();
+
+incrementModule.addToCounter();
+incrementModule.addToCounter();
+incrementModule.addToCounter();
+```
+
+---
+
+I moduli in JavaScript sono
+funzioni IIFE (immediately invoked function expression) e che ritornano un oggetto.
+
+---
+
 ```javascript
 var me = "Piero Colangelo";
 function saluto() {
@@ -576,6 +748,8 @@ function saluto() {
 //me = 'Batman';
 saluto();
 ```
+
+---
 
 In parole povere le variabili definite all'interno di una funzione sono globalmente disponibili all'interno di eventuali funzioni nidificate.
 
