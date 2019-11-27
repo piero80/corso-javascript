@@ -1,4 +1,4 @@
-var i = 1;
+/*var i = 1;
 var msg = "";
 
 while (i < 10) {
@@ -7,6 +7,16 @@ while (i < 10) {
 }
 
 document.getElementById("answer").innerHTML = msg;
+*/
+
+var input = "fusolab";
+let output = "";
+for (var i = input.length - 1; i >= 0; i--) {
+  output += input[i];
+}
+
+console.log(output);
+
 /*
 //var i = 1;
 var msg = "";

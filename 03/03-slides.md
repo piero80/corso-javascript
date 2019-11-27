@@ -156,7 +156,7 @@ In questo modo se al momento della chiamata non viene passato un argomento, ad e
 
 ## Esercizio
 
-Dichiara una funzione chiamata ridere() che ritorna "ahahahahahaa!". Stampa il valore ritornato dalla funzione ridere() nella console.
+Dichiara una funzione chiamata ridere() che ritorna "ahahahahahah!". Stampa il valore ritornato dalla funzione ridere() nella console.
 
 ```javascript
 // il tuo codice va qui!
@@ -168,7 +168,7 @@ console.log(/* chiama la funzione ridere() */);
 
 ## 2 Esercizio
 
-Scrivi una funzione chiamata ridere() che prende un parametro "num" che rappresenta il numero di "ha" da ritornare. Attenzione ad aggiungere il punto esclamativo alla fine della stringa!
+Scrivi una funzione chiamata ridere() che prende un parametro "num" che rappresenta il numero di "ah" da ritornare. Attenzione ad aggiungere il punto esclamativo alla fine della stringa!
 
 ```javascript
 // il tuo codice va qui!
