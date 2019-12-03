@@ -1,4 +1,4 @@
-function Hotel(name, rooms, booked, parking, gym){
+function Hotel(name, rooms, booked, parking, gym) {
   this.name = name;
   this.rooms = rooms;
   this.booked = booked;
@@ -7,30 +7,31 @@ function Hotel(name, rooms, booked, parking, gym){
 }
 
 Hotel.prototype = {
-  getAvailability: function(){
+  getAvailability: function() {
     return this.rooms - this.booked;
   },
-  getName : function(){
+  getName: function() {
     return this.name;
   },
-  getParking : function(parking){
+  getParking: function(parking) {
     return this.parking;
   },
-  getGym : function(gym){
+  getGym: function(gym) {
     return this.gym;
   }
-}
-var hotelHilton = new Hotel('Hilton', 45, 23, true, true);
-var elName = document.getElementById('hotel1');
-var details = hotelHilton.getName() + ' ' + hotelHilton.getAvailability()+ ' rooms';
+};
+var hotelHilton = new Hotel("Hilton", 45, 23, true, true);
+var elName = document.getElementById("hotel1");
+var details =
+  hotelHilton.getName() + " " + hotelHilton.getAvailability() + " rooms";
 elName.textContent = details;
-var elParking = document.getElementById('parking');
+var elParking = document.getElementById("parking");
 elParking.className = hotelHilton.getParking();
-var elGym = document.getElementById('gym');      // Get element
+var elGym = document.getElementById("gym"); // Get element
 elGym.className = hotelHilton.getGym();
 
-
-var CasaVacanze = function(name,address,rooms,booked,parking,gym){ //subClass
+var CasaVacanze = function(name, address, rooms, booked, parking, gym) {
+  //subClass
 
   Hotel.call(this);
   this.name = name;
@@ -39,19 +40,27 @@ var CasaVacanze = function(name,address,rooms,booked,parking,gym){ //subClass
   this.booked = booked;
   this.parking = parking;
   this.gym = gym;
-}
+};
 
 CasaVacanze.prototype = Object.create(Hotel.prototype);
 CasaVacanze.prototype.constructor = CasaVacanze;
 
-var myCasaVacanze = new CasaVacanze('Park', 'Via Ferrarelle, 23', 12, 4, true, false);
-var elCasaVacanze = document.getElementById('casavacanze1');
+var myCasaVacanze = new CasaVacanze(
+  "Maitress Hotel",
+  "Via Ferrarelle, 23",
+  12,
+  4,
+  true,
+  false
+);
+var elCasaVacanze = document.getElementById("casavacanze1");
 
-var details2 = myCasaVacanze.getName() + ' ' + myCasaVacanze.getAvailability()+ ' rooms';
+var details2 =
+  myCasaVacanze.getName() + " " + myCasaVacanze.getAvailability() + " rooms";
 elCasaVacanze.textContent = details2;
 
-var elParkingCasa = document.getElementById('parkingCasa');
+var elParkingCasa = document.getElementById("parkingCasa");
 elParkingCasa.className = myCasaVacanze.getParking();
 
-var elGymCasa = document.getElementById('gymCasa');
+var elGymCasa = document.getElementById("gymCasa");
 elGymCasa.className = myCasaVacanze.getGym();

@@ -339,10 +339,10 @@ var ombrello = {
   color: "blu",
   isOpen: false,
   open: function() {
-    if (umbrella.isOpen === true) {
+    if (ombrello.isOpen === true) {
       return "L'ombrello é giá aperto";
     } else {
-      umbrella.isOpen = true;
+      ombrello.isOpen = true;
       return "Giulia apre l'ombrello";
     }
   }

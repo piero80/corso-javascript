@@ -8,7 +8,17 @@ while (i < 10) {
 
 document.getElementById("answer").innerHTML = msg;
 */
-
+function ridere(num) {
+  var string = "ah";
+  var result = "";
+  for (var i = 0; i < num; i++) {
+    result += string;
+  }
+  return result + "!";
+}
+var num = 17;
+console.log(ridere(num));
+/*
 var input = "fusolab";
 let output = "";
 for (var i = input.length - 1; i >= 0; i--) {
@@ -16,7 +26,7 @@ for (var i = input.length - 1; i >= 0; i--) {
 }
 
 console.log(output);
-
+*/
 /*
 //var i = 1;
 var msg = "";
