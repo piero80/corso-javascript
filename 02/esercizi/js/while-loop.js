@@ -53,7 +53,6 @@ function laugh(num){
 
 document.getElementById("answer").innerHTML = laugh(5);
 */
-
 /*
 function makeLine(length) {
   var line = "";
@@ -72,8 +71,26 @@ function buildTriangle(width) {
 }
 
 console.log(buildTriangle(10));
-
 */
+
+var profiloFacebook = {
+  nome: "Piero",
+  numerodiamici: 124,
+  messaggi: ["Ciao Mondo", "Lorem ipsum"],
+  aggiungiMessaggi: function(messaggio) {
+    this.messaggi.push(messaggio);
+  },
+  rimuoviMessaggio: function() {
+    this.messaggi.splice(0, 1);
+  },
+  aggiuntaAmico: function() {
+    this.numerodiamici = this.numerodiamici + 1;
+  },
+  rimuoviAmico: function() {
+    this.numerodiamici = this.numerodiamici - 1;
+  }
+};
+console.log(profiloFacebook.aggiungiMessaggi("Ciao, ciao"));
 
 //document.getElementById("answer").innerHTML = buildTriangle(10);
 
