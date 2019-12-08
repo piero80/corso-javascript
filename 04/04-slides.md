@@ -285,6 +285,55 @@ console.log(totale);
 
 ---
 
+## Filter func
+
+Con il metodo filter (), è possibile acquisire un array, eseguire alcune operazioni di filtro su ciascun elemento dell'array e restituire un nuovo array.
+
+```javascript
+var numbers = [12, 5, 8, 130, 44];
+var filtered = numbers.filter(function(number) {
+  return number >= 10;
+});
+// filtered is [12, 130, 44]
+```
+
+---
+
+## Reduce func
+
+Con il metodo Reduce (), è possibile acquisire un array, e ritornare un valore che può essere un nuovo array che è la combinazione degli elementi dell'array di partenza.
+
+---
+
+```javascript
+const numbers = [1, -1, 2, 3];
+const sum = numbers.reduce(function(accumulator, currentValue) {
+  return accumulator + currentValue;
+});
+// sum is [5]
+```
+
+---
+
+Secondo Esempio
+
+```javascript
+var shoppingCart = [
+  { productTitle: "Product 1", amount: 10 },
+  { productTitle: "Product 2", amount: 30 },
+  { productTitle: "Product 3", amount: 20 },
+  { productTitle: "Product 4", amount: 60 }
+];
+
+var getTotalAmount = shoppingCart.reduce(function(currentTotalAmount, order) {
+  return currentTotalAmount + order.amount;
+}, 0);
+
+getTotalAmount(shoppingCart); // 120
+```
+
+---
+
 # OBJECTS
 
 ---
