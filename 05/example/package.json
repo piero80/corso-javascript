@@ -16,7 +16,7 @@
     "gulp-webserver": "^0.9.1",
     "install": "^0.4.0",
     "mq4-hover-shim": "^0.3.0",
-    "npm": "^3.5.0"
+    "npm": "^6.13.4"
   },
   "author": "Pietro Colangelo",
   "license": "ISC"
