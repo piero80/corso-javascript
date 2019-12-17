@@ -8,12 +8,15 @@ var mountains = [
   { name: "Monte Amiata", height: 1738, place: "Siena" }
 ];
 //Per prima cosa abbiamo bisogno di un thead
+
+/*
 document.createElement("thead");
 function generateTableHead(table) {
   var thead = table.createTHead();
 }
-//var table = document.querySelector("table");
-//generateTableHead(table);
+var table = document.querySelector("table");
+generateTableHead(table);
+*/
 
 /*SECOND STEP*/
 
