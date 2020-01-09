@@ -1,4 +1,4 @@
-// Book Class: Represents a Book
+// 1 Book Class: Represents a Book
 class Book {
   constructor(title, author, isbn) {
     this.title = title;
@@ -7,7 +7,7 @@ class Book {
   }
 }
 
-// UI Class: Handle UI Tasks
+// 2 UI Class: Handle UI Tasks
 
 class UI {
   static displayBooks() {
@@ -27,7 +27,7 @@ class UI {
     const books = Store.getBooks();
     books.forEach(book => UI.addBookToList(book));
   }
-
+  // 3
   static addBookToList(book) {
     const list = document.querySelector("#book-list");
 
@@ -96,15 +96,15 @@ class Store {
   }
 }
 
-// Event: Display Books
+// 4 Event: Display Books
 
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
-// Event: Add a book
+// 5 Event: Add a book
 
 document.querySelector("#book-form").addEventListener("submit", e => {
   // Prevent actual submit
-  e.preventDefault();
+  //e.preventDefault();
 
   // Get form values
   const title = document.querySelector("#title").value;
@@ -118,7 +118,6 @@ document.querySelector("#book-form").addEventListener("submit", e => {
 
   // Instatiate book
   const book = new Book(title, author, isbn);
-
   // Add book to UI
   UI.addBookToList(book);
 
@@ -132,7 +131,7 @@ document.querySelector("#book-form").addEventListener("submit", e => {
   UI.clearFields();
 });
 
-// Event: Remove a Book
+// 6 Event: Remove a Book
 document.querySelector("#book-list").addEventListener("click", e => {
   UI.deleteBook(e.target);
 
