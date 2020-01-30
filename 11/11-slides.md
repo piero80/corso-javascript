@@ -227,8 +227,46 @@ export class SummuryPipe implements PipeTransform {
 
 ---
 
-Component API
--------------
+Exercise
+
+Component Favorite
+
+```javascript
+import { Component, OnInit } from "@angular/core";
+
+@Component({
+  selector: "favorite",
+  templateUrl: "./favorite.component.html",
+  styleUrls: ["./favorite.component.css"]
+})
+export class FavoriteComponent implements OnInit {
+  isFavorite: boolean;
+
+  constructor() {}
+
+  ngOnInit() {}
+
+  onClick() {
+    this.isFavorite = !this.isFavorite;
+  }
+}
+```
+
+---
+
+```javascript
+<link href = "http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel = "stylesheet">
+<span
+  class="glyphicon"
+  [class.glyphicon-star]="isFavorite"
+  [class.glyphicon-star-empty]="!isFavorite"
+  (click)="onClick()"
+  ></span>
+```
+
+---
+
+## Component API
 
 Un Component Angular riceve proprietá dall'esterno tramite Input e lancia Eventi tramite Output. Questo per rendere un Componente
 riutilizzabile.
@@ -276,7 +314,7 @@ import { Component, Input } from "@angular/core";
   template: "<p>Hello, {{name}}!</p>"
 })
 export class HelloComponent {
-  @Input('my-name') name: string;
+  @Input("my-name") name: string;
 }
 ```
 
@@ -286,7 +324,6 @@ export class HelloComponent {
 <!-- To bind to a variable in the parent scope -->
 <rio-hello [name]="helloName"></rio-hello>
 ```
-
 
 ---
 
@@ -329,19 +366,18 @@ export class CounterComponent {
 
 ---
 
-ngContent
----------
+## ngContent
 
 ```javascript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'bootstrap-panel',
-  templateUrl: './panel.component.html',
-  styleUrls:['./panel.component.css']
+  selector: "bootstrap-panel",
+  templateUrl: "./panel.component.html",
+  styleUrls: ["./panel.component.css"]
 })
 export class PanelComponent {
- constructor(){}
+  constructor() {}
 }
 ```
 
@@ -349,28 +385,26 @@ export class PanelComponent {
 
 ```html
 <div class="card">
-    <div class="card-heading">
-      <ng-content></ng-content>
-    </div>
-    <div class="card-body">
-      <ng-content></ng-content>
-    </div>
+  <div class="card-heading">
+    <ng-content></ng-content>
   </div>
+  <div class="card-body">
+    <ng-content></ng-content>
+  </div>
+</div>
 ```
 
 ---
 
-
 ```html
 <bootstrap-panel>
-    <div class="heading">Heading</div>
-    <div class="body">
-        <h2>Body</h2>
-        <p>Some content here..</p>
-    </div>
+  <div class="heading">Heading</div>
+  <div class="body">
+    <h2>Body</h2>
+    <p>Some content here..</p>
+  </div>
 </bootstrap-panel>
 ```
-
 
 ---
 
