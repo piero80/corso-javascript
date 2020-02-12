@@ -374,26 +374,3 @@ export class ArticoloComponent implements OnInit {
 ```
 
 ---
-
-## FORM IN ANGULAR
-
----
-
-```html
-<form>
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input ngModel name="firstName" class="form-control" (change)="log()" id="firstName">
-  </div>
-  <div class="form-group">
-    <label for="comment">Comment</label>
-    <textarea ngModel name="comment" class="form-control" id="comment">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>
-```
-
----
